@@ -31,14 +31,19 @@ class Lyric extends LyricBase {
     }
 
     async find_info(url, html) {
+        const prefix = '<font size="4" color="#FFFFFF">';
+        const suffix = '<tr bgcolor="#CCCCCC">';
+
+        const info_str = this.find_string_by_prefix_suffix(html, prefix, suffix);
+
         const patterns = {
             'title': ' color="#FFFFFF"><b>(.*?)</b></font>',
-            'artist': '>歌：(.*?)/詞：',
-            'lyricist': '詞：(.*?)/<br>',
+            'artist': '歌：(.*?)/',
+            'lyricist': '詞：(.*?)/',
             'composer': '曲：(.*?)<',
         }
 
-        this.fill_song_info(html, patterns);
+        this.fill_song_info(info_str, patterns);
     }
 
     async parse_page() {
