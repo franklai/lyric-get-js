@@ -8,11 +8,6 @@ const LyricBase = require('../include/lyric_base');
 const keyword = 'kget';
 
 class Lyric extends LyricBase {
-    find_song_id(url) {
-        const pattern = /\?([0-9]+)/;
-        return this.get_first_group_by_pattern(url, pattern);
-    }
-
     async find_lyric(url, html) {
         const prefix = '<div id="lyric-trunk">';
         const suffix = '</div>';
