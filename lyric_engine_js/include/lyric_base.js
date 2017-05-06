@@ -1,4 +1,6 @@
 const util = require('util');
+const he = require('he');
+const striptags = require('striptags');
 
 const ATTR_LIST = [
     ['artist', '歌手'],
@@ -77,6 +79,19 @@ class LyricBase {
             return result[1];
         }
         return null;
+    }
+
+    fill_song_info(content, patterns) {
+        for (let key in patterns) {
+            const key_for_pattern = patterns[key];
+
+            let value = this.get_first_group_by_pattern(content, key_for_pattern);
+            if (value) {
+                value = striptags(he.decode(value)).trim();
+
+                this[key] = value;
+            }
+        }
     }
 }
 
