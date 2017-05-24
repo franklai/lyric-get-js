@@ -10,7 +10,7 @@ const LyricBase = require('../include/lyric_base');
 const keyword = 'music-book.jp';
 
 class Lyric extends LyricBase {
-    async get_artist_id(url) {
+    async get_html(url) {
         const headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2141.0 Safari/537.36'
         };
@@ -20,13 +20,17 @@ class Lyric extends LyricBase {
             headers: headers
         });
 
+        return html;
+    }
+
+    get_artist_id(html) {
         const pattern = "checkFavorite\\('([0-9]+)'\\)";
         const id = this.get_first_group_by_pattern(html, pattern);
         return id;
     }
 
-    async get_song_json(url) {
-        const artist_id = await this.get_artist_id(url);
+    async get_song_json(url, html) {
+        const artist_id = this.get_artist_id(html);
         if (!artist_id) {
             console.error('Failed to get artist id of url:', url);
             return false;
@@ -83,7 +87,20 @@ class Lyric extends LyricBase {
     async parse_page() {
         const url = this.url;
 
-        const json = await this.get_song_json(url);
+        let html;
+        try {
+            html = await this.get_html(url);
+        } catch (err) {
+            if (err.response && err.response.body && err.response.body.indexOf('メンテナンス') >= 0) {
+                this.lyric = '只今メンテナンス中です';
+                return true;
+            } else {
+                console.error(err);
+                return false;
+            }
+        }        
+
+        const json = await this.get_song_json(url, html);
 
         await this.find_lyric(url, json);
         await this.find_info(url, json);
