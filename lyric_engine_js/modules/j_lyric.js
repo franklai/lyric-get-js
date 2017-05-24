@@ -9,7 +9,7 @@ const keyword = 'j-lyric.net';
 
 class Lyric extends LyricBase {
     async find_lyric(url, html) {
-        const prefix = "<p id='lyricBody'>";
+        const prefix = '<p id="Lyric">';
         const suffix = '</p>';
 
         let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
@@ -18,6 +18,7 @@ class Lyric extends LyricBase {
             return false;
         }
 
+        lyric = lyric.replace(/<br>/g, '\n');
         lyric = he.decode(lyric);
         lyric = striptags(lyric);
         lyric = lyric.trim();
@@ -28,10 +29,10 @@ class Lyric extends LyricBase {
 
     async find_info(url, html) {
         const patterns = {
-            'title': "<div class='caption'><h2>(.*?)</h2></div>",
-            'artist': '<p>歌：(.*?)</p>',
-            'lyricist': '<p>作詞：(.*?)</p>',
-            'composer': '<p>作曲：(.*?)</p>',
+            'title': '<div class="cap"><h2>(.*?)</h2></div>',
+            'artist': '<p class="sml">歌：(.*?)</p>',
+            'lyricist': '<p class="sml">作詞：(.*?)</p>',
+            'composer': '<p class="sml">作曲：(.*?)</p>',
         }
 
         this.fill_song_info(html, patterns);
