@@ -3,5 +3,15 @@
     "version": "1.0.0",
     "description": "Extract enginge for lyric get",
     "homepage": "https://github.com/franklai/lyric-get-js",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "he": "^1.1.1",
+        "iconv-lite": "^0.4.15",
+        "mime-types": "^2.1.14",
+        "mz": "^2.6.0",
+        "pixl-xml": "^1.0.10",
+        "request": "^2.81.0",
+        "request-promise": "^4.1.1",
+        "striptags": "^3.0.1"
+    }
 }
