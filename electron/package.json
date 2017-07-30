@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/franklai/lyric-get.git"
+    "url": "git+https://github.com/franklai/lyric-get-js.git"
   },
   "author": "franklai",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/franklai/lyric-get/issues"
+    "url": "https://github.com/franklai/lyric-get-js/issues"
   },
-  "homepage": "https://github.com/franklai/lyric-get/",
+  "homepage": "https://github.com/franklai/lyric-get-js/",
   "devDependencies": {
     "electron-builder": "^19.17.0",
     "electron": "^1.6.0",
