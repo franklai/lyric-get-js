@@ -29,5 +29,8 @@
     "win": {
       "target": "nsis"
     }
+  },
+  "dependencies": {
+    "lyric-get-engine": "file:../lyric_engine_js"
   }
 }

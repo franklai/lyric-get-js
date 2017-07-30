@@ -1,0 +1,7 @@
+{
+    "name": "lyric-get-engine",
+    "version": "1.0.0",
+    "description": "Extract enginge for lyric get",
+    "homepage": "https://github.com/franklai/lyric-get-js",
+    "license": "MIT"
+}

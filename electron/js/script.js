@@ -57,37 +57,38 @@ $(document).ready(function(){
     $("#loading_div").html("Loading...");
     $("#loading_div").show();
 
-    // JSON query
-    $.getJSON(
-      "https://lyric-get-node-test1.azurewebsites.net/app",
-      {'url': url},
-      function(data){
-        var lyric = data["lyric"];
-        if (!lyric) {
-          // failed to get lyric
-          $("#loading_div").html('<span style="color: red;">Failed to get lyric. Please contact franklai.</span>');
-          $("#btn_submit").removeAttr("disabled");
-          return;
-        }
-        var count = lyric.split("\n");
-        //alert(tmp.length);
-        //lyric = tmp.join("<br/>");
+    let lyric = '';
+    let a_promise;
+    try {
+      a_promise = engine.get_lyric(url);
+    } catch (err) {
+      console.error('err:', err);
+      // catch error type?
+    }
 
-        //$("#lyric_div > div").html(lyric);
-        $("#lyric_div > textarea").val(lyric);
-        $("#lyric_div > textarea").css("height", (14*count.length)+"pt");
-
-        $("#loading_div").hide();
-        $("#lyric_div").show();
+    a_promise.then(function(lyric) {
+      if (!lyric) {
+        // failed to get lyric
+        $("#loading_div").html('<span style="color: red;">Failed to get lyric. Please contact franklai.</span>');
         $("#btn_submit").removeAttr("disabled");
+        return;
       }
-    );
-  });
+      console.log(lyric);
+      var count = lyric.split("\n");
 
-  $("#loading_div").ajaxError(function(event, request, settings){
-    $(this).html('<span style="color: red;">Error.</span>');
-    $("#btn_submit").removeAttr("disabled");
-  });
+      $("#lyric_div > textarea").val(lyric);
+      $("#lyric_div > textarea").css("height", (14*count.length)+"pt");
+
+      $("#loading_div").hide();
+      $("#lyric_div").show();
+      $("#btn_submit").removeAttr("disabled");
+    });
+
+    $("#loading_div").ajaxError(function(event, request, settings){
+      $(this).html('<span style="color: red;">Error.</span>');
+      $("#btn_submit").removeAttr("disabled");
+    });
+  })
 });
 
 // vim: tabstop=2 shiftwidth=2 expandtab
