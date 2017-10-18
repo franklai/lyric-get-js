@@ -96,6 +96,9 @@ class Lyric extends LyricBase {
 
     get_info_one(text, prefix, suffix) {
         const result = this.find_string_by_prefix_suffix(text, prefix, suffix, false);
+        if (!result) {
+            return '';
+        }
         return he.decode(result);
     }
 
@@ -106,6 +109,8 @@ class Lyric extends LyricBase {
         if (title_bar) {
             this.title = this.get_info_one(title_bar, 'title-bar">', '<!-- ');
             this.artist = this.get_info_one(title_bar, '<!-- / ', '-->');
+        } else {
+            console.warn('Failed to find title bar');
         }
 
         this.lyricist = this.get_info_one(html, '<b>&#20316;&#35422;&#65306;</b>', '\t');
@@ -132,7 +137,9 @@ exports.Lyric  = Lyric;
 
 if (require.main === module) {
     (async function() {
-        const url = 'https://petitlyrics.com/lyrics/2640215';
+//         const url = 'https://petitlyrics.com/lyrics/2640215';
+//         const url = 'https://petitlyrics.com/lyrics/2664168';
+        const url = 'https://petitlyrics.com/lyrics/2664256';
         const obj = new Lyric(url);
         const lyric =  await obj.get();
         console.log(lyric);
