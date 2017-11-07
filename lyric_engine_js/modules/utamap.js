@@ -55,27 +55,20 @@ class Lyric extends LyricBase {
             html = iconv.decode(raw, 'sjis');
         }
 
-        const patterns = {
+        const keys = {
             'title': 'title',
             'artist': 'artist',
             'lyricist': 'sakusi',
             'composer': 'sakyoku',
+        };
+
+        let patterns = {};
+        for (const key in keys) {
+            const input_name = keys[key];
+            patterns[key] = new RegExp(util.format('<INPUT type="hidden" name=%s value="([^"]*)">', input_name));
         }
 
-        for (let key in patterns) {
-            const key_for_pattern = patterns[key];
-
-            const pattern = new RegExp(util.format('<INPUT type="hidden" name=%s value="([^"]*)">', key_for_pattern));
-            const result = pattern.exec(html);
-
-            if (result) {
-                const value = result[1].trim();
-                this[key] = value;
-
-                console.log('key:', key, ', value:', value)
-            }
-
-        }
+        this.fill_song_info(html, patterns);
     }
 
     async parse_page() {
