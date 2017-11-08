@@ -1,6 +1,6 @@
 const { Lyric } = require('./kashinavi');
 
-jest.setTimeout(20000); // 20 second timeout
+jest.setTimeout(30000); // 20 second timeout
 
 async function testLyric(obj) {
   const url = obj.url;
