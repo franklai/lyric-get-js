@@ -15,12 +15,16 @@ class Lyric extends LyricBase {
         ], [
             '<p class="writers">',
             '</sd-lyricbody>'
+        ], [
+            '\n<!--WIDGET - RELATED-->',
+            '<!-- Second Section -->\n'
+        ], [
+            '\n<!--WIDGET - PHOTOS-->',
+            '<!-- Third Section -->\n'
         ]];
 
         for (const [prefix, suffix] of items) {
-console.log(prefix, suffix);
             const noise = this.find_string_by_prefix_suffix(lyric, prefix, suffix);
-console.log('noise:', noise);
             if (noise) {
                 lyric = lyric.replace(noise, '');
             }
