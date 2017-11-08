@@ -1,25 +1,35 @@
+/* global expect test */
 const { Lyric } = require('./utamap');
 
+async function testLyric(obj) {
+  const { url } = obj;
+  const inst = new Lyric(url);
+  await inst.get();
+
+  expect(inst.title).toBe(obj.title);
+  expect(inst.artist).toBe(obj.artist);
+  if (obj.lyricist) expect(inst.lyricist).toBe(obj.lyricist);
+  if (obj.composer) expect(inst.composer).toBe(obj.composer);
+  if (obj.length) expect(inst.lyric.length).toBe(obj.length);
+}
 
 test('', async () => {
-  const url = 'http://www.utamap.com/showkasi.php?surl=59709';
-  obj = new Lyric(url);
-  const a = await obj.get()
-
-  expect(obj.title).toBe('One more time,One more chance');
-  expect(obj.artist).toBe('山崎まさよし');
-  expect(obj.lyricist).toBe('山崎将義');
-  expect(obj.lyric.length).toBe(794);
+  await testLyric({
+    url: 'http://www.utamap.com/showkasi.php?surl=59709',
+    title: 'One more time,One more chance',
+    artist: '山崎まさよし',
+    lyricist: '山崎将義',
+    length: 794,
+  });
 });
 
 test('', async () => {
-  const url = 'http://www.utamap.com/showkasi.php?surl=k-131226-001';
-  obj = new Lyric(url);
-  const a = await obj.get()
-
-  expect(obj.title).toBe('ちっぽけな愛のうた');
-  expect(obj.artist).toBe('小枝理子&小笠原秋');
-  expect(obj.lyricist).toBe('亀田誠治');
-  expect(obj.composer).toBe('亀田誠治');
-  expect(obj.lyric.length).toBe(572);
+  await testLyric({
+    url: 'http://www.utamap.com/showkasi.php?surl=k-131226-001',
+    title: 'ちっぽけな愛のうた',
+    artist: '小枝理子&小笠原秋',
+    lyricist: '亀田誠治',
+    composer: '亀田誠治',
+    length: 572,
+  });
 });

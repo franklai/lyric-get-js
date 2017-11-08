@@ -1,5 +1,5 @@
 /* global expect test */
-const { Lyric } = require('./musixmatch');
+const { Lyric } = require('./animationsong');
 
 async function testLyric(obj) {
   const { url } = obj;
@@ -15,18 +15,24 @@ async function testLyric(obj) {
 
 test('', async () => {
   await testLyric({
-    url: 'https://www.musixmatch.com/lyrics/SawanoHiroyuki-nZk-Tielle-Gemie/sh0ut',
-    title: 'sh0ut',
-    artist: 'SawanoHiroyuki[nZk]:Tielle&Gemie',
-    length: 1719,
+    url: 'http://animationsong.com/archives/1803656.html',
+    title: 'gravityWall',
+    artist: 'SawanoHiroyuki[nZk]:Tielle & Gemie',
+    lyricist: '澤野弘之・Tielle',
+    composer: '澤野弘之',
+    length: 1466,
   });
 });
 
 test('', async () => {
   await testLyric({
-    url: 'https://www.musixmatch.com/lyrics/Mariah-Carey-feat-Ne%E2%80%90Yo/Angels-Cry',
-    title: 'Angels Cry',
-    artist: 'Mariah Carey feat. Ne-Yo',
-    length: 1808,
+    url: 'http://animationsong.com/archives/1804004.html',
+    title: '明日の君さえいればいい。',
+    artist: 'ChouCho',
+    lyricist: '松井洋平',
+    composer: 'yuxuki waga',
+    arranger: 'yuxuki waga',
+    length: 733,
   });
 });
+

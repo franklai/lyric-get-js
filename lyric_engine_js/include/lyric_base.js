@@ -3,96 +3,95 @@ const he = require('he');
 const striptags = require('striptags');
 
 const ATTR_LIST = [
-    ['artist', '歌手'],
-    ['lyricist', '作詞'],
-    ['composer', '作曲'],
-    ['arranger', '編曲'],
+  ['artist', '歌手'],
+  ['lyricist', '作詞'],
+  ['composer', '作曲'],
+  ['arranger', '編曲'],
 ];
 
 class LyricBase {
-    constructor(url) {
-        this.url = url;
+  constructor(url) {
+    this.url = url;
+  }
+
+  async get() {
+    if (!await this.parse_page()) {
+      return null;
     }
 
-    async get() {
-        if (!await this.parse_page()) {
-            return null;
-        }
+    return this.get_full();
+  }
 
-        return this.get_full();
+  get_full() {
+    // template of full information
+    const template = [];
+
+    if (this.title) {
+      template.push(this.title);
+      template.push('');
     }
 
-    get_full() {
-        // template of full information
-        let template = [];
+    ATTR_LIST.forEach((attr) => {
+      const key = attr[0];
+      const translate = attr[1];
 
-        if (this.title) {
-            template.push(this.title);
-            template.push('');
-        }
+      if (this[key]) {
+        template.push(util.format('%s：%s', translate, this[key]));
+      }
+    });
 
-        ATTR_LIST.forEach((attr) => {
-            const key = attr[0];
-            const translate = attr[1];
+    if (template.length > 2) {
+      template.push('');
+      template.push('');
+    }
+    template.push(this.lyric);
 
-            if (this[key]) {
-                template.push(util.format('%s：%s', translate, this[key]));
-            }
-        });
+    return template.join('\n');
+  }
 
-        if (template.length > 2) {
-            template.push('');
-            template.push('');
-        }
-        template.push(this.lyric);
+  async parse_page() {
+    this.title = 'base class';
+    throw 'Implement this function!';
+  }
 
-        return template.join('\n');
+  find_string_by_prefix_suffix(input, prefix, suffix, including = true) {
+    const start = input.indexOf(prefix);
+    if (start === -1) {
+      return false;
     }
 
-    async parse_page() {
-        this.title = 'base class';
-        throw 'Implement this function!';
+    const end = input.indexOf(suffix, start + prefix.length);
+    if (end === -1) {
+      return false;
     }
 
-    find_string_by_prefix_suffix(input, prefix, suffix, including=true) {
-        const start = input.indexOf(prefix);
-        if (start === -1) {
-            return false;
-        }
-
-        const end = input.indexOf(suffix, start + prefix.length);
-        if (end === -1) {
-            return false;
-        }
-
-        if (including === true) {
-            return input.substr(start, end - start + suffix.length);
-        } else {
-            return input.substr(start + prefix.length, end - start - prefix.length);
-        }
+    if (including === true) {
+      return input.substr(start, (end - start) + suffix.length);
     }
+    return input.substr(start + prefix.length, (end - start) - prefix.length);
+  }
 
-    get_first_group_by_pattern(input, pattern) {
-        const regex = new RegExp(pattern);
-        const result = regex.exec(input);
-        if (result && result.length >= 2) {
-            return result[1];
-        }
-        return null;
+  get_first_group_by_pattern(input, pattern) {
+    const regex = new RegExp(pattern);
+    const result = regex.exec(input);
+    if (result && result.length >= 2) {
+      return result[1];
     }
+    return null;
+  }
 
-    fill_song_info(content, patterns) {
-        for (let key in patterns) {
-            const key_for_pattern = patterns[key];
+  fill_song_info(content, patterns) {
+    Object.keys(patterns).forEach((key) => {
+      const key_for_pattern = patterns[key];
 
-            let value = this.get_first_group_by_pattern(content, key_for_pattern);
-            if (value) {
-                value = striptags(he.decode(value)).trim();
+      let value = this.get_first_group_by_pattern(content, key_for_pattern);
+      if (value) {
+        value = striptags(he.decode(value)).trim();
 
-                this[key] = value;
-            }
-        }
-    }
+        this[key] = value;
+      }
+    });
+  }
 }
 
 module.exports = LyricBase;

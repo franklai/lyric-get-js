@@ -1,7 +1,8 @@
+/* global expect test */
 const { Lyric } = require('./metrolyrics');
 
 async function testLyric(obj) {
-  const url = obj.url;
+  const { url } = obj;
   const inst = new Lyric(url);
   await inst.get();
 

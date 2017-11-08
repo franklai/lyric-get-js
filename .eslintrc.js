@@ -4,5 +4,6 @@ module.exports = {
         "class-methods-use-this": "off",
         "camelcase": "off",
         "no-console": "off",
+        "no-throw-literal": "off",
     }
 };

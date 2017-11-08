@@ -1,5 +1,5 @@
 /* global expect test */
-const { Lyric } = require('./musixmatch');
+const { Lyric } = require('./animap');
 
 async function testLyric(obj) {
   const { url } = obj;
@@ -15,18 +15,23 @@ async function testLyric(obj) {
 
 test('', async () => {
   await testLyric({
-    url: 'https://www.musixmatch.com/lyrics/SawanoHiroyuki-nZk-Tielle-Gemie/sh0ut',
-    title: 'sh0ut',
-    artist: 'SawanoHiroyuki[nZk]:Tielle&Gemie',
-    length: 1719,
+    url: 'http://www.animap.jp/kasi/showkasi.php?surl=B38260',
+    title: "Don't be long",
+    artist: '水樹奈々',
+    lyricist: '矢吹俊郎',
+    composer: '矢吹俊郎',
+    length: 541,
   });
 });
 
 test('', async () => {
   await testLyric({
-    url: 'https://www.musixmatch.com/lyrics/Mariah-Carey-feat-Ne%E2%80%90Yo/Angels-Cry',
-    title: 'Angels Cry',
-    artist: 'Mariah Carey feat. Ne-Yo',
-    length: 1808,
+    url: 'http://www.animap.jp/kasi/showkasi.php?surl=dk130730_30',
+    title: 'ViViD',
+    artist: "May'n",
+    lyricist: '藤林聖子',
+    composer: '秋田博之',
+    length: 788,
   });
 });
+
