@@ -22,6 +22,9 @@
     "superagent": "^3.6.3"
   },
   "devDependencies": {
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
     "jest": "^21.2.1"
   }
 }
