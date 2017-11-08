@@ -20,6 +20,9 @@ const load_modules = async () => {
         if (obj.ext !== '.js') {
             return;
         }
+        if (f.indexOf('.test.js') !== -1) {
+            return;
+        }
 
         let obj_name = './modules/' + obj.name;
 
