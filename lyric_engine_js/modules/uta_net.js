@@ -57,20 +57,7 @@ class Lyric extends LyricBase {
             'composer': '作曲：<h4.*?>([^<]+)</h4>'
         }
 
-        for (let key in patterns) {
-            const key_for_pattern = patterns[key];
-
-            const pattern = new RegExp(key_for_pattern);
-            const result = pattern.exec(html);
-
-            if (result) {
-                const value = striptags(result[1]).trim();
-                this[key] = value;
-
-                console.log('key:', key, ', value:', value)
-            }
-
-        }
+        this.fill_song_info(html, patterns);
     }
 
     async parse_page() {
@@ -88,7 +75,7 @@ exports.Lyric  = Lyric;
 
 if (require.main === module) {
     (async function() {
-        const url = 'http://www.uta-net.com/song/216847/';
+        const url = 'https://www.uta-net.com/song/216847/';
         const obj = new Lyric(url);
         const lyric =  await obj.get();
         console.log(lyric);
