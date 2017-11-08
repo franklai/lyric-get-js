@@ -13,14 +13,9 @@ class Lyric extends LyricBase {
         return this.get_first_group_by_pattern(url, pattern);
     }
 
-    async find_lyric(url) {
-        const id = this.find_song_id(url);
-        const kashi_url = 'http://kashinavi.com/s/kashi.php?no=' + id;
-        const raw = await rp({url: kashi_url, encoding: null});
-        const html = iconv.decode(raw, 'sjis');
-
-        const prefix = ";'>";
-        const suffix = '")';
+    async find_lyric(url, html) {
+        const prefix = '<p oncopy="return false;" unselectable="on;">';
+        const suffix = '</p>';
         let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
         lyric = lyric.replace(/<br>/g, '\n');
         lyric = striptags(lyric);
@@ -30,10 +25,7 @@ class Lyric extends LyricBase {
         return true;
     }
 
-    async find_info(url) {
-        const raw = await rp({url: url, encoding: null});
-        const html = iconv.decode(raw, 'sjis');
-
+    async find_info(url, html) {
         const prefix = '<table border=0 cellpadding=0 cellspacing=5>';
         const suffix = '<hr noshade size=1>';
         const table_str = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
@@ -55,14 +47,22 @@ class Lyric extends LyricBase {
                 this[key] = value;
             }
         }
+    }
 
+    async get_html(url) {
+        const raw = await rp({url: url, encoding: null});
+        const html = iconv.decode(raw, 'Shift_JIS');
+
+        return html;
     }
 
     async parse_page() {
         const url = this.url;
 
-        await this.find_lyric(url);
-        await this.find_info(url);
+        const html= await this.get_html(url);
+
+        this.find_lyric(url, html);
+        this.find_info(url, html);
 
         return true;
     }
@@ -73,7 +73,7 @@ exports.Lyric  = Lyric;
 
 if (require.main === module) {
     (async function() {
-        const url = 'http://kashinavi.com/song_view.html?17783';
+        const url = 'http://kashinavi.com/song_view.html?77597';
         const obj = new Lyric(url);
         const lyric =  await obj.get();
         console.log(lyric);
