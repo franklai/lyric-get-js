@@ -38,8 +38,8 @@ class Lyric extends LyricBase {
 
         const patterns = {
             'artist': '">([^<]*)</a></span></td></tr>',
-            'lyricist': 'td>([^<]*)<br></td></tr>',
-            'composer': 'td>([^<]*)<br></td></tr>',
+            'lyricist': '>作詞</th><td>([^<]*)<br></td></tr>',
+            'composer': '>作曲</th><td>([^<]*)<br></td></tr>',
         }
 
         for (let key in patterns) {
