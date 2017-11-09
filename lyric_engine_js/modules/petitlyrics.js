@@ -99,7 +99,7 @@ class Lyric extends LyricBase {
     if (!result) {
       return '';
     }
-    return he.decode(result);
+    return he.decode(result).trim();
   }
 
   async find_info(url, html) {
