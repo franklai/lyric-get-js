@@ -12,6 +12,7 @@
         "pixl-xml": "^1.0.10",
         "request": "^2.81.0",
         "request-promise": "^4.1.1",
-        "striptags": "^3.0.1"
+        "striptags": "^3.0.1",
+        "superagent": "^3.8.1"
     }
 }

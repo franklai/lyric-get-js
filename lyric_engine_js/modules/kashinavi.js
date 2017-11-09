@@ -1,81 +1,71 @@
-const util = require('util');
 const iconv = require('iconv-lite');
-const he = require('he');
 const rp = require('request-promise');
 const striptags = require('striptags');
 
 const LyricBase = require('../include/lyric_base');
+
 const keyword = 'kashinavi';
 
 class Lyric extends LyricBase {
-    find_song_id(url) {
-        const pattern = /\?([0-9]+)/;
-        return this.get_first_group_by_pattern(url, pattern);
-    }
+  find_song_id(url) {
+    const pattern = /\?([0-9]+)/;
+    return this.get_first_group_by_pattern(url, pattern);
+  }
 
-    async find_lyric(url, html) {
-        const prefix = '<p oncopy="return false;" unselectable="on;">';
-        const suffix = '</p>';
-        let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
-        lyric = lyric.replace(/<br>/g, '\n');
-        lyric = striptags(lyric);
-        lyric = lyric.trim();
+  async find_lyric(url, html) {
+    const prefix = '<p oncopy="return false;" unselectable="on;">';
+    const suffix = '</p>';
+    let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    lyric = lyric.replace(/<br>/g, '\n');
+    lyric = striptags(lyric);
+    lyric = lyric.trim();
 
-        this.lyric = lyric;
-        return true;
-    }
+    this.lyric = lyric;
+    return true;
+  }
 
-    async find_info(url, html) {
-        const prefix = '<table border=0 cellpadding=0 cellspacing=5>';
-        const suffix = '<hr noshade size=1>';
-        const table_str = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+  async find_info(url, html) {
+    const prefix = '<table border=0 cellpadding=0 cellspacing=5>';
+    const suffix = '<hr noshade size=1>';
+    const table_str = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
 
-        const patterns = {
-            'title': '<td>([^<]+?)</td>',
-            'artist': '<td><a href="[^"]+">(.+?)</a></td>',
-            'lyricist': '作詞　：　([^<]+)<br>',
-            'composer': '作曲　：　([^<]+)</td>'
-        }
+    const patterns = {
+      title: '<td>([^<]+?)</td>',
+      artist: '<td><a href="[^"]+">(.+?)</a></td>',
+      lyricist: '作詞　：　([^<]+)<br>',
+      composer: '作曲　：　([^<]+)</td>',
+    };
 
-        for (let key in patterns) {
-            const key_for_pattern = patterns[key];
+    this.fill_song_info(table_str, patterns);
+  }
 
-            let value = this.get_first_group_by_pattern(table_str, key_for_pattern);
-            value = striptags(value).trim();
-            
-            if (value) {
-                this[key] = value;
-            }
-        }
-    }
+  async get_html(url) {
+    const raw = await rp({ url, encoding: null });
+    const html = iconv.decode(raw, 'Shift_JIS');
 
-    async get_html(url) {
-        const raw = await rp({url: url, encoding: null});
-        const html = iconv.decode(raw, 'Shift_JIS');
+    return html;
+  }
 
-        return html;
-    }
+  async parse_page() {
+    const { url } = this;
 
-    async parse_page() {
-        const url = this.url;
+    const html = await this.get_html(url);
 
-        const html= await this.get_html(url);
+    this.find_lyric(url, html);
+    this.find_info(url, html);
 
-        this.find_lyric(url, html);
-        this.find_info(url, html);
-
-        return true;
-    }
+    return true;
+  }
 }
 
 exports.keyword = keyword;
-exports.Lyric  = Lyric;
+exports.Lyric = Lyric;
 
 if (require.main === module) {
-    (async function() {
-        const url = 'http://kashinavi.com/song_view.html?77597';
-        const obj = new Lyric(url);
-        const lyric =  await obj.get();
-        console.log(lyric);
-    })();
+  (async () => {
+    const url = 'http://kashinavi.com/song_view.html?77597';
+    const obj = new Lyric(url);
+    const lyric = await obj.get();
+    console.log(lyric);
+  })();
 }
