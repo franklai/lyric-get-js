@@ -17,7 +17,7 @@
 
 		.header.pure-menu {
 			background: #2d3e50;
-			height: 36px;
+			height: 38px;
 			text-align: center;
 		}
 
@@ -33,6 +33,7 @@
 
 		.header .pure-menu-item {
 			border-bottom: 2px solid transparent;
+			height: 36px;
 		}
 
 		.header .pure-menu-selected {
@@ -60,6 +61,7 @@
 			padding: 0;
 			position: relative;
 		}
+
 		.content .do-center {
 			display: flex;
 			flex-direction: column;
@@ -92,27 +94,50 @@
 			list-style: circle;
 			padding: 3px
 		}
+
 		.content input[type=button],
 		.content input[type=submit] {
 			background-color: #d0e5f5;
-    	padding: 3px 10px;
-    	border: 1px solid #79b7e7;
+			padding: 3px 10px;
+			border: 1px solid #79b7e7;
 			border-radius: 5px;
-    	font-size: 16px;
+			font-size: 16px;
 		}
+
 		.content input[type=button]:disabled,
 		.content input[type=submit]:disabled {
 			color: graytext;
 		}
 
+		.copied-msg {
+			height: 32px;
+			display: inline-block;
+			vertical-align: middle;
+			margin-left: 10px;
+			opacity: 1;
+			visibility: hidden;
+			color: blue;
+		}
+
+		.fadeout {
+			transition-property: opacity;
+			transition-duration: 2s;
+			transition-delay: 2s;
+			opacity: 0;
+			visibility: visible;
+		}
+
 		.lyric-loading-div {
 			padding: 10px;
 			text-align: center;
-			display: none;		
+			display: none;
 		}
+
 		.lyric-div {
+			display: none;
 			padding: 10px;
 		}
+
 		.lyric-textarea {
 			margin: 10px 0;
 			width: 100%;
@@ -130,6 +155,7 @@
 			border-radius: 3px;
 			height: 36px;
 		}
+
 		.content .submit {
 			width: 100px;
 			padding: 8px;
@@ -138,6 +164,7 @@
 			top: 5px;
 			height: 26px;
 		}
+
 		.content .url,
 		.content .submit {
 			box-sizing: border-box;
@@ -160,16 +187,19 @@
 		.content-block .width-limit {
 			width: 100%;
 		}
+
 		@media screen and (max-width: 520px) and (min-width: 400px) {
-			.content-block .width-limit{
+			.content-block .width-limit {
 				width: 380px;
 			}
 		}
+
 		@media screen and (max-width: 620px) and (min-width: 520px) {
-			.content-block .width-limit{
+			.content-block .width-limit {
 				width: 500px;
 			}
 		}
+
 		@media screen and (min-width: 620px) {
 			.content-block .width-limit {
 				width: 600px;
@@ -225,7 +255,7 @@
 			<div class="do-center">
 				<form id="query_form" class="width-limit">
 					<fieldset>
-						<input type="text" id="url" class="url fill" placeholder="Paste URL HERE..." title="Paste URL HERE..." value="http://www.utamap.com/showkasi.php?surl=70380" />
+						<input type="text" id="url" class="url fill" placeholder="Paste URL HERE..." title="Paste URL HERE..." value="" />
 						<input type="submit" id="submit_btn" class="submit" value="Fetch" />
 					</fieldset>
 				</form>
@@ -236,6 +266,7 @@
 				<div id="lyric_div" class="lyric-div width-limit" lang="ja">
 					<input type="button" id="select" value="Select Lyric" />
 					<input type="button" id="copy" value="Copy Lyric" />
+					<span class="copied-msg">Lyric copied to clipboard.</span>
 					<div class="hr"></div>
 					<textarea lang="ja" id="lyric_textarea" class="lyric-textarea"></textarea>
 				</div>
@@ -313,7 +344,7 @@
 
 				<dt>musixmatch</dt>
 				<dd>
-					<a href="https://www.musixmatch.com/lyrics/Mariah-Carey/We-Belong-Together" target="_blank">https://www.musixmatch.com/lyrics/Mariah-Carey/We-Belong-Togethe://www.musixmatch.com/lyrics/Mariah-Carey/We-Belong-Together</a>
+					<a href="https://www.musixmatch.com/lyrics/Mariah-Carey/We-Belong-Together" target="_blank">https://www.musixmatch.com/lyrics/Mariah-Carey/We-Belong-Together</a>
 				</dd>
 
 			</dl>
@@ -398,7 +429,7 @@
 				textareaLyric.style.height = (20 * lines.length + 40) + 'px';
 			};
 
-			var setErrorMsg = function(msg) {
+			var setErrorMsg = function (msg) {
 				if (msg === false) {
 					divLoading.style.display = 'none';
 					divLyric.style.display = 'block';
@@ -409,11 +440,11 @@
 				divLoading.style.display = 'block';
 				divLyric.style.display = 'none';
 			};
-			var setLoading = function() {
+			var setLoading = function () {
 				setErrorMsg('Loading...');
 				btnSubmit.disabled = true;
 			};
-			var setResult = function(json) {
+			var setResult = function (json) {
 				if (!json || !json.lyric) {
 					setError();
 					return;
@@ -423,7 +454,7 @@
 				btnSubmit.disabled = false;
 
 				updateTextareaHeight(json.lyric);
-				
+
 				textareaLyric.value = json.lyric;
 			};
 			var setError = function () {
@@ -445,25 +476,33 @@
 			});
 
 			var selectLyric = function () {
-				textareaLyric.focus();
+				// textareaLyric.focus();
 				textareaLyric.select();
 			};
 			$('select').addEventListener('click', function (evt) {
 				selectLyric();
 			});
 			if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+				var msg = q('.copied-msg');
+
 				$('copy').addEventListener('click', function (evt) {
 					selectLyric();
 					document.execCommand('copy');
-					window.alert('Lyric has copied to Clipboard.');
+
+					msg.classList.add('fadeout');
+				});
+
+				msg.addEventListener('transitionend', function (evt) {
+					msg.classList.remove('fadeout');
 				});
 			} else {
 				$('copy').disabled = true;
 			}
+			inputUrl.addEventListener('click', function (evt) {
+				inputUrl.select();
+			});
 
-			formQuery.addEventListener('submit', function (evt) {
-				evt.preventDefault();
-
+			var doQuery = function () {
 				var val = inputUrl.value.trim();
 				if (val === '' || val.toLowerCase().match('https?:\/\/') === null) {
 					return false;
@@ -485,8 +524,33 @@
 					setError();
 				});
 
+			};
+
+			$('examples').addEventListener('click', function (evt) {
+				console.log(`meta: ${evt.metaKey}, shift: ${evt.shiftKey}`);
+				console.log('meta:', evt.metaKey, ', ctrl:', evt.ctrlKey, ', alt:', evt.altKey);
+				console.log(evt.target);
+				console.dir(evt.target);
+
+				if (evt.target.tagName.toLowerCase() !== 'a') {
+					return;
+				}
+				if (evt.metaKey || evt.ctrlKey || evt.shiftKey || evt.altKey) {
+					return;
+				}
+				evt.preventDefault();
+
+				inputUrl.value = evt.target.href;
+
+				showContent('main');
+				doQuery();
 			});
-			
+
+			formQuery.addEventListener('submit', function (evt) {
+				evt.preventDefault();
+				doQuery();
+			});
+
 		})();
 	</script>
 </body>
