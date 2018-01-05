@@ -395,8 +395,7 @@
 		ga('create', 'UA-879036-3', 'auto');
 		ga('send', 'pageview');
 	</script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/native-promise-only/0.8.1/npo.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,fetch,Element.prototype.dataset"></script>
 	<script type="text/javascript">
 		(function () {
 			if (!document.querySelectorAll) {
@@ -472,18 +471,18 @@
 			links.forEach(function (link) {
 				link.addEventListener('click', function (evt) {
 					evt.preventDefault();
+
 					var pn = evt.target.parentNode;
 					if (!pn || !pn.dataset) {
 						return;
 					}
-					var id = pn.dataset.contentId;
 
+					var id = pn.dataset.contentId;
 					showContent(id);
 				});
 			});
 
 			var selectLyric = function () {
-				// textareaLyric.focus();
 				textareaLyric.select();
 			};
 			$('select').addEventListener('click', function (evt) {
