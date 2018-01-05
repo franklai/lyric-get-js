@@ -43,7 +43,7 @@ class Lyric extends LyricBase {
   async get_xml(query) {
     const url = util.format(
       'http://rio.yahooapis.jp/RioWebService/V2/getLyrics?appid=%s&%s',
-      '7vOgnk6xg64IDggn6YEl3IQxmbj1qqkQzTpAx5nGwl9HnfPX3tZksE.oYhEw3zA-', query,
+      '7vOgnk6xg64IDggn6YEl3IQxmbj1qqkQzTpAx5nGwl9HnfPX3tZksE.oYhEw3zA-', query
     );
 
     const xml = await rp(url);
