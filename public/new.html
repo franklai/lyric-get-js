@@ -112,7 +112,7 @@
 		.copied-msg {
 			height: 32px;
 			display: inline-block;
-			vertical-align: middle;
+			line-height: 32px;
 			margin-left: 10px;
 			opacity: 1;
 			visibility: hidden;
@@ -141,6 +141,7 @@
 		.lyric-textarea {
 			margin: 10px 0;
 			width: 100%;
+			box-sizing: border-box;
 			min-height: 300px;
 			border: 1px solid #999;
 			border-radius: 3px;
@@ -188,6 +189,11 @@
 			width: 100%;
 		}
 
+		@media screen and (max-width: 400px) and (min-width: 360px) {
+			.content-block .width-limit {
+				width: 330px;
+			}
+		}
 		@media screen and (max-width: 520px) and (min-width: 400px) {
 			.content-block .width-limit {
 				width: 380px;
@@ -426,8 +432,9 @@
 				q('.pure-menu-item[data-content-id=' + id + ']').classList.add(selectedCls);
 			};
 			var updateTextareaHeight = function (text) {
-				var lines = text.split('\n');
-				textareaLyric.style.height = (20 * lines.length + 40) + 'px';
+				textareaLyric.style.height = '100px';
+				var height = textareaLyric.scrollHeight;
+				textareaLyric.style.height = (height + 20) + 'px';
 			};
 
 			var setErrorMsg = function (msg) {
@@ -454,9 +461,8 @@
 				setErrorMsg(false);
 				btnSubmit.disabled = false;
 
-				updateTextareaHeight(json.lyric);
-
 				textareaLyric.value = json.lyric;
+				updateTextareaHeight(json.lyric);
 			};
 			var setError = function () {
 				setErrorMsg('<span style="color: red;">Failed to get lyric. Please contact franklai.</span>');
@@ -517,22 +523,15 @@
 					resp.json().then(function (json) {
 						setResult(json);
 					}).catch(function (reason) {
-						console.log(reason);
 						setError();
 					});
 				}).catch(function (reason) {
-					console.log(reason);
 					setError();
 				});
 
 			};
 
 			$('examples').addEventListener('click', function (evt) {
-				console.log(`meta: ${evt.metaKey}, shift: ${evt.shiftKey}`);
-				console.log('meta:', evt.metaKey, ', ctrl:', evt.ctrlKey, ', alt:', evt.altKey);
-				console.log(evt.target);
-				console.dir(evt.target);
-
 				if (evt.target.tagName.toLowerCase() !== 'a') {
 					return;
 				}
