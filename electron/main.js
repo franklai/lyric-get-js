@@ -1,8 +1,7 @@
 const electron = require('electron');
 // Module to control application life.
-const { app } = electron;
+const { app, BrowserWindow, shell } = electron;
 // Module to create native browser window.
-const { BrowserWindow } = electron;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -24,6 +23,11 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+  });
+
+  mainWindow.webContents.on('new-window', (event, url) => {
+    event.preventDefault();
+    shell.openExternal(url);
   });
 }
 
