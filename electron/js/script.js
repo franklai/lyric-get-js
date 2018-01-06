@@ -1,94 +1,198 @@
-const engine = require('lyric-get-engine');
-
-$(document).ready(function(){
-  // initialize tab
-  $("#tabs").tabs();
-
-  /** binding */
-  // select url when focus on #url [text input]
-  $("#url").bind('click', function(){
-    this.select();
-  });
-
-  // select lyric all
-  $("#select").bind("click", function(e){
-    $("#lyric_div > textarea").focus();
-    $("#lyric_div > textarea").select();
-  });
-
-  // copy lyric
-
-  if (window.clipboardData){
-    $("#copy").bind("click", function(e){
-      var text = $("#lyric_div > textarea").val();
-      window.clipboardData.clearData(); 
-      window.clipboardData.setData("Text", text); 
-      window.alert("Lyric has copied to Clipboard.");
-    });
-  } else {
-    $("#copy").attr("disabled", "disabled");
+/* eslint func-names: 0, no-var: 0, vars-on-top:0, prefer-template: 0, prefer-arrow-callback:0 */
+(function () {
+  if (!document.querySelectorAll) {
+    return;
   }
 
-  // binding examples URL
-  $("#examples a").click(function(e){
-    e.preventDefault();
+  var links = document.querySelectorAll('.pure-menu-link');
+  links = Array.prototype.slice.call(links);
 
-    var url = e.target.href;
-    $("#url").val(url);
-    $("#btn_submit").submit();
-  });
+  var $ = function (id) {
+    return document.getElementById(id);
+  };
+  var q = function (selector) {
+    return document.querySelector(selector);
+  };
 
-  // submit url to get episode list
-  $("#query_form").bind("submit", function(e){
-    // no form submit action
-    e.preventDefault();
+  var formQuery = $('query_form');
+  var inputUrl = $('url');
+  var btnSubmit = $('submit_btn');
+  var divLoading = $('loading_div');
+  var divLyric = $('lyric_div');
+  var textareaLyric = $('lyric_textarea');
 
-    var url = jQuery.trim($("#url").val());
+  var showContent = function (id) {
+    var activeCls = 'content-active';
+    q('.' + activeCls).classList.remove(activeCls);
+    $(id).classList.add(activeCls);
 
-    // check input
-    if (url == "" || url == $("#url").attr("title")) {
-      return false;
+    var selectedCls = 'pure-menu-selected';
+    q('.' + selectedCls).classList.remove(selectedCls);
+    q('.pure-menu-item[data-content-id=' + id + ']').classList.add(selectedCls);
+  };
+  var updateTextareaHeight = function () {
+    textareaLyric.style.height = '100px';
+    var height = textareaLyric.scrollHeight;
+    textareaLyric.style.height = height + 20 + 'px';
+  };
+
+  var setErrorMsg = function (msg) {
+    if (msg === false) {
+      divLoading.style.display = 'none';
+      divLyric.style.display = 'block';
+      return;
     }
-    
-    // show waiting dialog
-    $("#btn_submit").attr("disabled", "disabled");
-    $("#lyric_div").hide();
-    $("#lyric_div > textarea").empty();
-    $("#loading_div").html("Loading...");
-    $("#loading_div").show();
 
-    let lyric = '';
-    let a_promise;
-    try {
-      a_promise = engine.get_lyric(url);
-    } catch (err) {
-      console.error('err:', err);
-      // catch error type?
+    divLoading.innerHTML = msg;
+    divLoading.style.display = 'block';
+    divLyric.style.display = 'none';
+  };
+  var setLoading = function () {
+    setErrorMsg('Loading...');
+    btnSubmit.disabled = true;
+  };
+  var setError = function () {
+    var errMsg = '<span style="color: red;">Failed to get lyric. Please contact franklai.</span>';
+    setErrorMsg(errMsg);
+    btnSubmit.disabled = false;
+  };
+  var setResult = function (lyric) {
+    if (!lyric) {
+      setError();
+      return;
     }
 
-    a_promise.then(function(lyric) {
-      if (!lyric) {
-        // failed to get lyric
-        $("#loading_div").html('<span style="color: red;">Failed to get lyric. Please contact franklai.</span>');
-        $("#btn_submit").removeAttr("disabled");
+    setErrorMsg(false);
+    btnSubmit.disabled = false;
+
+    textareaLyric.value = lyric;
+    updateTextareaHeight(lyric);
+  };
+
+
+  links.forEach(function (link) {
+    link.addEventListener('click', function (evt) {
+      evt.preventDefault();
+
+      var pn = evt.target.parentNode;
+      if (!pn || !pn.dataset) {
         return;
       }
-      console.log(lyric);
-      var count = lyric.split("\n");
 
-      $("#lyric_div > textarea").val(lyric);
-      $("#lyric_div > textarea").css("height", (14*count.length)+"pt");
+      var id = pn.dataset.contentId;
+      showContent(id);
+    });
+  });
 
-      $("#loading_div").hide();
-      $("#lyric_div").show();
-      $("#btn_submit").removeAttr("disabled");
+  var selectLyric = function () {
+    textareaLyric.select();
+  };
+  $('select').addEventListener('click', function () {
+    selectLyric();
+  });
+  if (
+    document.queryCommandSupported &&
+    document.queryCommandSupported('copy')
+  ) {
+    var msg = q('.copied-msg');
+
+    $('copy').addEventListener('click', function () {
+      selectLyric();
+      document.execCommand('copy');
+
+      msg.classList.add('fadeout');
     });
 
-    $("#loading_div").ajaxError(function(event, request, settings){
-      $(this).html('<span style="color: red;">Error.</span>');
-      $("#btn_submit").removeAttr("disabled");
+    msg.addEventListener('transitionend', function () {
+      msg.classList.remove('fadeout');
     });
-  })
-});
+  } else {
+    $('copy').disabled = true;
+  }
+  inputUrl.addEventListener('click', function () {
+    inputUrl.select();
+  });
 
-// vim: tabstop=2 shiftwidth=2 expandtab
+  var doAjaxQuery = function (val) {
+    var url = 'app?url=' + encodeURIComponent(val);
+
+    fetch(url)
+      .then(function (resp) {
+        resp
+          .json()
+          .then(function (json) {
+            if (!json || !json.lyric) {
+              setError();
+              return;
+            }
+            setResult(json.lyric);
+          })
+          .catch(function () {
+            setError();
+          });
+      })
+      .catch(function () {
+        setError();
+      });
+  };
+  var doElectronQuery = function (val) {
+    try {
+      const engine = require('lyric-get-engine'); // eslint-disable-line global-require
+      engine
+        .get_lyric(val)
+        .then(function (lyric) {
+          if (!lyric) {
+            setError();
+            return;
+          }
+
+          setResult(lyric);
+        })
+        .catch(function (reason) {
+          setError();
+          console.log('Error:', reason);
+        });
+    } catch (err) {
+      console.log('Error:', err);
+    }
+  };
+
+  var doQuery = function () {
+    var val = inputUrl.value.trim();
+    if (val === '' || val.toLowerCase().match('https?://') === null) {
+      return false;
+    }
+
+    setLoading();
+
+    if (
+      window.process &&
+      window.process.versions &&
+      window.process.versions.electron !== undefined
+    ) {
+      return doElectronQuery(val);
+    }
+
+    return doAjaxQuery(val);
+  };
+
+  $('examples').addEventListener('click', function (evt) {
+    if (evt.target.tagName.toLowerCase() !== 'a') {
+      return;
+    }
+    if (evt.metaKey || evt.ctrlKey || evt.shiftKey || evt.altKey) {
+      return;
+    }
+    evt.preventDefault();
+
+    inputUrl.value = evt.target.href;
+
+    showContent('main');
+    doQuery();
+  });
+
+  formQuery.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    doQuery();
+  });
+}());

@@ -6,7 +6,10 @@ module.exports = {
         "no-console": "off",
         "no-throw-literal": "off",
     },
+    "env": {
+        "browser": true,
+    },
     "settings": {
-        "import/core-modules": ["electron"]
+        "import/core-modules": ["electron"],
     }
 };
