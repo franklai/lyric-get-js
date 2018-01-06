@@ -5,5 +5,8 @@ module.exports = {
         "camelcase": "off",
         "no-console": "off",
         "no-throw-literal": "off",
+    },
+    "settings": {
+        "import/core-modules": ["electron"]
     }
 };
