@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server",
+    "watch": "nodemon server",
     "test": "jest"
   },
   "license": "Apache",
