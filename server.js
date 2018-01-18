@@ -13,7 +13,12 @@ function do_not_found(res) {
 http.createServer(async function (req, res) {
     const req_obj = url.parse(req.url, true);
 
-    const pathname = (req_obj.pathname === '/') ? '/index.html' : req_obj.pathname;
+    let pathname = req_obj.pathname;
+    if (pathname === '/') {
+        pathname = '/index.html';
+    } else if (pathname === '/former/') {
+        pathname = '/former/index.html';
+    }
 
     if (pathname === '/app') {
         if (!req_obj.query || !req_obj.query.url) {
