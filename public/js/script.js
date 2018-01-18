@@ -191,7 +191,7 @@
     doQuery();
   });
 
-  formQuery.addEventListener('submit', (evt) => {
+  formQuery.addEventListener('submit', function (evt) {
     evt.preventDefault();
     doQuery();
   });

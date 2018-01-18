@@ -1,4 +1,6 @@
 const http = require('http');
+const mime = require('mime-types');
+const path = require('path');
 const url = require('url');
 const util = require('util');
 
@@ -56,7 +58,8 @@ http.createServer(async function (req, res) {
     src = util.format('%s%s', 'public', pathname);
     fs.readFile(src).then(function (data) {
         res.writeHead(200, {
-            'Content-Length': data.length
+            'Content-Length': data.length,
+            'Content-Type': mime.lookup(pathname) || 'application/octet-stream',
         });
         res.end(data);
     }).catch(function(err) {
