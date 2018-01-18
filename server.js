@@ -10,6 +10,9 @@ function do_not_found(res) {
     res.end();
 }
 
+const port = process.env.PORT || 8866;
+console.log(`Listen to http://localhost:${port}`);
+
 http.createServer(async function (req, res) {
     const req_obj = url.parse(req.url, true);
 
@@ -59,4 +62,4 @@ http.createServer(async function (req, res) {
     }).catch(function(err) {
         return do_not_found(res);
     });
-}).listen(process.env.PORT || 8866);
+}).listen(port);
