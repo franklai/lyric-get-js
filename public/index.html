@@ -8,236 +8,7 @@
 	<title>Lyric Get 2018</title>
 	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
 	 crossorigin="anonymous">
-	<style type="text/css">
-		body {
-			background-color: #CEE;
-			margin: 0;
-			padding: 0;
-		}
-
-		.header.pure-menu {
-			background: #2d3e50;
-			height: 38px;
-			text-align: center;
-		}
-
-		.header .pure-menu-heading {
-			color: white;
-			font-size: 120%;
-		}
-
-		.header .pure-menu-selected .pure-menu-link,
-		.header .pure-menu-selected .pure-menu-link:visited {
-			color: white;
-		}
-
-		.header .pure-menu-item {
-			border-bottom: 2px solid transparent;
-			height: 36px;
-		}
-
-		.header .pure-menu-selected {
-			border-bottom: 2px solid yellow;
-		}
-
-		.header .pure-menu-active>.pure-menu-link,
-		.header .pure-menu-link:focus,
-		.header .pure-menu-link:hover {
-			background: none;
-		}
-
-		.content {
-			position: absolute;
-			top: 36px;
-			display: flex;
-			justify-content: center;
-			width: 100%;
-			margin-bottom: 56px;
-		}
-
-		.content fieldset {
-			border: none;
-			margin: 0;
-			padding: 0;
-			position: relative;
-		}
-
-		.content .do-center {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-		}
-
-		.content dt {
-			font-weight: bold;
-		}
-
-		.content dd {
-			word-break: break-all;
-		}
-
-		.content dl {
-			margin: 10px;
-		}
-
-		.content dl dd {
-			margin-bottom: 3px;
-		}
-
-		.content dl a {
-			font-size: 80%;
-			color: #222;
-		}
-
-		.content ul li {
-			list-style: circle;
-			padding: 3px
-		}
-
-		.content input[type=button],
-		.content input[type=submit] {
-			background-color: #d0e5f5;
-			padding: 3px 10px;
-			border: 1px solid #79b7e7;
-			border-radius: 5px;
-			font-size: 16px;
-		}
-
-		.content input[type=button]:disabled,
-		.content input[type=submit]:disabled {
-			color: graytext;
-		}
-
-		.copied-msg {
-			height: 32px;
-			display: inline-block;
-			line-height: 32px;
-			margin-left: 10px;
-			opacity: 1;
-			visibility: hidden;
-			color: blue;
-		}
-
-		.fadeout {
-			transition-property: opacity;
-			transition-duration: 2s;
-			transition-delay: 2s;
-			opacity: 0;
-			visibility: visible;
-		}
-
-		.lyric-loading-div {
-			padding: 10px;
-			text-align: center;
-			display: none;
-		}
-
-		.lyric-div {
-			display: none;
-			padding: 10px;
-		}
-
-		.lyric-textarea {
-			margin: 10px 0;
-			width: 100%;
-			box-sizing: border-box;
-			min-height: 300px;
-			border: 1px solid #999;
-			border-radius: 3px;
-			padding: 6px;
-			font-size: 16px;
-			line-height: 20px;
-		}
-
-		.content .url {
-			border: 1px solid #999;
-			padding: 8px;
-			border-radius: 3px;
-			height: 36px;
-		}
-
-		.content .submit {
-			width: 100px;
-			padding: 8px;
-			position: absolute;
-			right: 10px;
-			top: 5px;
-			height: 26px;
-		}
-
-		.content .url,
-		.content .submit {
-			box-sizing: border-box;
-			margin: 10px 0;
-		}
-
-		.content .content-block {
-			display: none;
-			margin-bottom: 38px;
-		}
-
-		.content .content-block.content-active {
-			display: block;
-		}
-
-		.content .fill {
-			width: 100%;
-		}
-
-		.content-block .width-limit {
-			width: 100%;
-		}
-
-		@media screen and (max-width: 400px) and (min-width: 360px) {
-			.content-block .width-limit {
-				width: 330px;
-			}
-		}
-		@media screen and (max-width: 520px) and (min-width: 400px) {
-			.content-block .width-limit {
-				width: 380px;
-			}
-		}
-
-		@media screen and (max-width: 620px) and (min-width: 520px) {
-			.content-block .width-limit {
-				width: 500px;
-			}
-		}
-
-		@media screen and (min-width: 620px) {
-			.content-block .width-limit {
-				width: 600px;
-			}
-		}
-
-		.footer {
-			color: #CCC;
-			background-color: #111;
-			position: fixed;
-			left: 0;
-			bottom: 0;
-			width: 100%;
-			text-align: center;
-			font-size: 80%;
-			line-height: 150%;
-			padding: 10px 0;
-			height: 36px;
-		}
-
-		@media screen and (min-width: 520px) {
-			.content {
-				margin-bottom: 38px;
-			}
-			.footer {
-				height: 18px;
-			}
-			.footer .line-item {
-				display: inline-block;
-			}
-		}
-	</style>
+	<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -275,6 +46,10 @@
 					<span class="copied-msg">Lyric copied to clipboard.</span>
 					<div class="hr"></div>
 					<textarea lang="ja" id="lyric_textarea" class="lyric-textarea"></textarea>
+				</div>
+
+				<div>
+					<a href="./former/">Use former page</a>
 				</div>
 			</div>
 		</div>
@@ -323,8 +98,11 @@
 				</dd>
 				<dt>music.jp</dt>
 				<dd>
-					<a href="http://music-book.jp/music/Kashi/aaa0k3wa?artistname=%25e5%25ae%2589%25e5%25ae%25a4%25e5%25a5%2588%25e7%25be%258e%25e6%2581%25b5&title=Love%2520Story&packageName=Sit!%2520Stay!%2520Wait!%2520Down!%252fLove%2520Story"
-					 target="_blank">http://music-book.jp/music/Kashi/aaa0k3wa?...</a>
+					<a href="http://music-book.jp/music/Kashi/aaa5vfyg?artistname=FLOW&title=COLORS" target="_blank">http://music-book.jp/music/Kashi/aaa5vfyg?...</a>
+				</dd>
+				<dt>petitlyrics</dt>
+				<dd>
+					<a href="https://petitlyrics.com/lyrics/2669211" target="_blank">https://petitlyrics.com/lyrics/2669211</a>
 				</dd>
 				<dt>J-Lyric.net</dt>
 				<dd>
@@ -338,6 +116,8 @@
 				<dd>
 					<a href="http://animationsong.com/archives/1800903.html" target="_blank">http://animationsong.com/archives/1800903.html</a>
 				</dd>
+
+
 
 				<dt>LyricWiki</dt>
 				<dd>
@@ -358,6 +138,8 @@
 
 		<div id="changelog" class="content-block">
 			<ul>
+				<li>[2018 01-18] Switch 2018 page to default</li>
+				<li>[2018 01-06] use new UI for electron version</li>
 				<li>[2018 01-05] new webpage</li>
 				<li>[2017 11-08]
 					<ol>
@@ -378,7 +160,7 @@
 			<div class="line-item">
 				Please report issue on
 				<a href="https://github.com/franklai/lyric-get-js/issues" target="_blank">lyric-get-js Issues</a>, or contact
-				<a href="http://franks543.blogspot.com/p/lyric-get.html" target="_blank">franklai</a>.
+				<a href="https://franks543.blogspot.com/p/lyric-get.html" target="_blank">franklai</a>.
 			</div>
 		</div>
 	</div>
@@ -396,162 +178,7 @@
 		ga('send', 'pageview');
 	</script>
 	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,fetch,Element.prototype.dataset"></script>
-	<script type="text/javascript">
-		(function () {
-			if (!document.querySelectorAll) {
-				return;
-			}
-
-			var links = document.querySelectorAll('.pure-menu-link');
-			links = Array.prototype.slice.call(links);
-			var contents = document.querySelectorAll('.content-block');
-			contents = Array.prototype.slice.call(contents);
-
-			var $ = function (id) {
-				return document.getElementById(id);
-			};
-			var q = function (selector) {
-				return document.querySelector(selector);
-			};
-
-			var formQuery = $('query_form');
-			var inputUrl = $('url');
-			var btnSubmit = $('submit_btn');
-			var divLoading = $('loading_div');
-			var divLyric = $('lyric_div');
-			var textareaLyric = $('lyric_textarea');
-
-			var showContent = function (id) {
-				var activeCls = 'content-active';
-				q('.' + activeCls).classList.remove(activeCls);
-				$(id).classList.add(activeCls);
-
-				var selectedCls = 'pure-menu-selected';
-				q('.' + selectedCls).classList.remove(selectedCls);
-				q('.pure-menu-item[data-content-id=' + id + ']').classList.add(selectedCls);
-			};
-			var updateTextareaHeight = function (text) {
-				textareaLyric.style.height = '100px';
-				var height = textareaLyric.scrollHeight;
-				textareaLyric.style.height = (height + 20) + 'px';
-			};
-
-			var setErrorMsg = function (msg) {
-				if (msg === false) {
-					divLoading.style.display = 'none';
-					divLyric.style.display = 'block';
-					return;
-				}
-
-				divLoading.innerHTML = msg;
-				divLoading.style.display = 'block';
-				divLyric.style.display = 'none';
-			};
-			var setLoading = function () {
-				setErrorMsg('Loading...');
-				btnSubmit.disabled = true;
-			};
-			var setResult = function (json) {
-				if (!json || !json.lyric) {
-					setError();
-					return;
-				}
-
-				setErrorMsg(false);
-				btnSubmit.disabled = false;
-
-				textareaLyric.value = json.lyric;
-				updateTextareaHeight(json.lyric);
-			};
-			var setError = function () {
-				setErrorMsg('<span style="color: red;">Failed to get lyric. Please contact franklai.</span>');
-				btnSubmit.disabled = false;
-			};
-
-			links.forEach(function (link) {
-				link.addEventListener('click', function (evt) {
-					evt.preventDefault();
-
-					var pn = evt.target.parentNode;
-					if (!pn || !pn.dataset) {
-						return;
-					}
-
-					var id = pn.dataset.contentId;
-					showContent(id);
-				});
-			});
-
-			var selectLyric = function () {
-				textareaLyric.select();
-			};
-			$('select').addEventListener('click', function (evt) {
-				selectLyric();
-			});
-			if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
-				var msg = q('.copied-msg');
-
-				$('copy').addEventListener('click', function (evt) {
-					selectLyric();
-					document.execCommand('copy');
-
-					msg.classList.add('fadeout');
-				});
-
-				msg.addEventListener('transitionend', function (evt) {
-					msg.classList.remove('fadeout');
-				});
-			} else {
-				$('copy').disabled = true;
-			}
-			inputUrl.addEventListener('click', function (evt) {
-				inputUrl.select();
-			});
-
-			var doQuery = function () {
-				var val = inputUrl.value.trim();
-				if (val === '' || val.toLowerCase().match('https?:\/\/') === null) {
-					return false;
-				}
-
-				setLoading();
-
-				var url = 'app?url=' + encodeURIComponent(val);
-
-				fetch(url).then(function (resp) {
-					resp.json().then(function (json) {
-						setResult(json);
-					}).catch(function (reason) {
-						setError();
-					});
-				}).catch(function (reason) {
-					setError();
-				});
-
-			};
-
-			$('examples').addEventListener('click', function (evt) {
-				if (evt.target.tagName.toLowerCase() !== 'a') {
-					return;
-				}
-				if (evt.metaKey || evt.ctrlKey || evt.shiftKey || evt.altKey) {
-					return;
-				}
-				evt.preventDefault();
-
-				inputUrl.value = evt.target.href;
-
-				showContent('main');
-				doQuery();
-			});
-
-			formQuery.addEventListener('submit', function (evt) {
-				evt.preventDefault();
-				doQuery();
-			});
-
-		})();
-	</script>
+	<script type="text/javascript" src="js/script.js"></script>
 </body>
 
 </html>
