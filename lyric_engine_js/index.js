@@ -31,7 +31,7 @@ const load_modules = async () => {
   });
 };
 
-const get_lyric = async (url) => {
+const get_obj = async (url) => {
   await load_modules();
 
   let site;
@@ -46,19 +46,36 @@ const get_lyric = async (url) => {
   });
 
   if (!site) {
-    return 'Site is not supported';
+    throw 'Site is not supported.';
   }
 
   const obj = new site.Lyric(url);
-  // eslint-disable-next-line no-return-await
-  return await obj.get();
+
+  if (!await obj.parse_page()) {
+    throw 'Parse failed.';
+  }
+
+  return obj;
 };
 
-exports.get_lyric = get_lyric;
+const get_full = async (url) => {
+  const obj = await get_obj(url);
+
+  return obj.get_full();
+};
+
+const get_json = async (url) => {
+  const obj = await get_obj(url);
+
+  return obj.get_json();
+};
+
+exports.get_full = get_full;
+exports.get_json = get_json;
 
 async function main() {
   const url = 'http://www.utamap.com/showkasi.php?surl=70380';
-  const lyric = await get_lyric(url);
+  const lyric = await get_full(url);
 
   console.log('lyric: ', lyric);
 }

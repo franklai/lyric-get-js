@@ -25,7 +25,7 @@ http.createServer(async function (req, res) {
         pathname = '/former/index.html';
     }
 
-    if (pathname === '/app') {
+    if (pathname === '/app' || pathname === '/json') {
         if (!req_obj.query || !req_obj.query.url) {
             console.warn('in app, but no query');
             return do_not_found(res);
@@ -34,15 +34,27 @@ http.createServer(async function (req, res) {
         const lyric_url = req_obj.query.url;
 
         let out = {
-            'lyric': 'error'
+          'lyric': 'error',
         };
 
-        try {
-            const lyric = await engine.get_lyric(lyric_url);
-            out.lyric = lyric;
-        } catch (err) {
-            console.error('err:', err);
-            // catch error type?
+        if (pathname === '/app') {
+          try {
+              const lyric = await engine.get_full(lyric_url);
+              out.lyric = lyric;
+          } catch (err) {
+              console.error('err:', err);
+              // catch error type?
+          }
+        } else if (pathname === '/json') {
+          try {
+              const json = await engine.get_json(lyric_url);
+              if (json) {
+                out = json;
+              }
+          } catch (err) {
+              console.error('err:', err);
+              // catch error type?
+          }
         }
 
         const json_str = JSON.stringify(out);

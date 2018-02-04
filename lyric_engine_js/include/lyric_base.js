@@ -22,6 +22,26 @@ class LyricBase {
     return this.get_full();
   }
 
+  get_json() {
+    const obj = {
+      'title': this.title || null,
+      'lyric': this.lyric || null,
+    };
+
+    ATTR_LIST.forEach((attr) => {
+      const key = attr[0];
+      const translate = attr[1];
+
+      if (this[key]) {
+        obj[key] = util.format('%s：%s', translate, this[key]);
+      } else {
+        obj[key] = null;
+      }
+    });
+
+    return obj;
+  }
+
   get_full() {
     // template of full information
     const template = [];
