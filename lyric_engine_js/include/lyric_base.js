@@ -30,13 +30,7 @@ class LyricBase {
 
     ATTR_LIST.forEach((attr) => {
       const key = attr[0];
-      const translate = attr[1];
-
-      if (this[key]) {
-        obj[key] = util.format('%s：%s', translate, this[key]);
-      } else {
-        obj[key] = null;
-      }
+      obj[key] = this[key] || null;
     });
 
     return obj;
