@@ -139,8 +139,7 @@ a, a:visited {
 	border: 1px solid #999;
 	border-radius: 3px;
 	padding: 6px;
-	font-size: 16px;
-	line-height: 20px;
+	font-size: 1rem;
 }
 
 .content .url {
