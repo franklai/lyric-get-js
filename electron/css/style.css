@@ -4,6 +4,10 @@ body {
 	padding: 0;
 }
 
+a, a:visited {
+	color: rgb(102, 153, 255);
+}
+
 .header.pure-menu {
 	background: #2d3e50;
 	height: 38px;
@@ -135,8 +139,7 @@ body {
 	border: 1px solid #999;
 	border-radius: 3px;
 	padding: 6px;
-	font-size: 16px;
-	line-height: 20px;
+	font-size: 1rem;
 }
 
 .content .url {
