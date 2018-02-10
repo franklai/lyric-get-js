@@ -139,7 +139,7 @@
     try {
       const engine = require('lyric-get-engine'); // eslint-disable-line global-require
       engine
-        .get_lyric(val)
+        .get_full(val)
         .then(function (lyric) {
           if (!lyric) {
             setError();
