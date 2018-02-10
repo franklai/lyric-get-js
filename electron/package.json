@@ -1,7 +1,7 @@
 {
   "name": "lyric-get-electron",
   "productName": "Lyric Get",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "description": "Desktop client to Lyric Get service",
   "main": "main.js",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/franklai/lyric-get-js/",
   "devDependencies": {
-    "electron": "^1.7.0",
+    "electron": "^1.8.0",
     "electron-builder": "^19.17.0"
   },
   "build": {
