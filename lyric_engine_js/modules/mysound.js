@@ -1,5 +1,5 @@
-const rp = require('request-promise');
 const striptags = require('striptags');
+const superagent = require('superagent');
 
 const LyricBase = require('../include/lyric_base');
 
@@ -15,7 +15,7 @@ class Lyric extends LyricBase {
     const id = this.find_id(url);
 
     const lyric_url = `https://mysound.jp/song/lyric/${id}/`;
-    const json = await rp({ uri: lyric_url, json: true });
+    const json = (await superagent.get(lyric_url)).body;
 
     let lyric = json.lyricData;
     lyric = lyric.replace(/<dl>.*?<\/dl>/, '');
@@ -28,7 +28,7 @@ class Lyric extends LyricBase {
   }
 
   async find_info(url) {
-    const html = await rp(url);
+    const html = (await superagent.get(url)).text;
 
     const prefix = '<div class="textBox">';
     const suffix = '</div>';

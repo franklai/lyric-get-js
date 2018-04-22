@@ -1,6 +1,8 @@
 /* global expect test */
 const { Lyric } = require('./petitlyrics');
 
+jest.setTimeout(10000); // 10 second timeout
+
 async function testLyric(obj) {
   const { url } = obj;
   const inst = new Lyric(url);

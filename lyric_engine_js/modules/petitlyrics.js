@@ -1,7 +1,6 @@
 const he = require('he');
 const striptags = require('striptags');
 const superagent = require('superagent');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'petitlyrics';
@@ -54,14 +53,14 @@ class Lyric extends LyricBase {
 
   async get_2nd_part(html) {
     const song_id = this.find_song_id(html);
-    console.log('song_id:', song_id);
+    // console.log('song_id:', song_id);
 
     const csrf_token = await this.get_csrf_token(html);
     if (!csrf_token) {
       console.warn('Failed to get CSRF token');
       return false;
     }
-    console.log('csrf token:', csrf_token);
+    // console.log('csrf token:', csrf_token);
 
     const lyric_url = 'https://petitlyrics.com/com/get_lyrics.ajax';
     const headers = {
@@ -70,7 +69,6 @@ class Lyric extends LyricBase {
     };
     const body = `lyrics_id=${song_id}`;
 
-    console.log('song id:', song_id);
     const res = await this.agent
       .post(lyric_url)
       .set(headers)
