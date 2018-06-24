@@ -16,7 +16,8 @@ class Lyric extends LyricBase {
     const prefix = '<p oncopy="return false;" unselectable="on;">';
     const suffix = '</p>';
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
-    lyric = lyric.replace(/<br>/g, '\n').replace(/<br \/><br \/>\n/g, '\n\n');
+    lyric = lyric.replace(/<br>　<br>/g, '\n\n');
+    lyric = lyric.replace(/<br>/g, '\n');
     lyric = striptags(lyric);
     lyric = lyric.trim();
 
@@ -30,8 +31,8 @@ class Lyric extends LyricBase {
     const table_str = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
 
     const patterns = {
-      title: '<td><h2>([^<]+?)</h2></td>',
-      artist: '<td><h3><a href="[^"]+">(.+?)</a></h3></td>',
+      title: '<td><h2>([^<]+?)</h2>',
+      artist: '<a href="[^"]+">(.+?)</a>',
       lyricist: '作詞　：　([^<]+)<br>',
       composer: '作曲　：　([^<]+)</td>',
     };
