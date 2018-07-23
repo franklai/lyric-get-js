@@ -6,13 +6,13 @@ const LyricBase = require('../include/lyric_base');
 const keyword = 'mysound';
 
 class Lyric extends LyricBase {
-  find_id(url) {
-    const pattern = '/song/([0-9]+)/';
-    return this.get_first_group_by_pattern(url, pattern);
+  find_id(url, html) {
+    const pattern = /id="song_id" value="([0-9]+)/;
+    return this.get_first_group_by_pattern(html, pattern);
   }
 
-  async find_lyric(url) {
-    const id = this.find_id(url);
+  async find_lyric(url, html) {
+    const id = this.find_id(url, html);
 
     const lyric_url = `https://mysound.jp/song/lyric/${id}/`;
     const json = (await superagent.get(lyric_url)).body;
@@ -27,9 +27,7 @@ class Lyric extends LyricBase {
     return true;
   }
 
-  async find_info(url) {
-    const html = (await superagent.get(url)).text;
-
+  async find_info(url, html) {
     const prefix = '<div class="textBox">';
     const suffix = '</div>';
     const og_desc = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
@@ -47,8 +45,9 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    await this.find_lyric(url);
-    await this.find_info(url);
+    const html = (await superagent.get(url)).text;
+    await this.find_lyric(url, html);
+    await this.find_info(url, html);
 
     return true;
   }

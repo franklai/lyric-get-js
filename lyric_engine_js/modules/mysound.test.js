@@ -21,7 +21,7 @@ test('', async () => {
     artist: '米津玄師',
     lyricist: '米津玄師',
     composer: '米津玄師',
-    length: 629,
+    length: 634,
   });
 });
 
@@ -32,6 +32,6 @@ test('', async () => {
     artist: 'SawanoHiroyuki[nZk]:Tielle&Gemie',
     lyricist: '澤野弘之/Tielle',
     composer: '澤野弘之',
-    length: 1462,
+    length: 1457,
   });
 });
