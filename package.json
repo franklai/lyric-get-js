@@ -9,7 +9,7 @@
   },
   "license": "Apache",
   "engines": {
-    "node": "^8.9.0 || ^9"
+    "node": "^8.9.0 || ^10"
   },
   "dependencies": {
     "he": "^1.1.1",
@@ -17,6 +17,7 @@
     "mime-types": "^2.1.14",
     "mz": "^2.6.0",
     "pixl-xml": "^1.0.10",
+    "raven": "^2.6.3",
     "request": "^2.81.0",
     "request-promise": "^4.1.1",
     "striptags": "^3.0.1",

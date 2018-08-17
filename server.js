@@ -5,6 +5,9 @@ const url = require('url');
 const util = require('util');
 
 const fs = require('mz/fs');
+var Raven = require('raven');
+Raven.config('https://a7fa45b215ae4cf68bb9320a075234d7@sentry.io/1263950').install();
+
 const engine = require('./lyric_engine_js')
 
 function do_not_found(res) {
@@ -43,6 +46,7 @@ http.createServer(async function (req, res) {
               out.lyric = lyric;
           } catch (err) {
               console.error('err:', err);
+              Raven.captureException(err);
               // catch error type?
           }
         } else if (pathname === '/json') {
@@ -53,6 +57,7 @@ http.createServer(async function (req, res) {
               }
           } catch (err) {
               console.error('err:', err);
+              Raven.captureException(err);
               // catch error type?
           }
         }
