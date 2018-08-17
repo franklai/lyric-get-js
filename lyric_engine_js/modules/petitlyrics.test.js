@@ -22,7 +22,7 @@ test('', async () => {
     artist: 'SawanoHiroyuki[nZk]:Tielle&Gemie',
     lyricist: 'Hiroyuki Sawano/Tielle',
     composer: 'Hiroyuki Sawano',
-    length: 1037,
+    length: 985,
   });
 });
 
@@ -33,6 +33,6 @@ test('', async () => {
     artist: '米津玄師',
     lyricist: '米津玄師',
     composer: '米津玄師',
-    length: 681,
+    length: 629,
   });
 });

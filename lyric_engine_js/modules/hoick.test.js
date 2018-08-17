@@ -20,7 +20,7 @@ test('', async () => {
     title: 'にじ',
     lyricist: '新沢としひこ',
     composer: '中川ひろたか',
-    length: 509,
+    length: 1922,
   });
 });
 

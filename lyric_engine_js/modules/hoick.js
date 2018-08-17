@@ -18,7 +18,7 @@ class Lyric extends LyricBase {
 
     lines.pop(); // last one is a number
 
-    const lyric = lines.join('\n');
+    const lyric = lines.join('\n').replace(/\r/g, '');
 
     this.lyric = lyric;
 
