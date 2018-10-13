@@ -1,74 +1,53 @@
 const util = require('util');
 const rp = require('request-promise');
-const XML = require('pixl-xml');
+const striptags = require('striptags');
 
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'yahoo';
 
 class Lyric extends LyricBase {
-  async find_lyric(url, xml) {
-    const doc = XML.parse(xml);
+  find_lyric(url, html) {
+    const pattern = '<div class="lyrics-texts">(.+?)</div>';
 
-    let lyric = doc.Result.Lyrics;
+    let lyric = this.get_first_group_by_pattern(html, pattern);
+    lyric = lyric.replace(/<\/p>/g, '\n');
     lyric = lyric.replace(/<br>/g, '\n');
+    lyric = striptags(lyric);
+    lyric = lyric.trim();
 
     this.lyric = lyric;
-
     return true;
   }
 
-  async find_info(url, xml) {
-    const doc = XML.parse(xml);
+  find_info(url, html) {
+    const prefix = '<h1';
+    const suffix = '</dl>';
+    const info_str = this.find_string_by_prefix_suffix(html, prefix, suffix);
 
     const patterns = {
-      title: 'Title',
-      artist: 'ArtistName',
-      lyricist: 'WriterName',
-      composer: 'ComposerName',
+      title: '<h1 class="lyrics-title">(.+?)</h1>',
+      artist: '>([^>]+?)</a></h2>',
+      lyricist: '作詞</dt><dd[^>]*>(.+?)</dd>',
+      composer: '作曲</dt><dd.*?>(.+?)</dd>',
     };
-    Object.keys(patterns).forEach((key) => {
-      const key_for_pattern = patterns[key];
-      this[key] = doc.Result[key_for_pattern];
-    });
+
+    this.fill_song_info(info_str, patterns);
   }
 
-  async get_xml_parameters(url) {
-    const xml = await rp(url);
+  async get_html(url) {
+    const html = await rp(url);
 
-    const pattern = "query +: +'([^']+)'";
-    return this.get_first_group_by_pattern(xml, pattern);
-  }
-
-  async get_xml(query) {
-    const url = util.format(
-      'http://rio.yahooapis.jp/RioWebService/V2/getLyrics?appid=%s&%s',
-      '7vOgnk6xg64IDggn6YEl3IQxmbj1qqkQzTpAx5nGwl9HnfPX3tZksE.oYhEw3zA-', query
-    );
-
-    const xml = await rp(url);
-
-    if (!xml) {
-      return false;
-    }
-
-    return xml;
+    return html;
   }
 
   async parse_page() {
     const { url } = this;
 
-    let query = await this.get_xml_parameters(url);
-    if (query === false) {
-      console.warn('Failed to get query of url:', url);
-      return false;
-    }
-    query = decodeURIComponent(query);
+    const html = await this.get_html(url);
 
-    const xml = await this.get_xml(query);
-
-    await this.find_lyric(url, xml);
-    await this.find_info(url, xml);
+    this.find_lyric(url, html);
+    this.find_info(url, html);
 
     return true;
   }

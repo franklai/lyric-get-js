@@ -16,7 +16,7 @@ async function testLyric(obj) {
 
 test('', async () => {
   await testLyric({
-    url: 'http://lyrics.gyao.yahoo.co.jp/ly/Y004402/',
+    url: 'https://gyao.yahoo.co.jp/lyrics/Y004402',
     title: '帰って来たヨッパライ',
     artist: 'ザ・フォーク・クルセダーズ',
     lyricist: 'ザ･フォーク･パロディ･ギャング',
@@ -27,7 +27,7 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'http://lyrics.gyao.yahoo.co.jp/ly/Y160641/',
+    url: 'https://gyao.yahoo.co.jp/lyrics/Y160641',
     title: 'home',
     artist: 'クリス・ハート',
     lyricist: '多胡邦夫',
