@@ -13,7 +13,7 @@ class Lyric extends LyricBase {
   }
 
   async find_lyric(url, html) {
-    const prefix = '<p oncopy="return false;" unselectable="on;">';
+    const prefix = 'oncopy="return false;" unselectable="on;">';
     const suffix = '</p>';
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
     lyric = lyric.replace(/<br>　<br>/g, '\n\n');
@@ -31,7 +31,7 @@ class Lyric extends LyricBase {
     const table_str = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
 
     const patterns = {
-      title: '<td><h2>([^<]+?)</h2>',
+      title: '<td><h.>([^<]+?)♪',
       artist: '<a href="[^"]+">(.+?)</a>',
       lyricist: '作詞　：　([^<]+)<br>',
       composer: '作曲　：　([^<]+)</td>',
@@ -64,7 +64,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'http://kashinavi.com/song_view.html?77597';
+    const url = 'https://kashinavi.com/song_view.html?77597';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);

@@ -17,7 +17,7 @@ async function testLyric(obj) {
 
 test('', async () => {
   await testLyric({
-    url: 'http://kashinavi.com/song_view.html?65545',
+    url: 'https://kashinavi.com/song_view.html?65545',
     title: '猫背',
     artist: '坂本真綾',
     lyricist: '岩里祐穂',
@@ -28,7 +28,7 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'http://kashinavi.com/song_view.html?77597',
+    url: 'https://kashinavi.com/song_view.html?77597',
     title: "We Don't Stop",
     artist: '西野カナ',
     lyricist: 'Kana Nishino・GIORGIO 13',
