@@ -46,7 +46,7 @@ http.createServer(async function (req, res) {
               out.lyric = lyric;
           } catch (err) {
               console.error('err:', err);
-              Raven.captureException(err);
+              Raven.captureException(err, { req: req });
               // catch error type?
           }
         } else if (pathname === '/json') {
@@ -57,7 +57,7 @@ http.createServer(async function (req, res) {
               }
           } catch (err) {
               console.error('err:', err);
-              Raven.captureException(err);
+              Raven.captureException(err, { req: req });
               // catch error type?
           }
         }
