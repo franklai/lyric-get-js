@@ -12,6 +12,9 @@ class Lyric extends LyricBase {
     const suffix = '</div>';
 
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    if (!lyric) {
+      return false;
+    }
 
     const pattern = /<span class="rt">(.*?)<\/span>/g;
     lyric = lyric.replace(pattern, '($1)');
@@ -38,6 +41,11 @@ class Lyric extends LyricBase {
     prefix = '<dl class="lyricWork">';
     suffix = '</dl>';
     content = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    if (!content) {
+      console.error(`Failed to find info of url: ${url}`);
+      return false;
+    }
+
     patterns = {
       lyricist: '作詞</dt>(.*?)</dd>',
       composer: '作曲</dt>(.*?)</dd>',
@@ -64,7 +72,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'http://utaten.com/lyric/%E5%AE%89%E5%AE%A4%E5%A5%88%E7%BE%8E%E6%81%B5%26VERBAL/lovin%27+it/';
+    const url = 'https://utaten.com/lyric/Daisy%C3%97Daisy/%E3%82%A4%E3%83%84%E3%83%A2%E3%82%AD%E3%83%9F%E3%83%88/';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);

@@ -1,9 +1,12 @@
 const path = require('path');
+const urlModule = require('url')
 
 const fs = require('mz/fs');
 
 // let site_dict = {};
 const site_array = [];
+
+class SiteNotSupportError extends Error {}
 
 const load_modules = async () => {
   let files;
@@ -46,7 +49,8 @@ const get_obj = async (url) => {
   });
 
   if (!site) {
-    throw 'Site is not supported.';
+    const domain = urlModule.parse(url).hostname;
+    throw new SiteNotSupportError(`Site ${domain} is not supported`);
   }
 
   const obj = new site.Lyric(url);
@@ -72,9 +76,15 @@ const get_json = async (url) => {
 
 exports.get_full = get_full;
 exports.get_json = get_json;
+exports.SiteNotSupportError = SiteNotSupportError;
 
 async function main() {
-  const url = 'http://www.utamap.com/showkasi.php?surl=70380';
+  let url = 'http://www.utamap.com/showkasi.php?surl=70380';
+
+  if (process.argv.length > 2) {
+    url = process.argv[2];
+  }
+
   const lyric = await get_full(url);
 
   console.log('lyric: ', lyric);
