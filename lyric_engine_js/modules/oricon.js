@@ -28,6 +28,10 @@ class Lyric extends LyricBase {
     const suffix = '</div>';
 
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix);
+    if (!lyric) {
+      const prefix_lyric_contents = '<div class="lyric-contents"';
+      lyric = this.find_string_by_prefix_suffix(html, prefix_lyric_contents, suffix);
+    }
 
     lyric = lyric.replace(/<br>/g, '\n');
     lyric = striptags(he.decode(lyric)).trim();

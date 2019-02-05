@@ -35,3 +35,14 @@ test('', async () => {
     length: 622,
   });
 });
+
+test('', async () => {
+  await testLyric({
+    url: 'https://music.oricon.co.jp/php/lyrics/LyricsDisp.php?music=3969679',
+    title: '運気上昇イエローパンチ',
+    artist: '富井大樹(Cv.蒼井翔太)',
+    lyricist: '橋口いくよ',
+    composer: 'Kohei by SIMONSAYZ',
+    length: 539,
+  });
+});
