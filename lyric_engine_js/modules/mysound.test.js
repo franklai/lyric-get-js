@@ -18,7 +18,7 @@ test('', async () => {
   await testLyric({
     url: 'https://mysound.jp/song/3532534/',
     title: '灰色と青 ( + 菅田将暉 )',
-    artist: '米津 玄師',
+    artist: '米津玄師',
     lyricist: '米津玄師',
     composer: '米津玄師',
     length: 634,
