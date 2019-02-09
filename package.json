@@ -9,7 +9,7 @@
   },
   "license": "Apache",
   "engines": {
-    "node": "^10"
+    "node": "^10.14.1"
   },
   "dependencies": {
     "he": "^1.1.1",
