@@ -26,15 +26,15 @@ class Lyric extends LyricBase {
   }
 
   async find_info(url, html) {
-    const prefix = '<table border=0 cellpadding=0 cellspacing=5>';
+    const prefix = '<td valign=top align=center width=550>';
     const suffix = '<hr noshade size=1>';
     const table_str = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
 
     const patterns = {
-      title: '<td><h.>([^<]+?)[♪<]',
+      title: '<div align=center><h1>([^<]+?)[♪<]',
       artist: '<a href="[^"]+">(.+?)</a>',
       lyricist: '作詞　：　([^<]+)<br>',
-      composer: '作曲　：　([^<]+)</td>',
+      composer: '作曲　：　([^<]+)</.+>',
     };
 
     this.fill_song_info(table_str, patterns);
