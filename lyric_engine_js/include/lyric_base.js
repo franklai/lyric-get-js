@@ -24,8 +24,8 @@ class LyricBase {
 
   get_json() {
     const obj = {
-      'title': this.title || null,
-      'lyric': this.lyric || null,
+      title: this.title || null,
+      lyric: this.lyric || null,
     };
 
     ATTR_LIST.forEach((attr) => {
@@ -94,13 +94,17 @@ class LyricBase {
     return null;
   }
 
+  sanitize_html(value) {
+    return striptags(he.decode(value)).trim();
+  }
+
   fill_song_info(content, patterns) {
     Object.keys(patterns).forEach((key) => {
       const key_for_pattern = patterns[key];
 
       let value = this.get_first_group_by_pattern(content, key_for_pattern);
       if (value) {
-        value = striptags(he.decode(value)).trim();
+        value = this.sanitize_html(value);
 
         this[key] = value;
       }
