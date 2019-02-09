@@ -71,7 +71,7 @@ class Lyric extends LyricBase {
       this.fill_song_info(html, pattern);
     }
     if (!this.artist) {
-      const pattern = { artist: '<div class="artistcontainer">(.*?)</div>' };
+      const pattern = { artist: '<div class="artistcontainer">(.*?)</h2>' };
       this.fill_song_info(html, pattern);
     }
   }
