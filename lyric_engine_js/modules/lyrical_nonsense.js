@@ -57,7 +57,7 @@ class Lyric extends LyricBase {
 
   find_info(url, html) {
     const patterns = {
-      title: '<th>曲名:</th><td>(.*?)</td>',
+      title: '"name" : "(.*?) 歌詞"',
       artist: '<th>歌手:</th><td>(.*?)</td>',
       lyricist: '<th>作詞:</th><td>(.*?)</td>',
       composer: '<th>作曲:</th><td>(.*?)</td>',
