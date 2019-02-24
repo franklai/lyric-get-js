@@ -1,5 +1,3 @@
-const util = require('util');
-const rp = require('request-promise');
 const striptags = require('striptags');
 
 const LyricBase = require('../include/lyric_base');
@@ -33,18 +31,6 @@ class Lyric extends LyricBase {
     };
 
     this.fill_song_info(info_str, patterns);
-  }
-
-  async get_html(url) {
-    const headers = {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2141.0 Safari/537.36',
-    };
-    const html = await rp({
-      method: 'GET',
-      uri: url,
-      headers,
-    });
-    return html;
   }
 
   async parse_page() {

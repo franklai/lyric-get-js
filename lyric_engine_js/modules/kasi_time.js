@@ -6,16 +6,6 @@ const LyricBase = require('../include/lyric_base');
 const keyword = 'kasi-time';
 
 class Lyric extends LyricBase {
-  async get_html(url) {
-    const raw = await rp(url);
-
-    if (!raw) {
-      console.warn('Failed to get content of url:', url);
-      return false;
-    }
-
-    return raw;
-  }
   find_lyric(html) {
     const prefix = "var lyrics = '";
     const suffix = "';";

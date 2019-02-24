@@ -7,19 +7,6 @@ const LyricBase = require('../include/lyric_base');
 const keyword = 'music-book.jp';
 
 class Lyric extends LyricBase {
-  async get_html(url) {
-    const headers = {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2141.0 Safari/537.36',
-    };
-    const html = await rp({
-      method: 'POST',
-      uri: url,
-      headers,
-    });
-
-    return html;
-  }
-
   get_artist_id(html) {
     const pattern = "checkFavorite\\('([0-9]+)'\\)";
     const id = this.get_first_group_by_pattern(html, pattern);

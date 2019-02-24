@@ -1,5 +1,7 @@
 const util = require('util');
+
 const he = require('he');
+const rp = require('request-promise');
 const striptags = require('striptags');
 
 const ATTR_LIST = [
@@ -92,6 +94,20 @@ class LyricBase {
       return result[1];
     }
     return null;
+  }
+
+  async get_html(url, encoding) {
+    const headers = {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36',
+    };
+    const html = await rp({
+      method: 'GET',
+      uri: url,
+      headers,
+      encoding,
+    });
+
+    return html;
   }
 
   sanitize_html(value) {

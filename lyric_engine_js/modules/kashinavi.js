@@ -40,17 +40,11 @@ class Lyric extends LyricBase {
     this.fill_song_info(table_str, patterns);
   }
 
-  async get_html(url) {
-    const raw = await rp({ url, encoding: null });
-    const html = iconv.decode(raw, 'Shift_JIS');
-
-    return html;
-  }
-
   async parse_page() {
     const { url } = this;
 
-    const html = await this.get_html(url);
+    const raw = await this.get_html(url, null);
+    const html = iconv.decode(raw, 'sjis')
 
     this.find_lyric(url, html);
     this.find_info(url, html);
