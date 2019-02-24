@@ -36,8 +36,14 @@ class Lyric extends LyricBase {
   }
 
   async get_html(url) {
-    const html = await rp(url);
-
+    const headers = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2141.0 Safari/537.36',
+    };
+    const html = await rp({
+      method: 'GET',
+      uri: url,
+      headers,
+    });
     return html;
   }
 
@@ -58,7 +64,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'https://gyao.yahoo.co.jp/lyrics/ly/Y217740/';
+    const url = 'https://gyao.yahoo.co.jp/lyrics/Y004402';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);
