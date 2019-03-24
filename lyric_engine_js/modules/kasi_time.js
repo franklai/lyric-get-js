@@ -1,5 +1,4 @@
 const he = require('he');
-const rp = require('request-promise');
 
 const LyricBase = require('../include/lyric_base');
 

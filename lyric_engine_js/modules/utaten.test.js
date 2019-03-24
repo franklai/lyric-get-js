@@ -14,7 +14,7 @@ async function testLyric(obj) {
   if (obj.length) expect(inst.lyric.length).toBe(obj.length);
 }
 
-test('', async () => {
+test('BUMP OF CHICKEN', async () => {
   await testLyric({
     url: 'http://utaten.com/lyric/BUMP+OF+CHICKEN/beautiful+glider/',
     title: 'beautiful glider',
@@ -25,7 +25,7 @@ test('', async () => {
   });
 });
 
-test('', async () => {
+test('AAA', async () => {
   await testLyric({
     url: 'http://utaten.com/lyric/AAA/Charge+%26++Go%21/',
     title: 'Charge & Go!',

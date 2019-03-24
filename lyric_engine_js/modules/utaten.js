@@ -32,7 +32,7 @@ class Lyric extends LyricBase {
     let suffix = '<meta property="og:image"';
     let content = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
     let patterns = {
-      title: '<meta property="og:title" content="(.*?)　歌詞【',
+      title: '<meta property="og:title" content="(.*?) 歌詞',
       artist: '<meta property="og:description" content="(.*?)が歌う',
     };
 
@@ -53,6 +53,8 @@ class Lyric extends LyricBase {
 
     content = content.replace(/\n/g, '');
     this.fill_song_info(content, patterns);
+
+    return true;
   }
 
   async parse_page() {
@@ -72,7 +74,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'https://utaten.com/lyric/Daisy%C3%97Daisy/%E3%82%A4%E3%83%84%E3%83%A2%E3%82%AD%E3%83%9F%E3%83%88/';
+    const url = 'http://utaten.com/lyric/BUMP+OF+CHICKEN/beautiful+glider/';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);
