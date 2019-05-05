@@ -1,5 +1,7 @@
-/* global expect test */
+/* global expect jest test */
 const { Lyric } = require('./mysound');
+
+jest.setTimeout(20000); // 20 second timeout
 
 async function testLyric(obj) {
   const { url } = obj;
