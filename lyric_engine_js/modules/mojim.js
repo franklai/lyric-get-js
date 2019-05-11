@@ -15,7 +15,7 @@ class Lyric extends LyricBase {
   filter_ad(lyric) {
     const separator = '<br />';
     const lines = lyric.split(separator);
-    const filtered = lines.filter(line => line.indexOf('<a href=') === -1);
+    const filtered = lines.filter(line => line.indexOf('Mojim.com') === -1);
     return filtered.join(separator);
   }
 
@@ -30,13 +30,6 @@ class Lyric extends LyricBase {
     const lyricPrefix = '<br /><br />';
 
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix, true);
-
-    Sentry.withScope((scope) => {
-      scope.setLevel('info');
-      scope.setExtra(block);
-      Sentry.captureMessage('lyric block');
-    });
-
     let lyric = this.find_string_by_prefix_suffix(block, lyricPrefix, suffix, false);
     lyric = this.filter_ad(lyric);
     lyric = this.filter_thank(lyric);
@@ -56,7 +49,7 @@ class Lyric extends LyricBase {
     Sentry.withScope((scope) => {
       scope.setLevel('info');
       scope.setExtra(block);
-      Sentry.captureMessage('info block');
+      Sentry.captureMessage('Mojim.com info block');
     });
 
     const keys = {
@@ -90,13 +83,6 @@ class Lyric extends LyricBase {
     const { url } = this;
 
     const raw = await this.get_html(url, 'utf-8');
-
-    Sentry.withScope((scope) => {
-      scope.setLevel('info');
-      scope.setExtra(raw);
-      Sentry.captureMessage('mojim before he decode');
-    });
-
     const html = he.decode(raw);
 
     this.find_lyric(url, html);
