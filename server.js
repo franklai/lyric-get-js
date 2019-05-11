@@ -36,15 +36,14 @@ const handlerEror = (req, res, err, lyric_url) => {
 
   let level = 'error';
   if (err instanceof engine.SiteNotSupportError) {
-    console.log('yes site not support');
     level = 'warning';
     out.lyric = err.message;
-  } else {
-    console.log('no, why in else');
   }
 
   Sentry.withScope((scope) => {
     scope.setLevel(level);
+    scope.setExtra('request', req);
+    scope.setExtra('url', lyric_url);
     Sentry.captureException(err);
   });
 
