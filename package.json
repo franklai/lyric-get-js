@@ -12,12 +12,12 @@
     "node": "^10.14.1"
   },
   "dependencies": {
+    "@sentry/node": "5.2.0",
     "he": "^1.1.1",
     "iconv-lite": "^0.4.15",
     "mime-types": "^2.1.14",
     "mz": "^2.6.0",
     "pixl-xml": "^1.0.10",
-    "raven": "^2.6.3",
     "request": "^2.81.0",
     "request-promise": "^4.1.1",
     "striptags": "^3.0.1",

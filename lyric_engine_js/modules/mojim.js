@@ -1,5 +1,6 @@
 const he = require('he');
 const striptags = require('striptags');
+const Sentry = require('@sentry/node');
 
 const LyricBase = require('../include/lyric_base');
 
@@ -29,6 +30,13 @@ class Lyric extends LyricBase {
     const lyricPrefix = '<br /><br />';
 
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix, true);
+
+    Sentry.withScope((scope) => {
+      scope.setLevel('info');
+      scope.setExtra(block);
+      Sentry.captureMessage('lyric block');
+    });
+
     let lyric = this.find_string_by_prefix_suffix(block, lyricPrefix, suffix, false);
     lyric = this.filter_ad(lyric);
     lyric = this.filter_thank(lyric);
@@ -44,6 +52,12 @@ class Lyric extends LyricBase {
     const prefix = "<dl id='fsZx1'";
     const suffix = '</dl>';
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix, true).replace(/\n/g, '');
+
+    Sentry.withScope((scope) => {
+      scope.setLevel('info');
+      scope.setExtra(block);
+      Sentry.captureMessage('info block');
+    });
 
     const keys = {
       lyricist: '作詞',
