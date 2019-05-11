@@ -76,7 +76,7 @@ class Lyric extends LyricBase {
     }
 
     const patterns = {
-      title: "<dt id='fsZx2'.*?>(.+?)</dt>",
+      title: "<dt id='fsZx2'.*?>(.+?)<br",
       artist: "<dl id='fsZx1'.*?>(.+?)<br",
       lyricist: `${keys.lyricist}：(.+?)<br`,
       composer: `${keys.composer}：(.+?)<br`,
@@ -90,6 +90,13 @@ class Lyric extends LyricBase {
     const { url } = this;
 
     const raw = await this.get_html(url, 'utf-8');
+
+    Sentry.withScope((scope) => {
+      scope.setLevel('info');
+      scope.setExtra(raw);
+      Sentry.captureMessage('mojim before he decode');
+    });
+
     const html = he.decode(raw);
 
     this.find_lyric(url, html);
