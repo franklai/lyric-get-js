@@ -1,4 +1,4 @@
-/* global expect test */
+/* global expect jest test */
 const { Lyric } = require('./petitlyrics');
 
 jest.setTimeout(10000); // 10 second timeout

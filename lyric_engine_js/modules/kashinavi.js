@@ -1,5 +1,4 @@
 const iconv = require('iconv-lite');
-const rp = require('request-promise');
 const striptags = require('striptags');
 
 const LyricBase = require('../include/lyric_base');
@@ -16,7 +15,7 @@ class Lyric extends LyricBase {
     const prefix = 'oncopy="return false;" unselectable="on;">';
     const suffix = '</p>';
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
-    lyric = lyric.replace(/<br>　<br>/g, '\n\n');
+    lyric = lyric.replace(/<br>　<br>/g, '\n\n'); // eslint-disable-line no-irregular-whitespace
     lyric = lyric.replace(/<br>/g, '\n');
     lyric = striptags(lyric);
     lyric = lyric.trim();
@@ -44,7 +43,7 @@ class Lyric extends LyricBase {
     const { url } = this;
 
     const raw = await this.get_html(url, null);
-    const html = iconv.decode(raw, 'sjis')
+    const html = iconv.decode(raw, 'sjis');
 
     this.find_lyric(url, html);
     this.find_info(url, html);

@@ -1,5 +1,5 @@
 const path = require('path');
-const urlModule = require('url')
+const urlModule = require('url');
 
 const fs = require('mz/fs');
 
@@ -82,7 +82,7 @@ async function main() {
   let url = 'http://www.utamap.com/showkasi.php?surl=70380';
 
   if (process.argv.length > 2) {
-    url = process.argv[2];
+    url = process.argv[2]; // eslint-disable-line prefer-destructuring
   }
 
   const lyric = await get_full(url);

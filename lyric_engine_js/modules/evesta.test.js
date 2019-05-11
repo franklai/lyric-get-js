@@ -1,4 +1,4 @@
-/* global expect test */
+/* global expect jest test */
 const { Lyric } = require('./evesta');
 
 jest.setTimeout(20000); // 20 second timeout
