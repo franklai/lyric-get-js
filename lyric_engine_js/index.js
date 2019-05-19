@@ -6,7 +6,13 @@ const fs = require('mz/fs');
 // let site_dict = {};
 const site_array = [];
 
-class SiteNotSupportError extends Error {}
+class SiteNotSupportError extends Error {
+  constructor(domain) {
+    const message = `Site ${domain} is not supported`;
+    super(message);
+    this.domain = domain;
+  }
+}
 
 const load_modules = async () => {
   let files;
@@ -50,7 +56,7 @@ const get_obj = async (url) => {
 
   if (!site) {
     const domain = urlModule.parse(url).hostname;
-    throw new SiteNotSupportError(`Site ${domain} is not supported`);
+    throw new SiteNotSupportError(domain);
   }
 
   const obj = new site.Lyric(url);

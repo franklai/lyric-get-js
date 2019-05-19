@@ -6,7 +6,10 @@ const fs = require('mz/fs');
 
 const Sentry = require('@sentry/node');
 
-Sentry.init({ dsn: 'https://a7fa45b215ae4cf68bb9320a075234d7@sentry.io/1263950' });
+Sentry.init({
+  dsn: 'https://a7fa45b215ae4cf68bb9320a075234d7@sentry.io/1263950',
+});
+
 
 const engine = require('./lyric_engine_js');
 
@@ -35,15 +38,20 @@ const handlerEror = (req, res, err, lyric_url) => {
   };
 
   let level = 'error';
+  let domain = '';
   if (err instanceof engine.SiteNotSupportError) {
     level = 'warning';
+
     out.lyric = err.message;
+    domain = err.domain;  // eslint-disable-line
   }
 
   Sentry.withScope((scope) => {
     scope.setLevel(level);
-    scope.setExtra('request', req);
-    scope.setExtra('url', lyric_url);
+    scope.addEventProcessor(async event => Sentry.Handlers.parseRequest(event, req));
+    if (domain) {
+      scope.setFingerprint(['site-not-support-error', domain]);
+    }
     Sentry.captureException(err);
   });
 
