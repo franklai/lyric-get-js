@@ -60,8 +60,8 @@ class Lyric extends LyricBase {
     const patterns = {
       title: '<h2[^>]*>([^<]+)</h2>',
       artist: '歌手：<h3.*?><a href="/artist/[0-9]+/".*?>(.+?)</a></h3>',
-      lyricist: '作詞：<h4.*?>([^<]+)</h4>',
-      composer: '作曲：<h4.*?>([^<]+)</h4>',
+      lyricist: '作詞：<h4.*?>(.+?)</h4>',
+      composer: '作曲：<h4.*?>(.+?)</h4>',
     };
 
     this.fill_song_info(html, patterns);

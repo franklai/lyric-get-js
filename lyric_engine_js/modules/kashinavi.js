@@ -26,14 +26,14 @@ class Lyric extends LyricBase {
 
   async find_info(url, html) {
     const prefix = '<td valign=top align=center width=550>';
-    const suffix = '<hr noshade size=1>';
+    const suffix = '<hr ';
     const table_str = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
 
     const patterns = {
       title: '<div align=center><h1>([^<]+?)[♪<]',
       artist: '<a href="[^"]+">(.+?)</a>',
-      lyricist: '作詞　：　([^<]+)<br>',
-      composer: '作曲　：　([^<]+)</.+>',
+      lyricist: '作詞\\s*：\\s*([^<]+)<br>',
+      composer: '作曲\\s*：\\s*([^<]+)</.+>',
     };
 
     this.fill_song_info(table_str, patterns);
