@@ -1,5 +1,5 @@
-const iconv = require('iconv-lite');
 const rp = require('request-promise');
+const errors = require('request-promise/errors');
 const striptags = require('striptags');
 
 const LyricBase = require('../include/lyric_base');
@@ -47,8 +47,15 @@ class Lyric extends LyricBase {
 
   async find_info(url) {
     // set encoding to null, to let response is Buffer, not String
-    const raw = await rp({ url, encoding: null });
-    const html = iconv.decode(raw, 'utf8');
+    let html = '';
+    try {
+      html = await rp(url);
+    } catch (err) {
+      if (err instanceof errors.StatusCodeError) {
+        throw 'StatusCodeError';
+      }
+      throw err;
+    }
 
     const patterns = {
       title: '<h2[^>]*>([^<]+)</h2>',
