@@ -13,7 +13,7 @@ class Lyric extends LyricBase {
 
   async find_lyric(url, html) {
     const prefix = 'oncopy="return false;" unselectable="on;">';
-    const suffix = '</p>';
+    const suffix = '</div>';
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
     lyric = lyric.replace(/<br>　<br>/g, '\n\n'); // eslint-disable-line no-irregular-whitespace
     lyric = lyric.replace(/<br>/g, '\n');
