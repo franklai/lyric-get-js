@@ -30,7 +30,6 @@ class Lyric extends LyricBase {
     };
 
     this.fill_song_info(raw, patterns);
-
   }
 
   async parse_page() {

@@ -1,4 +1,4 @@
-/* global expect jest test */
+/* global expect test */
 const { Lyric } = require('./nana_music');
 
 async function testLyric(obj) {
