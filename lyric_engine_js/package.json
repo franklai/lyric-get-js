@@ -5,7 +5,7 @@
     "homepage": "https://github.com/franklai/lyric-get-js",
     "license": "MIT",
     "dependencies": {
-        "@sentry/node": "5.2.0",
+        "@sentry/node": "^5.4.3",
         "he": "^1.1.1",
         "iconv-lite": "^0.4.15",
         "mime-types": "^2.1.14",
