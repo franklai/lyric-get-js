@@ -56,14 +56,31 @@ class Lyric extends LyricBase {
   }
 
   find_info(url, html) {
+    const prefix = '"@type": "MusicComposition",';
+    const suffix = '"Lyrics" : {';
+
+    const block = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    if (!block) {
+      return false;
+    }
+
+    const patterns = {
+      title: '"name" : "(.+?)",',
+      artist: '"byArtist".*?"name" : "(.+?)",',
+      lyricist: '"lyricist".*?"name" : "(.+?)"',
+      composer: '"composer".*?"name" : "(.+?)"',
+    }
+    /*
     const patterns = {
       title: '"name" : "(.*?) 歌詞"',
       artist: '<th>歌手:</th><td>(.*?)</td>',
       lyricist: '<th>作詞:</th><td>(.*?)</td>',
       composer: '<th>作曲:</th><td>(.*?)</td>',
     };
+    */
 
-    this.fill_song_info(html, patterns);
+    const line = block.replace(/[\r\n]/g, '');
+    this.fill_song_info(line, patterns);
 
     // some page does not have 曲名、歌手
     if (!this.title) {
