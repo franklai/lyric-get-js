@@ -61,7 +61,7 @@ class Lyric extends LyricBase {
 
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
     if (!block) {
-      return false;
+      return;
     }
 
     const patterns = {
@@ -69,15 +69,7 @@ class Lyric extends LyricBase {
       artist: '"byArtist".*?"name" : "(.+?)",',
       lyricist: '"lyricist".*?"name" : "(.+?)"',
       composer: '"composer".*?"name" : "(.+?)"',
-    }
-    /*
-    const patterns = {
-      title: '"name" : "(.*?) 歌詞"',
-      artist: '<th>歌手:</th><td>(.*?)</td>',
-      lyricist: '<th>作詞:</th><td>(.*?)</td>',
-      composer: '<th>作曲:</th><td>(.*?)</td>',
     };
-    */
 
     const line = block.replace(/[\r\n]/g, '');
     this.fill_song_info(line, patterns);
