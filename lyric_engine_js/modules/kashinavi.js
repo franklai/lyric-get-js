@@ -30,7 +30,7 @@ class Lyric extends LyricBase {
     const table_str = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
 
     const patterns = {
-      title: '<div align=center><h1>([^<]+?)[♪<]',
+      title: '<div align=center><h.>([^<]+?)[♪<]',
       artist: '<a href="[^"]+">(.+?)</a>',
       lyricist: '作詞\\s*：\\s*([^<]+)<br>',
       composer: '作曲\\s*：\\s*([^<]+)</.+>',
