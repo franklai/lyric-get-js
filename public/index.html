@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
 	 crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="manifest" href="/manifest.json">
 </head>
 
 <body>
@@ -235,6 +236,16 @@
 
 	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,fetch,Element.prototype.dataset"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	<script type="application/javascript">
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('/js/service-worker.js')
+				.then(reg => {
+					console.log(`Registration succeeded. Scope is ${reg.scope}`);
+				}).catch(error => {
+					console.log(`Registration failed with ${error}`);
+				})
+		}
+	</script>
 </body>
 
 </html>
