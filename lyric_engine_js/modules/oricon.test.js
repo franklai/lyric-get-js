@@ -46,3 +46,14 @@ test('', async () => {
     length: 539,
   });
 });
+
+test('', async () => {
+  await testLyric({
+    url: 'https://music.oricon.co.jp/php/lyrics/LyricsDisp.php?music=6618069',
+    title: '紅蓮華',
+    artist: 'LiSA',
+    lyricist: 'LiSA',
+    composer: '草野華余子',
+    length: 516,
+  });
+});
