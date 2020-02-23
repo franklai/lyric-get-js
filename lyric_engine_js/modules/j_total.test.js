@@ -23,7 +23,7 @@ test('', async () => {
     artist: 'スキマスイッチ',
     lyricist: '常田真太郎・大橋卓弥',
     composer: '常田真太郎・大橋卓弥',
-    length: 1327,
+    length: 1330,
   });
 });
 

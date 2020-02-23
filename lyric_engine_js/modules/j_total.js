@@ -30,11 +30,14 @@ class Lyric extends LyricBase {
     return true;
   }
 
-  async find_info(url, html) {
+  find_info_in_table(html) {
     const prefix = '<font size="4" color="#FFFFFF">';
     const suffix = '<tr bgcolor="#CCCCCC">';
 
     const info_str = this.find_string_by_prefix_suffix(html, prefix, suffix);
+    if (!info_str) {
+      return false;
+    }
 
     const patterns = {
       title: ' color="#FFFFFF"><b>(.*?)</b></font>',
@@ -44,6 +47,40 @@ class Lyric extends LyricBase {
     };
 
     this.fill_song_info(info_str, patterns);
+
+    return true;
+  }
+
+  find_info_in_box2(html) {
+    const prefix = '<div class="box2">';
+    const suffix = '</div>';
+
+    const info_str = this.find_string_by_prefix_suffix(html, prefix, suffix);
+    if (!info_str) {
+      return false;
+    }
+
+    const patterns = {
+      title: '<h1>(.+?)</h1>',
+      artist: '歌：(.*?)/',
+      lyricist: '詞：(.*?)/',
+      composer: '曲：(.*?)<',
+    };
+
+    this.fill_song_info(info_str, patterns);
+
+    return true;
+  }
+
+  async find_info(url, html) {
+    if (this.find_info_in_table(html)) {
+      return true;
+    }
+    if (this.find_info_in_box2(html)) {
+      return true;
+    }
+    return false;
+
   }
 
   async parse_page() {
@@ -64,7 +101,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'http://music.j-total.net/data/026ha/053_Perfume/038.html';
+    const url = 'https://music.j-total.net/data/003u/003_utada_hikaru/004.html';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);
