@@ -80,7 +80,6 @@ class Lyric extends LyricBase {
       return true;
     }
     return false;
-
   }
 
   async parse_page() {
