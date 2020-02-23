@@ -1,186 +1,344 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lyric Get 2020</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+      integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<head>
-	<link rel="shortcut icon" href="favicon.ico" />
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Lyric Get 2018</title>
-	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
-	 crossorigin="anonymous">
-	<link rel="stylesheet" href="css/style.css">
-</head>
+  <body>
+    <div class="header pure-menu pure-menu-horizontal pure-menu-fixed">
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item pure-menu-selected" data-content-id="main">
+          <a href="#" class="pure-menu-link">Lyric Get</a>
+        </li>
+        <li class="pure-menu-item" data-content-id="examples">
+          <a href="#" class="pure-menu-link">Examples</a>
+        </li>
+        <li class="pure-menu-item" data-content-id="changelog">
+          <a href="#" class="pure-menu-link">Changelog</a>
+        </li>
+      </ul>
+    </div>
 
-<body>
+    <div class="content">
+      <div id="main" class="content-block content-active fill">
+        <div class="do-center">
+          <form id="query_form" class="width-limit">
+            <fieldset>
+              <input
+                type="text"
+                id="url"
+                class="url fill"
+                placeholder="Paste URL HERE..."
+                title="Paste URL HERE..."
+                value=""
+              />
+              <input
+                type="submit"
+                id="submit_btn"
+                class="submit"
+                value="Fetch"
+              />
+            </fieldset>
+          </form>
+          <div id="loading_div" class="lyric-loading-div width-limit">
+            Loading...
+          </div>
 
-	<div class="header pure-menu pure-menu-horizontal pure-menu-fixed">
-		<ul class="pure-menu-list">
-			<li class="pure-menu-item pure-menu-selected" data-content-id="main">
-				<a href="#" class="pure-menu-link">Lyric Get</a>
-			</li>
-			<li class="pure-menu-item" data-content-id="examples">
-				<a href="#" class="pure-menu-link">Examples</a>
-			</li>
-			<li class="pure-menu-item" data-content-id="changelog">
-				<a href="#" class="pure-menu-link">Changelog</a>
-			</li>
-		</ul>
-	</div>
+          <div id="lyric_div" class="lyric-div width-limit" lang="ja">
+            <input type="button" id="select" value="Select Lyric" />
+            <input type="button" id="copy" value="Copy Lyric" />
+            <span class="copied-msg">Lyric copied to clipboard.</span>
+            <div class="hr"></div>
+            <textarea
+              lang="ja"
+              id="lyric_textarea"
+              class="lyric-textarea"
+            ></textarea>
+          </div>
+        </div>
+      </div>
 
-	<div class="content">
-		<div id="main" class="content-block content-active fill">
-			<div class="do-center">
-				<form id="query_form" class="width-limit">
-					<fieldset>
-						<input type="text" id="url" class="url fill" placeholder="Paste URL HERE..." title="Paste URL HERE..." value="" />
-						<input type="submit" id="submit_btn" class="submit" value="Fetch" />
-					</fieldset>
-				</form>
-				<div id="loading_div" class="lyric-loading-div width-limit">
-					Loading...
-				</div>
+      <div id="examples" class="content-block">
+        <dl>
+          <dt>うたまっぷ</dt>
+          <dd>
+            <a
+              href="http://www.utamap.com/showkasi.php?surl=70380"
+              target="_blank"
+              >http://www.utamap.com/showkasi.php?surl=70380</a
+            >
+          </dd>
+          <dt>あにまっぷ</dt>
+          <dd>
+            <a
+              href="http://www.animap.jp/kasi/showkasi.php?surl=dk101202_50"
+              target="_blank"
+              >http://www.animap.jp/kasi/showkasi.php?surl=dk101202_50</a
+            >
+          </dd>
+          <dt>Uta-Net</dt>
+          <dd>
+            <a href="http://www.uta-net.com/song/17248/" target="_blank"
+              >http://www.uta-net.com/song/17248/</a
+            >
+          </dd>
+          <dt>歌詞タイム</dt>
+          <dd>
+            <a href="http://www.kasi-time.com/item-262.html" target="_blank"
+              >http://www.kasi-time.com/item-262.html</a
+            >
+          </dd>
+          <dt>歌詞ナビ</dt>
+          <dd>
+            <a href="http://kashinavi.com/song_view.html?65545" target="_blank"
+              >http://kashinavi.com/song_view.html?65545</a
+            >
+          </dd>
+          <dt>歌詞GET</dt>
+          <dd>
+            <a href="http://www.kget.jp/lyric/11066/" target="_blank"
+              >http://www.kget.jp/lyric/11066/</a
+            >
+          </dd>
+          <dt>イベスタ歌詞とる</dt>
+          <dd>
+            <a
+              href="http://www.evesta.jp/lyric/artists/a10019/lyrics/l7811.html"
+              target="_blank"
+              >http://www.evesta.jp/lyric/artists/a10019/lyrics/l7811.html</a
+            >
+          </dd>
+          <dt>UtaTen</dt>
+          <dd>
+            <a
+              href="http://utaten.com/lyric/BUMP+OF+CHICKEN/beautiful+glider/"
+              target="_blank"
+              >http://utaten.com/lyric/BUMP+OF+CHICKEN/beautiful+glider/</a
+            >
+          </dd>
+          <dt>JOYSOUND.com</dt>
+          <dd>
+            <a
+              href="https://www.joysound.com/web/search/song/26613"
+              target="_blank"
+              >https://www.joysound.com/web/search/song/26613</a
+            >
+          </dd>
+          <dt>music.jp</dt>
+          <dd>
+            <a
+              href="http://music-book.jp/music/Kashi/aaa5vfyg?artistname=FLOW&title=COLORS"
+              target="_blank"
+              >http://music-book.jp/music/Kashi/aaa5vfyg?...</a
+            >
+          </dd>
+          <dt>petitlyrics</dt>
+          <dd>
+            <a href="https://petitlyrics.com/lyrics/2669211" target="_blank"
+              >https://petitlyrics.com/lyrics/2669211</a
+            >
+          </dd>
+          <dt>J-Lyric.net</dt>
+          <dd>
+            <a
+              href="http://j-lyric.net/artist/a002723/l001e83.html"
+              target="_blank"
+              >http://j-lyric.net/artist/a002723/l001e83.html</a
+            >
+          </dd>
+          <dt>J-Total Music</dt>
+          <dd>
+            <a
+              href="http://music.j-total.net/data/026ha/053_Perfume/038.html"
+              target="_blank"
+              >http://music.j-total.net/data/026ha/053_Perfume/038.html</a
+            >
+          </dd>
+          <dt>アニ歌詞PV</dt>
+          <dd>
+            <a
+              href="http://animationsong.com/archives/1800903.html"
+              target="_blank"
+              >http://animationsong.com/archives/1800903.html</a
+            >
+          </dd>
+          <dt>Hoick</dt>
+          <dd>
+            <a
+              href="https://hoick.jp/mdb/detail/9920/%E3%81%AB%E3%81%98"
+              target="_blank"
+              >https://hoick.jp/mdb/detail/9920/%E3%81%AB%E3%81%98</a
+            >
+          </dd>
 
-				<div id="lyric_div" class="lyric-div width-limit" lang="ja">
-					<input type="button" id="select" value="Select Lyric" />
-					<input type="button" id="copy" value="Copy Lyric" />
-					<span class="copied-msg">Lyric copied to clipboard.</span>
-					<div class="hr"></div>
-					<textarea lang="ja" id="lyric_textarea" class="lyric-textarea"></textarea>
-				</div>
-			</div>
-		</div>
+          <dt>LyricWiki</dt>
+          <dd>
+            <a
+              href="http://lyrics.wikia.com/Ronan_Keating:When_You_Say_Nothing_At_All"
+              target="_blank"
+              >http://lyrics.wikia.com/Ronan_Keating:When_You_Say_Nothing_At_All</a
+            >
+          </dd>
+          <dt>metrolyrics</dt>
+          <dd>
+            <a
+              href="http://www.metrolyrics.com/we-belong-together-lyrics-mariah-carey.html"
+              target="_blank"
+              >http://www.metrolyrics.com/we-belong-together-lyrics-mariah-carey.html</a
+            >
+          </dd>
 
-		<div id="examples" class="content-block">
-			<dl>
-				<dt>うたまっぷ</dt>
-				<dd>
-					<a href="http://www.utamap.com/showkasi.php?surl=70380" target="_blank">http://www.utamap.com/showkasi.php?surl=70380</a>
-				</dd>
-				<dt>あにまっぷ</dt>
-				<dd>
-					<a href="http://www.animap.jp/kasi/showkasi.php?surl=dk101202_50" target="_blank">http://www.animap.jp/kasi/showkasi.php?surl=dk101202_50</a>
-				</dd>
-				<dt>Uta-Net</dt>
-				<dd>
-					<a href="http://www.uta-net.com/song/17248/" target="_blank">http://www.uta-net.com/song/17248/</a>
-				</dd>
-				<dt>歌詞タイム</dt>
-				<dd>
-					<a href="http://www.kasi-time.com/item-262.html" target="_blank">http://www.kasi-time.com/item-262.html</a>
-				</dd>
-				<dt>歌詞ナビ</dt>
-				<dd>
-					<a href="http://kashinavi.com/song_view.html?65545" target="_blank">http://kashinavi.com/song_view.html?65545</a>
-				</dd>
-				<dt>歌詞GET</dt>
-				<dd>
-					<a href="http://www.kget.jp/lyric/11066/" target="_blank">http://www.kget.jp/lyric/11066/</a>
-				</dd>
-				<dt>GyaO! 歌詞サービス</dt>
-				<dd>
-					<a href="http://lyrics.gyao.yahoo.co.jp/ly/Y152097/" target="_blank">http://lyrics.gyao.yahoo.co.jp/ly/Y152097/</a>
-				</dd>
-				<dt>イベスタ歌詞とる</dt>
-				<dd>
-					<a href="http://www.evesta.jp/lyric/artists/a10019/lyrics/l7811.html" target="_blank">http://www.evesta.jp/lyric/artists/a10019/lyrics/l7811.html</a>
-				</dd>
-				<dt>UtaTen</dt>
-				<dd>
-					<a href="http://utaten.com/lyric/BUMP+OF+CHICKEN/beautiful+glider/" target="_blank">http://utaten.com/lyric/BUMP+OF+CHICKEN/beautiful+glider/</a>
-				</dd>
-				<dt>JOYSOUND.com</dt>
-				<dd>
-					<a href="https://www.joysound.com/web/search/song/26613" target="_blank">https://www.joysound.com/web/search/song/26613</a>
-				</dd>
-				<dt>music.jp</dt>
-				<dd>
-					<a href="http://music-book.jp/music/Kashi/aaa5vfyg?artistname=FLOW&title=COLORS" target="_blank">http://music-book.jp/music/Kashi/aaa5vfyg?...</a>
-				</dd>
-				<dt>petitlyrics</dt>
-				<dd>
-					<a href="https://petitlyrics.com/lyrics/2669211" target="_blank">https://petitlyrics.com/lyrics/2669211</a>
-				</dd>
-				<dt>J-Lyric.net</dt>
-				<dd>
-					<a href="http://j-lyric.net/artist/a002723/l001e83.html" target="_blank">http://j-lyric.net/artist/a002723/l001e83.html</a>
-				</dd>
-				<dt>J-Total Music</dt>
-				<dd>
-					<a href="http://music.j-total.net/data/026ha/053_Perfume/038.html" target="_blank">http://music.j-total.net/data/026ha/053_Perfume/038.html</a>
-				</dd>
-				<dt>アニ歌詞PV</dt>
-				<dd>
-					<a href="http://animationsong.com/archives/1800903.html" target="_blank">http://animationsong.com/archives/1800903.html</a>
-				</dd>
-				<dt>Hoick</dt>
-				<dd>
-					<a href="https://hoick.jp/mdb/detail/9920/%E3%81%AB%E3%81%98" target="_blank">https://hoick.jp/mdb/detail/9920/%E3%81%AB%E3%81%98</a>
-				</dd>
-				<dt>mysound</dt>
-				<dd>
-					<a href="https://mysound.jp/song/65051/" target="_blank">https://mysound.jp/song/65051/</a>
-				</dd>
+          <dt>musixmatch</dt>
+          <dd>
+            <a
+              href="https://www.musixmatch.com/lyrics/Mariah-Carey/We-Belong-Together"
+              target="_blank"
+              >https://www.musixmatch.com/lyrics/Mariah-Carey/We-Belong-Together</a
+            >
+          </dd>
 
-				<dt>LyricWiki</dt>
-				<dd>
-					<a href="http://lyrics.wikia.com/Ronan_Keating:When_You_Say_Nothing_At_All" target="_blank">http://lyrics.wikia.com/Ronan_Keating:When_You_Say_Nothing_At_All</a>
-				</dd>
-				<dt>metrolyrics</dt>
-				<dd>
-					<a href="http://www.metrolyrics.com/we-belong-together-lyrics-mariah-carey.html" target="_blank">http://www.metrolyrics.com/we-belong-together-lyrics-mariah-carey.html</a>
-				</dd>
+          <dt>kkbox</dt>
+          <dd>
+            <a
+              href="https://www.kkbox.com/jp/ja/song/gly00H52O5lQXuYvQXuYv0XL-index.html"
+              target="_blank"
+              >https://www.kkbox.com/jp/ja/song/gly00H52O5lQXuYvQXuYv0XL-index.html</a
+            >
+          </dd>
 
-				<dt>musixmatch</dt>
-				<dd>
-					<a href="https://www.musixmatch.com/lyrics/Mariah-Carey/We-Belong-Together" target="_blank">https://www.musixmatch.com/lyrics/Mariah-Carey/We-Belong-Together</a>
-				</dd>
+          <dt>oricon</dt>
+          <dd>
+            <a
+              href="https://www.oricon.co.jp/prof/560188/lyrics/I232023/"
+              target="_blank"
+              >https://www.oricon.co.jp/prof/560188/lyrics/I232023/</a
+            >
+          </dd>
 
-			</dl>
-		</div>
+          <dt>Lyrical Nonsense</dt>
+          <dd>
+            <a
+              href="https://www.lyrical-nonsense.com/lyrics/eir-aoi/ignite/#Romaji"
+              target="_blank"
+              >https://www.lyrical-nonsense.com/lyrics/eir-aoi/ignite/#Romaji</a
+            >
+          </dd>
 
-		<div id="changelog" class="content-block">
-			<ul>
-				<li>[2018 02-10] Add mysound.jp</li>
-				<li>[2018 01-26] Add Hoick.jp</li>
-				<li>[2018 01-18] Switch 2018 page to default</li>
-				<li>[2018 01-06] use new UI for electron version</li>
-				<li>[2018 01-05] new webpage</li>
-				<li>[2017 11-08]
-					<ol>
-						<li>Fix metrolyrics.</li>
-						<li>Add musixmatch.</li>
-						<li>Fix kashinavi.</li>
-					</ol>
-				</li>
-				<li>[2017 10-18] Fix petitlyrics without composer info.</li>
-				<li>[2017 10-12] Fix kashinavi song info.</li>
-				<li>[2017 05-25] Fix J-Lyric.net</li>
-				<li>[2017 05-07] Node.js version on azure</li>
-			</ul>
-		</div>
+          <dt>Mojim.com</dt>
+          <dd>
+            <a href="https://mojim.com/twy105842x16x11.htm" target="_blank"
+              >https://mojim.com/twy105842x16x11.htm</a
+            >
+          </dd>
 
-		<div class="footer">
-			<div class="line-item">If you have problems to get lyric.</div>
-			<div class="line-item">
-				Please report issue on
-				<a href="https://github.com/franklai/lyric-get-js/issues" target="_blank">lyric-get-js Issues</a>, or contact
-				<a href="https://franks543.blogspot.com/p/lyric-get.html" target="_blank">franklai</a>.
-			</div>
-		</div>
-	</div>
+          <dt>Rock Lyric</dt>
+          <dd>
+            <a href="https://rocklyric.jp/lyric.php?sid=16016" target="_blank"
+              >https://rocklyric.jp/lyric.php?sid=16016</a
+            >
+          </dd>
 
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-879036-3"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
+          <dt>nana</dt>
+          <dd>
+            <a href="https://nana-music.com/songs/36697" target="_blank"
+              >https://nana-music.com/songs/36697</a
+            >
+          </dd>
+        </dl>
+      </div>
 
-		gtag('config', 'UA-879036-3');
-	</script>
+      <div id="changelog" class="content-block">
+        <ul>
+          <li>[2020 02-23] Remove mysound.jp</li>
+          <li>[2019-06-28] Add nana</li>
+          <li>[2019-06-07] Add Rock Lyric</li>
+          <li>[2019-05-11] Add Mojim.com</li>
+          <li>[2019-04-08] Remove yahoo</li>
+          <li>
+            [2019-02-09]
+            <ol>
+              <li>Add Lyrical Nonsense</li>
+              <li>Fix kashinavi info</li>
+            </ol>
+          </li>
+          <li>
+            [2019-02-02]
+            <ol>
+              <li>Add kkbox</li>
+              <li>Add oricon</li>
+            </ol>
+          </li>
+          <li>
+            [2018-10-13]
+            <ol>
+              <li>Fix kashinavi info</li>
+              <li>Fix yahoo</li>
+            </ol>
+          </li>
+          <li>[2018 02-10] Add mysound.jp</li>
+          <li>[2018 01-26] Add Hoick.jp</li>
+          <li>[2018 01-18] Switch 2018 page to default</li>
+          <li>[2018 01-06] use new UI for electron version</li>
+          <li>[2018 01-05] new webpage</li>
+          <li>
+            [2017 11-08]
+            <ol>
+              <li>Fix metrolyrics.</li>
+              <li>Add musixmatch.</li>
+              <li>Fix kashinavi.</li>
+            </ol>
+          </li>
+          <li>[2017 10-18] Fix petitlyrics without composer info.</li>
+          <li>[2017 10-12] Fix kashinavi song info.</li>
+          <li>[2017 05-25] Fix J-Lyric.net</li>
+          <li>[2017 05-07] Node.js version on azure</li>
+        </ul>
+      </div>
 
-	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,fetch,Element.prototype.dataset"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-</body>
+      <div class="footer">
+        <div class="line-item">If you have problems to get lyric.</div>
+        <div class="line-item">
+          Please report issue on
+          <a
+            href="https://github.com/franklai/lyric-get-js/issues"
+            target="_blank"
+            >lyric-get-js Issues</a
+          >, or contact
+          <a
+            href="https://franks543.blogspot.com/p/lyric-get.html"
+            target="_blank"
+            >franklai</a
+          >.
+        </div>
+      </div>
+    </div>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-879036-3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-879036-3");
+    </script>
+
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,fetch,Element.prototype.dataset"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
 </html>
