@@ -17,7 +17,7 @@ async function testLyric(obj) {
 
 test('', async () => {
   await testLyric({
-    url: 'http://www.utamap.com/showkasi.php?surl=59709',
+    url: 'https://www.utamap.com/showkasi.php?surl=59709',
     title: 'One more time,One more chance',
     artist: '山崎まさよし',
     lyricist: '山崎将義',
@@ -27,7 +27,7 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'http://www.utamap.com/showkasi.php?surl=k-131226-001',
+    url: 'https://www.utamap.com/showkasi.php?surl=k-131226-001',
     title: 'ちっぽけな愛のうた',
     artist: '小枝理子&小笠原秋',
     lyricist: '亀田誠治',

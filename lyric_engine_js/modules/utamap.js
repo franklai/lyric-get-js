@@ -1,4 +1,6 @@
+const tls = require('tls');
 const util = require('util');
+
 const iconv = require('iconv-lite');
 const rp = require('request-promise');
 
@@ -7,55 +9,19 @@ const LyricBase = require('../include/lyric_base');
 const keyword = 'utamap';
 
 class Lyric extends LyricBase {
-  async get_content(url) {
-    const html = await rp(url);
-    return html;
-  }
+  async find_lyric(url, html) {
+    const prefix = 'kasi_honbun">';
+    const suffix = '<!-- 歌詞 end -->';
+    let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
 
-  find_song_id(url) {
-    const pattern = /surl=([^&=]+)/;
-    const result = pattern.exec(url);
-
-    return result ? result[1] : null;
-  }
-
-  async find_lyric(url) {
-    const song_id = this.find_song_id(url);
-
-    if (!song_id) {
-      console.warn('Failed to get song id of url:', url);
-      return false;
-    }
-
-    const song_url = `http://www.utamap.com/phpflash/flashfalsephp.php?unum=${song_id}`;
-    const raw = await rp(song_url);
-    if (!raw) {
-      console.warn('Failed to get content of url:', song_url);
-      return false;
-    }
-
-    const prefix = 'test2=';
-    const pos = raw.indexOf(prefix);
-    if (pos === -1) {
-      console.warn('Failed to find test2=');
-      return false;
-    }
-
-    const lyric = raw.substr(pos + prefix.length).trim();
+    lyric = lyric.replace(/<br>/g, '\n');
+    lyric = lyric.trim();
 
     this.lyric = lyric;
     return true;
   }
 
-  async find_info(url) {
-    // set encoding to null, to let response is Buffer, not String
-    const raw = await rp({ url, encoding: null });
-    let html = iconv.decode(raw, 'eucjp');
-
-    if (html.indexOf('うたまっぷ') === -1) {
-      html = iconv.decode(raw, 'sjis');
-    }
-
+  async find_info(url, html) {
     const keys = {
       title: 'title',
       artist: 'artist',
@@ -75,8 +41,14 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    await this.find_lyric(url);
-    await this.find_info(url);
+    // due to utamap only supports TLS 1.0
+    tls.DEFAULT_MIN_VERSION = 'TLSv1';
+    // set encoding to null, to let response is Buffer, not String
+    const raw = await rp({ url, encoding: null });
+    const html = iconv.decode(raw, 'eucjp');
+
+    await this.find_lyric(url, html);
+    await this.find_info(url, html);
 
     return true;
   }
@@ -87,7 +59,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'http://www.utamap.com/showkasi.php?surl=70380';
+    const url = 'https://www.utamap.com/showkasi.php?surl=70380';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);
