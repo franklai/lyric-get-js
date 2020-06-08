@@ -32,13 +32,17 @@ class Lyric extends LyricBase {
     const hash = this.get_hash(url) || 'Lyrics';
 
     const prefix = `<div class="contents" id="${hash}">`;
-    const suffix = '</p>\n</div>';
+    const suffix = '</p><br /></div>';
 
     return this.find_string_by_prefix_suffix(html, prefix, suffix);
   }
 
   find_lyric(url, html) {
     const block = this.get_lyric_content_block(url, html);
+    if (!block) {
+      console.error(`Failed to get content block of url ${url}`);
+      return false;
+    }
     const prefix = '<div class="olyrictext">';
     const suffix = '</div>';
 
@@ -48,6 +52,7 @@ class Lyric extends LyricBase {
     }
 
     lyric = lyric.replace(/<\/p>/g, '\n');
+    lyric = lyric.replace(/<br \/> ?/g, '\n');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
