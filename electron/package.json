@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/franklai/lyric-get-js/",
   "devDependencies": {
-    "electron": "^8.0.0",
+    "electron": "^8.2.4",
     "electron-builder": "^22.3.0"
   },
   "build": {
