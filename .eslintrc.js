@@ -5,6 +5,7 @@ module.exports = {
         "camelcase": "off",
         "no-console": "off",
         "no-throw-literal": "off",
+        "comma-dangle": ["error", "only-multiline"],
     },
     "env": {
         "browser": true,
