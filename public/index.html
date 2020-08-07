@@ -71,7 +71,7 @@
             ></textarea>
           </div>
 
-          <div style="text-align: center; line-height: 150%; ">
+          <div style="text-align: center; line-height: 150%;">
             <a href="./former/">Use former style page</a>
             <br />
             <a href="https://franklai-lyric-get.appspot.com/2018/"
@@ -253,11 +253,19 @@
               >https://nana-music.com/songs/36697</a
             >
           </dd>
+
+          <dt>animesongz</dt>
+          <dd>
+            <a href="https://animesongz.com/lyric/5145/23706" target="_blank"
+              >https://animesongz.com/lyric/5145/23706</a
+            >
+          </dd>
         </dl>
       </div>
 
       <div id="changelog" class="content-block">
         <ul>
+          <li>[2020-08-07] Add animesongz</li>
           <li>[2020-03-30] Remove kasi-time</li>
           <li>[2020-03-15] Remove animap</li>
           <li>[2020-02-23] Removed mysound.jp</li>
@@ -334,21 +342,21 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
+      gtag('js', new Date());
 
-      gtag("config", "UA-879036-3");
+      gtag('config', 'UA-879036-3');
     </script>
 
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,fetch,Element.prototype.dataset"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="application/javascript">
-      if ("serviceWorker" in navigator) {
+      if ('serviceWorker' in navigator) {
         navigator.serviceWorker
-          .register("/service-worker.js")
-          .then(reg => {
+          .register('/service-worker.js')
+          .then((reg) => {
             console.log(`Registration succeeded. Scope is ${reg.scope}`);
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(`Registration failed with ${error}`);
           });
       }
