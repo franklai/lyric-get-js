@@ -14,15 +14,8 @@
   },
   "dependencies": {
     "@sentry/node": "^5.4.3",
-    "he": "^1.1.1",
-    "iconv-lite": "^0.4.15",
     "mime-types": "^2.1.14",
-    "mz": "^2.6.0",
-    "pixl-xml": "^1.0.10",
-    "request": "^2.81.0",
-    "request-promise": "^4.1.1",
-    "striptags": "^3.0.1",
-    "superagent": "^5.0.5"
+    "mz": "^2.6.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
