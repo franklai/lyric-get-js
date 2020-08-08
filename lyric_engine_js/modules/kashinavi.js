@@ -1,5 +1,4 @@
 const iconv = require('iconv-lite');
-const striptags = require('striptags');
 
 const LyricBase = require('../include/lyric_base');
 
