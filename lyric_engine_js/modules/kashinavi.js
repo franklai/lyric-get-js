@@ -17,8 +17,7 @@ class Lyric extends LyricBase {
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
     lyric = lyric.replace(/<\/p><p>/g, '\n\n'); // eslint-disable-line no-irregular-whitespace
     lyric = lyric.replace(/<br>/g, '\n');
-    lyric = striptags(lyric);
-    lyric = lyric.trim();
+    lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
     return true;
