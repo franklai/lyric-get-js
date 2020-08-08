@@ -1,8 +1,3 @@
-const iconv = require('iconv-lite');
-const he = require('he');
-const rp = require('request-promise');
-const striptags = require('striptags');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'j-total';
@@ -22,9 +17,7 @@ class Lyric extends LyricBase {
     lyric = lyric.replace(/\r/g, '');
     lyric = lyric.replace(/\n/g, '');
     lyric = lyric.replace(/<br>/g, '\n');
-    lyric = he.decode(lyric);
-    lyric = striptags(lyric);
-    lyric = lyric.trim();
+    lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
     return true;
@@ -85,8 +78,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const raw = await rp({ url, encoding: null });
-    const html = iconv.decode(raw, 'sjis');
+    const html = await this.get_html(url, 'sjis');
 
     await this.find_lyric(url, html);
     await this.find_info(url, html);
@@ -100,7 +92,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'https://music.j-total.net/data/003u/003_utada_hikaru/004.html';
+    const url = 'http://music.j-total.net/data/003u/003_utada_hikaru/004.html';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);

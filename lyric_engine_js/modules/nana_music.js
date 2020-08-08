@@ -1,5 +1,3 @@
-const striptags = require('striptags');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'nana-music';
@@ -10,8 +8,7 @@ class Lyric extends LyricBase {
     const suffix = '</div>';
 
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, true);
-    lyric = striptags(lyric);
-    lyric = lyric.trim();
+    lyric = this.sanitize_html(lyric);
     this.lyric = lyric;
 
     return true;

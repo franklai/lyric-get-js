@@ -1,5 +1,3 @@
-const iconv = require('iconv-lite');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'kashinavi';
@@ -25,7 +23,12 @@ class Lyric extends LyricBase {
   async find_info(url, html) {
     const prefix = '<td valign=top align=center width=550>';
     const suffix = '<hr ';
-    const table_str = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    const table_str = this.find_string_by_prefix_suffix(
+      html,
+      prefix,
+      suffix,
+      false
+    );
 
     const patterns = {
       title: '<div align=center><h.>([^<]+?)[♪<]',
@@ -40,8 +43,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const raw = await this.get_html(url, null);
-    const html = iconv.decode(raw, 'sjis');
+    const html = await this.get_html(url, 'sjis');
 
     this.find_lyric(url, html);
     this.find_info(url, html);

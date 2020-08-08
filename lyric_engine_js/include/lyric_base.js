@@ -1,7 +1,8 @@
 const util = require('util');
 
+const bent = require('bent');
 const he = require('he');
-const rp = require('request-promise');
+const iconv = require('iconv-lite');
 const striptags = require('striptags');
 
 const ATTR_LIST = [
@@ -100,14 +101,20 @@ class LyricBase {
     const headers = {
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36',
     };
-    const html = await rp({
-      method: 'GET',
-      uri: url,
-      headers,
-      encoding,
-    });
+    const getStream = bent([200, 301, 302]);
+    const stream = await getStream(url, null, headers);
+    if (stream.status === 301 || stream.status === 302) {
+      return this.get_html(stream.headers.location, encoding);
+    }
+    let text;
+    if (encoding) {
+      const buffer = await stream.arrayBuffer();
+      text = iconv.decode(buffer, encoding);
+    } else {
+      text = await stream.text();
+    }
 
-    return html;
+    return text;
   }
 
   sanitize_html(value) {

@@ -1,5 +1,3 @@
-const he = require('he');
-const striptags = require('striptags');
 const Sentry = require('@sentry/node');
 
 const LyricBase = require('../include/lyric_base');
@@ -34,8 +32,7 @@ class Lyric extends LyricBase {
     lyric = this.filter_ad(lyric);
     lyric = this.filter_thank(lyric);
     lyric = lyric.replace(/<br \/>/g, '\n');
-    lyric = striptags(lyric);
-    lyric = lyric.trim();
+    lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
     return true;
@@ -82,8 +79,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const raw = await this.get_html(url, 'utf-8');
-    const html = he.decode(raw);
+    const html = await this.get_html(url);
 
     this.find_lyric(url, html);
     this.find_info(url, html);
