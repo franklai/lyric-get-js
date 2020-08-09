@@ -88,7 +88,11 @@ class Lyric extends LyricBase {
   }
 
   async parse_page() {
-    const { url } = this;
+    let { url } = this;
+
+    if (url.startsWith('http://')) {
+      url = url.replace(/^https:/, 'http:');
+    }
 
     const raw = await this.get_html(url);
     const html = he.decode(raw);
