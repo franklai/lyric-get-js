@@ -1,5 +1,3 @@
-const rp = require('request-promise');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'joysound';
@@ -12,7 +10,6 @@ class Lyric extends LyricBase {
 
   async get_song_json(id) {
     const json_url = 'https://mspxy.joysound.com/Common/Lyric';
-    // const json_url = 'http://192.168.1.9';
     const headers = {
       'X-JSP-APP-NAME': '0000800',
     };
@@ -23,13 +20,7 @@ class Lyric extends LyricBase {
       apiVer: '1.0',
     };
 
-    const json = await rp({
-      method: 'POST',
-      uri: json_url,
-      headers,
-      form: body,
-      json: true,
-    });
+    const json = await this.post_form(json_url, body, { headers });
 
     return json;
   }

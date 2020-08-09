@@ -4,6 +4,7 @@ const axios = require('axios');
 const he = require('he');
 const iconv = require('iconv-lite');
 const striptags = require('striptags');
+const superagent = require('superagent');
 
 const ATTR_LIST = [
   ['artist', '歌手'],
@@ -11,6 +12,7 @@ const ATTR_LIST = [
   ['composer', '作曲'],
   ['arranger', '編曲'],
 ];
+const USER_AGENT = 'Mozilla/5.0 Gecko/20100101 Firefox/79.0 Lyric Get/2.0';
 
 class LyricBase {
   constructor(url) {
@@ -100,8 +102,7 @@ class LyricBase {
   async get_html(url, options = {}) {
     const { encoding = 'utf8' } = options;
     const headers = {
-      'User-Agent':
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Gecko/20100101 Firefox/79.0',
+      'User-Agent': USER_AGENT,
     };
     const responseType = encoding ? 'arraybuffer' : 'text';
 
@@ -115,6 +116,18 @@ class LyricBase {
     }
 
     return text;
+  }
+
+  async post_form(url, body, options = {}) {
+    const { headers = { 'User-Agent': USER_AGENT } } = options;
+
+    const response = await superagent
+      .post(url)
+      .set(headers)
+      .type('form')
+      .send(body);
+
+    return response.body;
   }
 
   sanitize_html(value) {
