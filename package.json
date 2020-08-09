@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server",
     "watch": "nodemon server",
-    "test": "jest",
+    "test": "jest --env=node",
     "lint": "npx eslint lyric_engine_js"
   },
   "license": "Apache",

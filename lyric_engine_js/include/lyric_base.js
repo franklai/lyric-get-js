@@ -1,6 +1,6 @@
 const util = require('util');
 
-const bent = require('bent');
+const axios = require('axios');
 const he = require('he');
 const iconv = require('iconv-lite');
 const striptags = require('striptags');
@@ -18,7 +18,7 @@ class LyricBase {
   }
 
   async get() {
-    if (!await this.parse_page()) {
+    if (!(await this.parse_page())) {
       return null;
     }
 
@@ -83,9 +83,9 @@ class LyricBase {
     }
 
     if (including === true) {
-      return input.substr(start, (end - start) + suffix.length);
+      return input.substr(start, end - start + suffix.length);
     }
-    return input.substr(start + prefix.length, (end - start) - prefix.length);
+    return input.substr(start + prefix.length, end - start - prefix.length);
   }
 
   get_first_group_by_pattern(input, pattern) {
@@ -97,21 +97,21 @@ class LyricBase {
     return null;
   }
 
-  async get_html(url, encoding) {
+  async get_html(url, options = {}) {
+    const { encoding = 'utf8' } = options;
     const headers = {
-      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36',
+      'User-Agent':
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Gecko/20100101 Firefox/79.0',
     };
-    const getStream = bent([200, 301, 302]);
-    const stream = await getStream(url, null, headers);
-    if (stream.status === 301 || stream.status === 302) {
-      return this.get_html(stream.headers.location, encoding);
-    }
-    let text;
+    const responseType = encoding ? 'arraybuffer' : 'text';
+
+    const response = await axios.get(url, {
+      headers,
+      responseType,
+    });
+    let text = response.data;
     if (encoding) {
-      const buffer = await stream.arrayBuffer();
-      text = iconv.decode(buffer, encoding);
-    } else {
-      text = await stream.text();
+      text = iconv.decode(text, encoding);
     }
 
     return text;

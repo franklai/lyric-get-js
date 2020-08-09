@@ -3,10 +3,14 @@
     "version": "1.0.0",
     "description": "Extract enginge for lyric get",
     "homepage": "https://github.com/franklai/lyric-get-js",
+    "scripts": {
+      "test": "jest --env=node",
+      "lint": "npx eslint lyric_engine_js"
+    },
     "license": "MIT",
     "dependencies": {
         "@sentry/node": "^5.4.3",
-        "bent": "^7.3.9",
+        "axios": "^0.19.2",
         "he": "^1.1.1",
         "iconv-lite": "^0.4.15",
         "mime-types": "^2.1.14",

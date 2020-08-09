@@ -43,7 +43,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const html = await this.get_html(url, 'sjis');
+    const html = await this.get_html(url, { encoding: 'sjis' });
 
     this.find_lyric(url, html);
     this.find_info(url, html);
