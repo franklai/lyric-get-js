@@ -2,6 +2,7 @@
   "name": "lyric-get-js",
   "version": "2.1.0",
   "private": true,
+  "main": "lyric_engine_js/index.js",
   "scripts": {
     "start": "node server",
     "watch": "nodemon server",
