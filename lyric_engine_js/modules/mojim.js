@@ -90,7 +90,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     let { url } = this;
 
-    if (url.startsWith('http://')) {
+    if (url.startsWith('https://')) {
       url = url.replace(/^https:/, 'http:');
     }
 
