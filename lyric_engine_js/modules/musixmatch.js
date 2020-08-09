@@ -1,5 +1,3 @@
-const rp = require('request-promise');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'musixmatch';
@@ -44,7 +42,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const html = await rp(url);
+    const html = await this.get_html(url);
     const json = this.find_json(html);
     this.find_lyric(url, json);
     this.find_info(url, json);
@@ -58,7 +56,8 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'https://www.musixmatch.com/lyrics/Shawn-Mendes/There-s-Nothing-Holdin-Me-Back';
+    const url =
+      'https://www.musixmatch.com/lyrics/Shawn-Mendes/There-s-Nothing-Holdin-Me-Back';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);

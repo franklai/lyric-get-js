@@ -1,7 +1,3 @@
-const he = require('he');
-const rp = require('request-promise');
-const striptags = require('striptags');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'lyrics.wikia';
@@ -18,10 +14,7 @@ class Lyric extends LyricBase {
     }
 
     lyric = lyric.replace(/<br \/>/g, '\n');
-
-    lyric = he.decode(lyric);
-    lyric = striptags(lyric);
-    lyric = lyric.trim();
+    lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
     return true;
@@ -46,7 +39,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const html = await rp(url);
+    const html = await this.get_html(url);
 
     await this.find_lyric(url, html);
     await this.find_info(url, html);
@@ -60,7 +53,8 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'http://lyrics.wikia.com/wiki/%E5%9D%82%E6%9C%AC%E7%9C%9F%E7%B6%BE_(Maaya_Sakamoto):Tune_The_Rainbow';
+    const url =
+      'http://lyrics.wikia.com/wiki/%E5%9D%82%E6%9C%AC%E7%9C%9F%E7%B6%BE_(Maaya_Sakamoto):Tune_The_Rainbow';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);

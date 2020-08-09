@@ -1,7 +1,3 @@
-const he = require('he');
-const rp = require('request-promise');
-const striptags = require('striptags');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'utaten';
@@ -18,10 +14,7 @@ class Lyric extends LyricBase {
 
     const pattern = /<span class="rt">(.*?)<\/span>/g;
     lyric = lyric.replace(pattern, '($1)');
-
-    lyric = he.decode(lyric);
-    lyric = striptags(lyric);
-    lyric = lyric.trim();
+    lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
     return true;
@@ -30,7 +23,12 @@ class Lyric extends LyricBase {
   async find_info(url, html) {
     let prefix = '<meta property="og:site_name"';
     let suffix = '<meta property="og:image"';
-    let content = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    let content = this.find_string_by_prefix_suffix(
+      html,
+      prefix,
+      suffix,
+      false
+    );
     let patterns = {
       title: '<meta property="og:title" content="(.*?) 歌詞',
       artist: '<meta property="og:description" content="(.*?)が歌う',
@@ -60,7 +58,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const html = await rp(url);
+    const html = await this.get_html(url);
 
     await this.find_lyric(url, html);
     await this.find_info(url, html);

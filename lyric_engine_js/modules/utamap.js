@@ -1,9 +1,6 @@
 const tls = require('tls');
 const util = require('util');
 
-const iconv = require('iconv-lite');
-const rp = require('request-promise');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'utamap';
@@ -32,7 +29,9 @@ class Lyric extends LyricBase {
     const patterns = {};
     Object.keys(keys).forEach((key) => {
       const input_name = keys[key];
-      patterns[key] = new RegExp(util.format('<INPUT type="hidden" name=%s value="([^"]*)">', input_name));
+      patterns[key] = new RegExp(
+        util.format('<INPUT type="hidden" name=%s value="([^"]*)">', input_name)
+      );
     });
 
     this.fill_song_info(html, patterns);
@@ -44,8 +43,7 @@ class Lyric extends LyricBase {
     // due to utamap only supports TLS 1.0
     tls.DEFAULT_MIN_VERSION = 'TLSv1';
     // set encoding to null, to let response is Buffer, not String
-    const raw = await rp({ url, encoding: null });
-    const html = iconv.decode(raw, 'eucjp');
+    const html = await this.get_html(url, { encoding: 'eucjp' });
 
     await this.find_lyric(url, html);
     await this.find_info(url, html);

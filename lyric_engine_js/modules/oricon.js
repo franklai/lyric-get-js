@@ -1,8 +1,3 @@
-const he = require('he');
-const iconv = require('iconv-lite');
-const rp = require('request-promise');
-const striptags = require('striptags');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'oricon';
@@ -16,14 +11,16 @@ class Lyric extends LyricBase {
       html,
       prefix,
       suffix,
-      false,
+      false
     );
     json_lds.push(first_json_ld);
 
     const pos = html.indexOf(first_json_ld);
     const after_first = html.substring(pos + first_json_ld.length);
 
-    json_lds.push(this.find_string_by_prefix_suffix(after_first, prefix, suffix, false));
+    json_lds.push(
+      this.find_string_by_prefix_suffix(after_first, prefix, suffix, false)
+    );
 
     return json_lds.map(JSON.parse);
   }
@@ -43,12 +40,12 @@ class Lyric extends LyricBase {
       lyric = this.find_string_by_prefix_suffix(
         html,
         prefix_lyric_contents,
-        suffix,
+        suffix
       );
     }
 
     lyric = lyric.replace(/<br>/g, '\n');
-    lyric = striptags(he.decode(lyric)).trim();
+    lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
 
@@ -80,8 +77,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const raw = await rp({ url, encoding: null });
-    const html = iconv.decode(raw, 'Shift_JIS');
+    const html = await this.get_html(url, { encoding: 'sjis' });
     await this.find_lyric(url, html);
     await this.find_info(url, html);
 

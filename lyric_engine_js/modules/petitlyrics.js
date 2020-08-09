@@ -1,5 +1,3 @@
-const he = require('he');
-const striptags = require('striptags');
 const superagent = require('superagent');
 const LyricBase = require('../include/lyric_base');
 
@@ -20,8 +18,7 @@ class Lyric extends LyricBase {
       return false;
     }
 
-    lyric = striptags(lyric);
-    lyric = he.decode(lyric);
+    lyric = this.sanitize_html(lyric);
 
     return lyric;
   }
@@ -69,10 +66,7 @@ class Lyric extends LyricBase {
     };
     const body = `lyrics_id=${song_id}`;
 
-    const res = await this.agent
-      .post(lyric_url)
-      .set(headers)
-      .send(body);
+    const res = await this.agent.post(lyric_url).set(headers).send(body);
 
     if (!res) {
       console.warn('Failed to get lyrics using post');
@@ -80,7 +74,9 @@ class Lyric extends LyricBase {
     }
 
     const items = res.body;
-    const lyric = items.map(item => Buffer.from(item.lyrics, 'base64')).join('\n');
+    const lyric = items
+      .map((item) => Buffer.from(item.lyrics, 'base64'))
+      .join('\n');
 
     return lyric;
   }
@@ -93,17 +89,27 @@ class Lyric extends LyricBase {
   }
 
   get_info_one(text, prefix, suffix) {
-    const result = this.find_string_by_prefix_suffix(text, prefix, suffix, false);
+    const result = this.find_string_by_prefix_suffix(
+      text,
+      prefix,
+      suffix,
+      false
+    );
     if (!result) {
       return '';
     }
-    return he.decode(result).trim();
+    return this.sanitize_html(result);
   }
 
   async find_info(url, html) {
     const prefix = '<div class="title-bar">';
     const suffix = '</div>';
-    const title_bar = this.find_string_by_prefix_suffix(html, prefix, suffix, true);
+    const title_bar = this.find_string_by_prefix_suffix(
+      html,
+      prefix,
+      suffix,
+      true
+    );
     if (title_bar) {
       this.title = this.get_info_one(title_bar, 'title-bar">', '<!-- ');
       this.artist = this.get_info_one(title_bar, '<!-- / ', '-->');
@@ -111,8 +117,16 @@ class Lyric extends LyricBase {
       console.warn('Failed to find title bar');
     }
 
-    this.lyricist = this.get_info_one(html, '<b>&#20316;&#35422;&#65306;</b>', '\t');
-    this.composer = this.get_info_one(html, '<b>&#20316;&#26354;&#65306;</b>', '\t');
+    this.lyricist = this.get_info_one(
+      html,
+      '<b>&#20316;&#35422;&#65306;</b>',
+      '\t'
+    );
+    this.composer = this.get_info_one(
+      html,
+      '<b>&#20316;&#26354;&#65306;</b>',
+      '\t'
+    );
   }
 
   async parse_page() {

@@ -1,5 +1,3 @@
-const rp = require('request-promise');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'animesongz';
@@ -57,7 +55,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const html = await rp(url);
+    const html = await this.get_html(url);
     await this.find_lyric(url, html);
     await this.find_info(url, html);
 

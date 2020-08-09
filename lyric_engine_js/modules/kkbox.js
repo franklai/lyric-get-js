@@ -1,5 +1,3 @@
-const rp = require('request-promise');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'kkbox';
@@ -9,7 +7,12 @@ class Lyric extends LyricBase {
     const prefix = "<script type='application/ld+json'>";
     const suffix = '</script>';
 
-    const json_ld = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    const json_ld = this.find_string_by_prefix_suffix(
+      html,
+      prefix,
+      suffix,
+      false
+    );
     return JSON.parse(json_ld);
   }
 
@@ -36,7 +39,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const html = await rp(url);
+    const html = await this.get_html(url);
     await this.find_lyric(url, html);
     await this.find_info(url, html);
 
@@ -49,7 +52,8 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'http://hoick.jp/mdb/detail/9920/%E3%81%AB%E3%81%98';
+    const url =
+      'https://www.kkbox.com/tw/tc/song/XgJ00.nUO65u2jgdu2jgd0XL-index.html';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);

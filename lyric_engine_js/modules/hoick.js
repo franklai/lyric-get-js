@@ -1,5 +1,3 @@
-const rp = require('request-promise');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'hoick';
@@ -14,7 +12,8 @@ class Lyric extends LyricBase {
     const id = this.find_id(url);
 
     const lyric_url = `https://hoick.jp/data.php?id=${id}&type=4`;
-    const lines = await rp({ uri: lyric_url, json: true });
+    const raw = await this.get_html(lyric_url);
+    const lines = JSON.parse(raw);
 
     lines.pop(); // last one is a number
 
@@ -26,11 +25,16 @@ class Lyric extends LyricBase {
   }
 
   async find_info(url) {
-    const html = await rp(url);
+    const html = await this.get_html(url);
 
     const prefix = '<meta property="og:description"';
     const suffix = '/>';
-    const og_desc = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    const og_desc = this.find_string_by_prefix_suffix(
+      html,
+      prefix,
+      suffix,
+      false
+    );
 
     const patterns = {
       title: 'content="(.*?)\\(詞:',

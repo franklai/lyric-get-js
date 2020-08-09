@@ -1,26 +1,18 @@
-const he = require('he');
-const rp = require('request-promise');
-const striptags = require('striptags');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'metrolyrics';
 
 class Lyric extends LyricBase {
   remove_noise(lyric) {
-    const items = [[
-      '<div id="mid-song-discussion"',
-      '<span class="label">See all</span>\n</a>\n</div>',
-    ], [
-      '<p class="writers">',
-      '</sd-lyricbody>',
-    ], [
-      '\n<!--WIDGET - RELATED-->',
-      '<!-- Second Section -->\n',
-    ], [
-      '\n<!--WIDGET - PHOTOS-->',
-      '<!-- Third Section -->\n',
-    ]];
+    const items = [
+      [
+        '<div id="mid-song-discussion"',
+        '<span class="label">See all</span>\n</a>\n</div>',
+      ],
+      ['<p class="writers">', '</sd-lyricbody>'],
+      ['\n<!--WIDGET - RELATED-->', '<!-- Second Section -->\n'],
+      ['\n<!--WIDGET - PHOTOS-->', '<!-- Third Section -->\n'],
+    ];
 
     let output = lyric;
     items.forEach(([prefix, suffix]) => {
@@ -47,10 +39,7 @@ class Lyric extends LyricBase {
 
     lyric = lyric.replace(/<br \/>/g, '\n');
     lyric = lyric.replace(/<p class='verse'>/g, '\n\n');
-
-    lyric = he.decode(lyric);
-    lyric = striptags(lyric);
-    lyric = lyric.trim();
+    lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
     return true;
@@ -68,7 +57,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const html = await rp(url);
+    const html = await this.get_html(url);
 
     await this.find_lyric(url, html);
     await this.find_info(url, html);
@@ -82,7 +71,8 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'http://www.metrolyrics.com/wherever-you-are-lyrics-one-ok-rock.html';
+    const url =
+      'http://www.metrolyrics.com/wherever-you-are-lyrics-one-ok-rock.html';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);

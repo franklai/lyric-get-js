@@ -11,7 +11,7 @@ class Lyric extends LyricBase {
   filter_ad(lyric) {
     const separator = '<br />';
     const lines = lyric.split(separator);
-    const filtered = lines.filter(line => line.indexOf('Mojim.com') === -1);
+    const filtered = lines.filter((line) => line.indexOf('Mojim.com') === -1);
     return filtered.join(separator);
   }
 
@@ -26,7 +26,12 @@ class Lyric extends LyricBase {
     const lyricPrefix = '<br /><br />';
 
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix, true);
-    let lyric = this.find_string_by_prefix_suffix(block, lyricPrefix, suffix, false);
+    let lyric = this.find_string_by_prefix_suffix(
+      block,
+      lyricPrefix,
+      suffix,
+      false
+    );
     lyric = this.filter_ad(lyric);
     lyric = this.filter_thank(lyric);
     lyric = lyric.replace(/<br \/>/g, '\n');
@@ -39,7 +44,12 @@ class Lyric extends LyricBase {
   async find_info(url, html) {
     const prefix = "<dl id='fsZx1'";
     const suffix = '</dl>';
-    const block = this.find_string_by_prefix_suffix(html, prefix, suffix, true).replace(/\n/g, '');
+    const block = this.find_string_by_prefix_suffix(
+      html,
+      prefix,
+      suffix,
+      true
+    ).replace(/\n/g, '');
 
     const keys = {
       lyricist: '作詞',

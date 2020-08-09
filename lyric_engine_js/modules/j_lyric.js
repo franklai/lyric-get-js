@@ -1,7 +1,3 @@
-const he = require('he');
-const rp = require('request-promise');
-const striptags = require('striptags');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'j-lyric.net';
@@ -18,9 +14,7 @@ class Lyric extends LyricBase {
     }
 
     lyric = lyric.replace(/<br>/g, '\n');
-    lyric = he.decode(lyric);
-    lyric = striptags(lyric);
-    lyric = lyric.trim();
+    lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
     return true;
@@ -40,7 +34,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const html = await rp(url);
+    const html = await this.get_html(url);
 
     await this.find_lyric(url, html);
     await this.find_info(url, html);

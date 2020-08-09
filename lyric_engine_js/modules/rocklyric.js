@@ -1,5 +1,3 @@
-const striptags = require('striptags');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'rocklyric';
@@ -11,8 +9,7 @@ class Lyric extends LyricBase {
 
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, true);
     lyric = lyric.replace(/\n/g, '').replace(/\r/g, '').replace(/<br>/g, '\n');
-    lyric = striptags(lyric);
-    lyric = lyric.trim();
+    lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
     return true;

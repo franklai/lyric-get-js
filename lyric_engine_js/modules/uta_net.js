@@ -1,7 +1,3 @@
-const rp = require('request-promise');
-const errors = require('request-promise/errors');
-const striptags = require('striptags');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'uta-net';
@@ -23,7 +19,7 @@ class Lyric extends LyricBase {
     }
 
     const song_url = `http://www.uta-net.com/user/phplib/svg/showkasi.php?ID=${song_id}`;
-    const raw = await rp(song_url);
+    const raw = await this.get_html(song_url);
     if (!raw) {
       console.warn('Failed to get content of url:', song_url);
       return false;
@@ -38,24 +34,14 @@ class Lyric extends LyricBase {
     }
 
     lyric = lyric.replace(/<\/text>/g, '\n');
-    lyric = striptags(lyric);
-    lyric = lyric.trim();
+    lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
     return true;
   }
 
   async find_info(url) {
-    // set encoding to null, to let response is Buffer, not String
-    let html = '';
-    try {
-      html = await rp(url);
-    } catch (err) {
-      if (err instanceof errors.StatusCodeError) {
-        throw 'StatusCodeError';
-      }
-      throw err;
-    }
+    const html = await this.get_html(url);
 
     const patterns = {
       title: '<h2[^>]*>([^<]+)</h2>',

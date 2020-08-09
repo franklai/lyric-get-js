@@ -1,5 +1,3 @@
-const rp = require('request-promise');
-
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'lyrical-nonsense';
@@ -9,13 +7,20 @@ class Lyric extends LyricBase {
     const prefix = '<script type="application/ld+json">';
     const suffix = '</script>';
     const json_lds = [];
-    const first_json_ld = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    const first_json_ld = this.find_string_by_prefix_suffix(
+      html,
+      prefix,
+      suffix,
+      false
+    );
     json_lds.push(first_json_ld);
 
     const pos = html.indexOf(first_json_ld);
     const after_first = html.substring(pos + first_json_ld.length);
 
-    json_lds.push(this.find_string_by_prefix_suffix(after_first, prefix, suffix, false));
+    json_lds.push(
+      this.find_string_by_prefix_suffix(after_first, prefix, suffix, false)
+    );
 
     return json_lds.map(JSON.parse);
   }
@@ -64,7 +69,12 @@ class Lyric extends LyricBase {
     const prefix = '"@type": "MusicComposition",';
     const suffix = '"Lyrics" : {';
 
-    const block = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    const block = this.find_string_by_prefix_suffix(
+      html,
+      prefix,
+      suffix,
+      false
+    );
     if (!block) {
       return;
     }
@@ -93,7 +103,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const html = await rp(url);
+    const html = await this.get_html(url);
     await this.find_lyric(url, html);
     await this.find_info(url, html);
 
@@ -106,7 +116,8 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'https://www.lyrical-nonsense.com/lyrics/minami-373/kawaki-wo-ameku/';
+    const url =
+      'https://www.lyrical-nonsense.com/lyrics/minami-373/kawaki-wo-ameku/';
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);
