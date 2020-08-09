@@ -1,3 +1,5 @@
+const Sentry = require('@sentry/node');
+
 const LyricBase = require('../include/lyric_base');
 
 const keyword = 'mojim';
@@ -50,6 +52,12 @@ class Lyric extends LyricBase {
       suffix,
       true
     ).replace(/\n/g, '');
+
+    Sentry.withScope((scope) => {
+      scope.setLevel('info');
+      scope.setExtra(block);
+      Sentry.captureMessage('Mojim.com info block');
+    });
 
     const keys = {
       lyricist: '作詞',
