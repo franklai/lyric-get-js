@@ -1,6 +1,5 @@
 const util = require('util');
 
-const axios = require('axios');
 const he = require('he');
 const iconv = require('iconv-lite');
 const striptags = require('striptags');
@@ -100,22 +99,17 @@ class LyricBase {
   }
 
   async get_html(url, options = {}) {
-    const { encoding = 'utf8' } = options;
+    const { encoding = 'utf-8' } = options;
     const headers = {
       'User-Agent': USER_AGENT,
     };
-    const responseType = encoding ? 'arraybuffer' : 'text';
 
-    const response = await axios.get(url, {
-      headers,
-      responseType,
-    });
-    let text = response.data;
-    if (encoding) {
-      text = iconv.decode(text, encoding);
-    }
+    const response = await superagent
+      .get(url)
+      .set(headers)
+      .responseType('arraybuffer');
 
-    return text;
+    return iconv.decode(response.body, encoding);
   }
 
   async post_form(url, body, options = {}) {

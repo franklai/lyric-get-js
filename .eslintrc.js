@@ -1,5 +1,5 @@
 module.exports = {
-  extends: 'airbnb-base',
+  extends: ['airbnb-base', 'prettier'],
   rules: {
     'class-methods-use-this': 'off',
     camelcase: 'off',

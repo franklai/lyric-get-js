@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server",
     "watch": "nodemon server",
-    "test": "jest --env=node",
+    "test": "jest",
     "lint": "npx eslint lyric_engine_js"
   },
   "license": "Apache",
@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@sentry/node": "^5.4.3",
-    "axios": "^0.19.2",
     "he": "^1.1.1",
     "iconv-lite": "^0.4.15",
     "mime-types": "^2.1.14",
@@ -26,9 +25,12 @@
   },
   "devDependencies": {
     "eslint": "^7.6.0",
-    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.17.2",
-    "jest": "^24.8.0"
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^24.8.0",
+    "prettier": "^2.0.5"
   },
   "prettier": {
     "trailingComma": "es5",
