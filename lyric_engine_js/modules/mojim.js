@@ -1,3 +1,4 @@
+const he = require('he');
 const Sentry = require('@sentry/node');
 
 const LyricBase = require('../include/lyric_base');
@@ -89,7 +90,8 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const html = await this.get_html(url);
+    const raw = await this.get_html(url);
+    const html = he.decode(raw);
 
     this.find_lyric(url, html);
     this.find_info(url, html);
