@@ -52,7 +52,8 @@
     btnSubmit.disabled = true;
   };
   var setError = function () {
-    var errMsg = '<span style="color: red;">Failed to get lyric. Please contact franklai.</span>';
+    var errMsg =
+      '<span style="color: red;">Failed to get lyric. Please contact franklai.</span>';
     setErrorMsg(errMsg);
     btnSubmit.disabled = false;
   };
@@ -69,6 +70,9 @@
     updateTextareaHeight(lyric);
   };
 
+  var getResult = function () {
+    return textareaLyric.value;
+  };
 
   links.forEach(function (link) {
     link.addEventListener('click', function (evt) {
@@ -84,31 +88,48 @@
     });
   });
 
+  var copyText = function () {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(getResult()).then(
+        function () {
+          console.log('successfully write text to clipboard');
+        },
+        function (err) {
+          console.log('failed;', err);
+        }
+      );
+      return;
+    }
+
+    if (
+      document.queryCommandSupported &&
+      document.queryCommandSupported('copy')
+    ) {
+      document.execCommand('copy');
+      return;
+    }
+  };
+
   var selectLyric = function () {
     textareaLyric.select();
   };
   $('select').addEventListener('click', function () {
     selectLyric();
   });
-  if (
-    document.queryCommandSupported &&
-    document.queryCommandSupported('copy')
-  ) {
-    var msg = q('.copied-msg');
 
-    $('copy').addEventListener('click', function () {
-      selectLyric();
-      document.execCommand('copy');
+  var msg = q('.copied-msg');
 
-      msg.classList.add('fadeout');
-    });
+  $('copy').addEventListener('click', function () {
+    selectLyric();
+    copyText();
 
-    msg.addEventListener('transitionend', function () {
-      msg.classList.remove('fadeout');
-    });
-  } else {
-    $('copy').disabled = true;
-  }
+    msg.classList.add('fadeout');
+  });
+
+  msg.addEventListener('transitionend', function () {
+    msg.classList.remove('fadeout');
+  });
+
   inputUrl.addEventListener('click', function () {
     inputUrl.select();
   });
@@ -195,4 +216,4 @@
     evt.preventDefault();
     doQuery();
   });
-}());
+})();
