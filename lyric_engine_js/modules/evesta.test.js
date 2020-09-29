@@ -18,7 +18,7 @@ async function testLyric(obj) {
 
 test('', async () => {
   await testLyric({
-    url: 'http://www.evesta.jp/lyric/artists/a10019/lyrics/l65161.html',
+    url: 'https://lyric.evesta.jp/l7c20b7s.html',
     title: 'Gift',
     artist: '坂本真綾',
     lyricist: '岩里 祐穂',
@@ -29,7 +29,7 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'http://www.evesta.jp/lyric/artists/a10019/lyrics/l65156.html',
+    url: 'https://lyric.evesta.jp/l7c20bcs.html',
     title: '紅茶',
     artist: '坂本真綾',
     lyricist: '坂本真綾',
