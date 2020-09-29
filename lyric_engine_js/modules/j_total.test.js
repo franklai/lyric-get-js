@@ -34,6 +34,6 @@ test('', async () => {
     artist: '秦基博',
     lyricist: '秦基博',
     composer: '秦基博',
-    length: 1267,
+    length: 1748,
   });
 });
