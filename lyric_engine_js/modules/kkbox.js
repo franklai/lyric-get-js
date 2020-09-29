@@ -4,11 +4,17 @@ const keyword = 'kkbox';
 
 class Lyric extends LyricBase {
   get_json_ld(html) {
-    const prefix = "<script type='application/ld+json'>";
+    const prefix = '<script type="application/ld+json">';
     const suffix = '</script>';
 
+    const pos = html.indexOf(prefix);
+    if (pos === -1) {
+      return null;
+    }
+    const second_part = html.substring(pos + 1);
+
     const json_ld = this.find_string_by_prefix_suffix(
-      html,
+      second_part,
       prefix,
       suffix,
       false
@@ -18,6 +24,9 @@ class Lyric extends LyricBase {
 
   find_lyric(url, html) {
     const json_ld = this.get_json_ld(html);
+    if (!json_ld) {
+      return false;
+    }
 
     let lyric = json_ld.recordingOf.lyrics.text;
     lyric = lyric.trim();
