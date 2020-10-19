@@ -43,7 +43,9 @@ class Lyric extends LyricBase {
   }
 
   find_lyric(url, html) {
-    const block = this.get_lyric_content_block(url, html);
+    const oneLine = html.replace(/[\r\n]/g, '');
+
+    const block = this.get_lyric_content_block(url, oneLine);
     if (!block) {
       console.error(`Failed to get content block of url ${url}`);
       return false;
@@ -116,8 +118,12 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url =
+    let url =
       'https://www.lyrical-nonsense.com/lyrics/minami-373/kawaki-wo-ameku/';
+    if (process.argv.length > 2) {
+      // eslint-disable-next-line prefer-destructuring
+      url = process.argv[2];
+    }
     const obj = new Lyric(url);
     const lyric = await obj.get();
     console.log(lyric);

@@ -19,7 +19,7 @@ test('', async () => {
     url: 'https://www.lyrical-nonsense.com/lyrics/aimer/i-beg-you/#Romaji',
     title: 'I beg you',
     artist: 'Aimer',
-    length: 1408,
+    length: 1412,
   });
 });
 
