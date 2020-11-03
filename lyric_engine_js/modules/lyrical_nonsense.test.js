@@ -16,10 +16,12 @@ async function testLyric(obj) {
 
 test('', async () => {
   await testLyric({
-    url: 'https://www.lyrical-nonsense.com/lyrics/aimer/i-beg-you/#Romaji',
-    title: 'I beg you',
-    artist: 'Aimer',
-    length: 1412,
+    url: 'https://www.lyrical-nonsense.com/lyrics/lisa/homura/#Romaji',
+    title: '炎',
+    artist: 'LiSA',
+    lyricist: '梶浦由記・LiSA',
+    composer: '梶浦由記',
+    length: 1019,
   });
 });
 
