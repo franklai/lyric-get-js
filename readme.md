@@ -1,3 +1,3 @@
-[![Build Status](https://travis-ci.org/franklai/lyric-get-js.svg?branch=master)](https://travis-ci.org/franklai/lyric-get-js)
+![CI Status](https://github.com/franklai/lyric-get-js/workflows/CI/badge.svg)
 
 Demo Site: https://franks543-lyric-get.azurewebsites.net/
