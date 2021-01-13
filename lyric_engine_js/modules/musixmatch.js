@@ -33,6 +33,8 @@ class Lyric extends LyricBase {
 
     const raw = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
     if (!raw) {
+      console.error(`Failed to get json content`);
+      console.error(html);
       return false;
     }
 
