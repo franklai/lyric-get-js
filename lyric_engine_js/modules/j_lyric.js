@@ -22,7 +22,7 @@ class Lyric extends LyricBase {
 
   async find_info(url, html) {
     const patterns = {
-      title: '<div class="cap"><h2>(.*?)歌詞</h2></div>',
+      title: '<div class="cap"><h2>「?(.*?)」?歌詞</h2></div>',
       artist: '<p class="sml">歌：(.*?)</p>',
       lyricist: '<p class="sml">作詞：(.*?)</p>',
       composer: '<p class="sml">作曲：(.*?)</p>',
