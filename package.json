@@ -11,7 +11,7 @@
   },
   "license": "Apache",
   "engines": {
-    "node": "^12.15.0"
+    "node": "^14.15.0"
   },
   "dependencies": {
     "@sentry/node": "^5.4.3",
