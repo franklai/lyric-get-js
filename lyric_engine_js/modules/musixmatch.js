@@ -1,4 +1,5 @@
 const LyricBase = require('../include/lyric_base');
+const BlockedError = require('../include/blocked_error');
 
 const keyword = 'musixmatch';
 
@@ -27,12 +28,19 @@ class Lyric extends LyricBase {
     return true;
   }
 
+  is_blocked(html) {
+    return html.indexOf('We detected that your IP is blocked');
+  }
+
   find_json(html) {
     const prefix = 'var __mxmState = ';
     const suffix = ';</script>';
 
     const raw = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
     if (!raw) {
+      if (this.is_blocked(html)) {
+        throw new BlockedError('musixmatch is blocked');
+      }
       console.error(`Failed to get json content`);
       console.error(html);
       return false;
