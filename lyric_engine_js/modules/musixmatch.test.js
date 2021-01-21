@@ -33,10 +33,9 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url:
-      'https://www.musixmatch.com/lyrics/Mariah-Carey-feat-Ne%E2%80%90Yo/Angels-Cry',
-    title: 'Angels Cry',
-    artist: 'Mariah Carey feat. Ne-Yo',
-    length: 1808,
+    url: 'https://www.musixmatch.com/lyrics/L-Arc-en-Ciel/Honey',
+    title: "Honey",
+    artist: "L'Arc-en-Ciel",
+    length: 433,
   });
 });
