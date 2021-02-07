@@ -14,22 +14,22 @@
     "node": "^14.15.0"
   },
   "dependencies": {
-    "@sentry/node": "^5.4.3",
-    "he": "^1.1.1",
+    "@sentry/node": "^6.1.0",
+    "he": "^1.2.0",
     "iconv-lite": "^0.6.2",
-    "mime-types": "^2.1.14",
-    "mz": "^2.6.0",
-    "striptags": "^3.0.1",
-    "superagent": "^6.0.0"
+    "mime-types": "^2.1.28",
+    "mz": "^2.7.0",
+    "striptags": "^3.1.1",
+    "superagent": "^6.1.0"
   },
   "devDependencies": {
-    "eslint": "^7.6.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-prettier": "^3.1.4",
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
     "jest": "^26.6.3",
-    "prettier": "^2.0.5"
+    "prettier": "^2.2.1"
   },
   "prettier": {
     "trailingComma": "es5",
