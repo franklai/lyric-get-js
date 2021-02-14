@@ -1,5 +1,5 @@
 const superagent = require('superagent');
-const LyricBase = require('../include/lyric_base');
+const LyricBase = require('../include/lyric-base');
 
 const keyword = 'petitlyrics';
 
@@ -73,7 +73,7 @@ class Lyric extends LyricBase {
       return false;
     }
 
-    const items = res.body;
+    const items = response.body;
     const lyric = items
       .map((item) => Buffer.from(item.lyrics, 'base64'))
       .join('\n');

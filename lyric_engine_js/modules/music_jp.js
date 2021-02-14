@@ -1,6 +1,6 @@
 const URL = require('url');
 
-const LyricBase = require('../include/lyric_base');
+const LyricBase = require('../include/lyric-base');
 
 const keyword = 'music-book.jp';
 

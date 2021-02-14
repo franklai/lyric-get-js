@@ -1,5 +1,5 @@
-const LyricBase = require('../include/lyric_base');
-const BlockedError = require('../include/blocked_error');
+const LyricBase = require('../include/lyric-base');
+const BlockedError = require('../include/blocked-error');
 
 const keyword = 'musixmatch';
 

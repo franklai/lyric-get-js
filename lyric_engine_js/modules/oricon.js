@@ -1,4 +1,4 @@
-const LyricBase = require('../include/lyric_base');
+const LyricBase = require('../include/lyric-base');
 
 const keyword = 'oricon';
 
