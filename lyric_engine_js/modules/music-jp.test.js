@@ -1,5 +1,5 @@
 /* global expect jest test */
-const { Lyric } = require('./music_jp');
+const { Lyric } = require('./music-jp');
 
 jest.setTimeout(40000); // 40 second timeout
 

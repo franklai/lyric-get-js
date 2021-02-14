@@ -7,7 +7,11 @@ class Lyric extends LyricBase {
     const pattern = /[a-z]+\/(\d+)/;
     const result = pattern.exec(url);
 
-    return result ? result[1] : null;
+    if (result) {
+      return result[1];
+    }
+
+    return;
   }
 
   async find_lyric(url) {

@@ -1,5 +1,5 @@
 /* global expect test */
-const { Lyric } = require('./lyrical_nonsense');
+const { Lyric } = require('./lyrical-nonsense');
 
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, arranger, length } = object;

@@ -22,7 +22,7 @@ class Lyric extends LyricBase {
       this.find_string_by_prefix_suffix(after_first, prefix, suffix, false)
     );
 
-    return json_lds.map(JSON.parse);
+    return json_lds.map((value) => JSON.parse(value));
   }
 
   get_hash(url) {

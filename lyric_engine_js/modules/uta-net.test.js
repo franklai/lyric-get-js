@@ -1,5 +1,5 @@
 /* global expect test */
-const { Lyric } = require('./j_lyric');
+const { Lyric } = require('./uta-net');
 
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, arranger, length } = object;
@@ -10,28 +10,27 @@ async function testLyric(object) {
   expect(inst.artist).toBe(artist);
   if (lyricist) expect(inst.lyricist).toBe(lyricist);
   if (composer) expect(inst.composer).toBe(composer);
-  if (arranger) expect(inst.arranger).toBe(arranger);
   if (length > 0) expect(inst.lyric.length).toBe(length);
 }
 
 test('', async () => {
   await testLyric({
-    url: 'http://j-lyric.net/artist/a002723/l001e83.html',
-    title: 'tune the rainbow',
-    artist: '坂本真綾',
-    lyricist: '岩里祐穂',
-    composer: '菅野よう子',
-    length: 447,
+    url: 'https://www.uta-net.com/song/231884/',
+    title: 'sh0ut',
+    artist: 'SawanoHiroyuki[nZk]:Tielle&Gemie',
+    lyricist: 'Hiroyuki Sawano・Tielle',
+    composer: 'Hiroyuki Sawano',
+    length: 1881,
   });
 });
 
 test('', async () => {
   await testLyric({
-    url: 'http://j-lyric.net/artist/a000673/l000bea.html',
-    title: '天体観測',
-    artist: 'BUMP OF CHICKEN',
-    lyricist: '藤原基央',
-    composer: '藤原基央',
-    length: 734,
+    url: 'https://www.uta-net.com/song/237845/',
+    title: '灰色と青 ( + 菅田将暉)',
+    artist: '米津玄師',
+    lyricist: '米津玄師',
+    composer: '米津玄師',
+    length: 629,
   });
 });

@@ -1,5 +1,5 @@
 /* global expect jest test */
-const { Lyric } = require('./j_total');
+const { Lyric } = require('./j-total');
 
 jest.setTimeout(20000); // 20 second timeout
 
