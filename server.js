@@ -1,8 +1,8 @@
+const fs = require('fs').promises;
 const http = require('http');
 const mime = require('mime-types');
 const url = require('url');
 const util = require('util');
-const fs = require('mz/fs');
 
 const Sentry = require('@sentry/node');
 

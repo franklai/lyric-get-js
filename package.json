@@ -18,7 +18,6 @@
     "he": "^1.2.0",
     "iconv-lite": "^0.6.2",
     "mime-types": "^2.1.28",
-    "mz": "^2.7.0",
     "striptags": "^3.1.1",
     "superagent": "^6.1.0"
   },

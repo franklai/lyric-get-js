@@ -1,7 +1,6 @@
+const fs = require('fs').promises;
 const path = require('path');
 const urlModule = require('url');
-
-const fs = require('mz/fs');
 
 // let site_dict = {};
 const site_array = [];
