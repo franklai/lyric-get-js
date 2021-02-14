@@ -9,7 +9,7 @@ class Lyric extends LyricBase {
 
     const pos = html.indexOf(prefix);
     if (pos === -1) {
-      return null;
+      return;
     }
     const second_part = html.slice(Math.max(0, pos + 1));
 

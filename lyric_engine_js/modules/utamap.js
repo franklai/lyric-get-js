@@ -1,5 +1,5 @@
 const tls = require('tls');
-const util = require('util');
+const { format } = require('util');
 
 const LyricBase = require('../include/lyric_base');
 
@@ -30,7 +30,7 @@ class Lyric extends LyricBase {
     for (const key of Object.keys(keys)) {
       const input_name = keys[key];
       patterns[key] = new RegExp(
-        util.format('<INPUT type="hidden" name=%s value="([^"]*)">', input_name)
+        format('<INPUT type="hidden" name=%s value="([^"]*)">', input_name)
       );
     }
 

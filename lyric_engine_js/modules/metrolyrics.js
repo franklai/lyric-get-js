@@ -15,12 +15,12 @@ class Lyric extends LyricBase {
     ];
 
     let output = lyric;
-    items.forEach(([prefix, suffix]) => {
+    for (const [prefix, suffix] of items) {
       const noise = this.find_string_by_prefix_suffix(lyric, prefix, suffix);
       if (noise) {
         output = output.replace(noise, '');
       }
-    });
+    }
 
     return output;
   }

@@ -34,8 +34,8 @@ class Lyric extends LyricBase {
     const site_url = 'https://petitlyrics.com';
     const js_url = `${site_url}${library_pl_js}`;
 
-    const res = await this.agent.get(js_url);
-    const js_raw = res.text;
+    const response = await this.agent.get(js_url);
+    const js_raw = response.text;
 
     if (!js_raw) {
       console.warn('Failed to get js content, url:', js_url);
@@ -66,9 +66,9 @@ class Lyric extends LyricBase {
     };
     const body = `lyrics_id=${song_id}`;
 
-    const res = await this.agent.post(lyric_url).set(headers).send(body);
+    const response = await this.agent.post(lyric_url).set(headers).send(body);
 
-    if (!res) {
+    if (!response) {
       console.warn('Failed to get lyrics using post');
       return false;
     }
@@ -130,12 +130,12 @@ class Lyric extends LyricBase {
   }
 
   async parse_page() {
-    const { url } = this;
-
     this.agent = superagent.agent();
 
-    const res = await this.agent.get(url);
-    const html = res.text;
+    const { agent, url } = this;
+
+    const response = await agent.get(url);
+    const html = response.text;
 
     await this.find_lyric(url, html);
     await this.find_info(url, html);
