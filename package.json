@@ -39,7 +39,13 @@
       "unicorn"
     ],
     "rules": {
-      "prettier/prettier": "error"
+      "prettier/prettier": "error",
+      "unicorn/prevent-abbreviations": [
+        "error",
+        {
+          "checkFilenames": false
+        }
+      ]
     }
   },
   "prettier": {
