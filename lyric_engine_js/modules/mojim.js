@@ -14,7 +14,7 @@ class Lyric extends LyricBase {
   filter_ad(lyric) {
     const separator = '<br />';
     const lines = lyric.split(separator);
-    const filtered = lines.filter((line) => line.indexOf('Mojim.com') === -1);
+    const filtered = lines.filter((line) => !line.includes('Mojim.com'));
     return filtered.join(separator);
   }
 
@@ -110,8 +110,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'https://mojim.com/twy105842x18x5.htm';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

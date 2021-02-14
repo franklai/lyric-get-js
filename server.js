@@ -2,7 +2,7 @@ const fs = require('fs').promises;
 const http = require('http');
 const mime = require('mime-types');
 const url = require('url');
-const util = require('util');
+const { format } = require('util');
 
 const Sentry = require('@sentry/node');
 
@@ -10,28 +10,27 @@ Sentry.init({
   dsn: 'https://a7fa45b215ae4cf68bb9320a075234d7@sentry.io/1263950',
 });
 
-
 const engine = require('./lyric_engine_js');
 
-function do_not_found(res) {
-  res.writeHead(404);
-  res.end();
+function do_not_found(response) {
+  response.writeHead(404);
+  response.end();
 }
 
 const port = process.env.PORT || 8866;
 console.log(`Listen to http://localhost:${port}`);
 
-const outputJson = (res, out) => {
-  const json_str = JSON.stringify(out);
-  res.writeHead(200, {
-    'Content-Length': Buffer.byteLength(json_str, 'utf8'),
+const outputJson = (response, out) => {
+  const json_string = JSON.stringify(out);
+  response.writeHead(200, {
+    'Content-Length': Buffer.byteLength(json_string, 'utf8'),
     'Content-Type': 'application/json',
   });
-  res.end(json_str);
+  response.end(json_string);
 };
 
-const handlerEror = (req, res, err, lyric_url) => {
-  console.error('err:', err);
+const handlerEror = (request, response, error, lyric_url) => {
+  console.error('err:', error);
 
   const out = {
     lyric: `Failed to find lyric of ${lyric_url}`,
@@ -39,30 +38,32 @@ const handlerEror = (req, res, err, lyric_url) => {
 
   let level = 'error';
   let domain = '';
-  if (err instanceof engine.SiteNotSupportError) {
+  if (error instanceof engine.SiteNotSupportError) {
     level = 'warning';
 
-    out.lyric = err.message;
-    domain = err.domain;  // eslint-disable-line
+    out.lyric = error.message;
+    domain = error.domain;
   }
 
   Sentry.withScope((scope) => {
     scope.setLevel(level);
-    scope.addEventProcessor(async event => Sentry.Handlers.parseRequest(event, req));
+    scope.addEventProcessor(async (event) =>
+      Sentry.Handlers.parseRequest(event, request)
+    );
     if (domain) {
       scope.setFingerprint(['site-not-support-error', domain]);
     }
-    Sentry.captureException(err);
+    Sentry.captureException(error);
   });
 
-  outputJson(res, out);
+  outputJson(response, out);
 };
 
 http
-  .createServer(async (req, res) => {
-    const req_obj = url.parse(req.url, true);
+  .createServer(async (request, response) => {
+    const request_object = url.parse(request.url, true);
 
-    let { pathname } = req_obj;
+    let { pathname } = request_object;
     if (pathname === '/') {
       pathname = '/index.html';
     } else if (pathname === '/former/') {
@@ -70,23 +71,24 @@ http
     }
 
     if (pathname === '/app' || pathname === '/json') {
-      if (!req_obj.query || !req_obj.query.url) {
+      const { query } = request_object;
+      if (!query || !query.url) {
         console.warn('in app, but no query');
-        return do_not_found(res);
+        return do_not_found(response);
       }
 
-      const lyric_url = req_obj.query.url;
+      const { url } = query;
 
       let out = {
-        lyric: `Failed to find lyric of ${lyric_url}`,
+        lyric: `Failed to find lyric of ${url}`,
       };
 
       if (pathname === '/app') {
         try {
           const lyric = await engine.get_full(lyric_url);
           out.lyric = lyric;
-        } catch (err) {
-          return handlerEror(req, res, err, lyric_url);
+        } catch (error) {
+          return handlerEror(request, response, error, lyric_url);
         }
       } else if (pathname === '/json') {
         try {
@@ -94,24 +96,24 @@ http
           if (json) {
             out = json;
           }
-        } catch (err) {
-          return handlerEror(req, res, err, lyric_url);
+        } catch (error) {
+          return handlerEror(request, response, error, lyric_url);
         }
       }
 
-      return outputJson(res, out);
+      return outputJson(response, out);
     }
 
-    const src = util.format('%s%s', 'public', pathname);
-    fs.readFile(src)
+    const source = format('%s%s', 'public', pathname);
+    fs.readFile(source)
       .then((data) => {
-        res.writeHead(200, {
+        response.writeHead(200, {
           'Content-Length': data.length,
           'Content-Type': mime.lookup(pathname) || 'application/octet-stream',
         });
-        res.end(data);
+        response.end(data);
       })
-      .catch(() => do_not_found(res));
+      .catch(() => do_not_found(response));
 
     return '';
   })

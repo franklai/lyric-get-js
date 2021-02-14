@@ -43,8 +43,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'https://lyric.evesta.jp/l7d0a18.html';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

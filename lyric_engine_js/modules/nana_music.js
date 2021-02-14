@@ -47,8 +47,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'https://en.nana-music.com/songs/36697';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

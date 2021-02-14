@@ -73,8 +73,8 @@ if (require.main === module) {
   (async () => {
     const url =
       'http://www.metrolyrics.com/wherever-you-are-lyrics-one-ok-rock.html';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

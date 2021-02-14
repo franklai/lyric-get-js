@@ -12,7 +12,7 @@ class Lyric extends LyricBase {
       return false;
     }
 
-    lyric = lyric.replace(/[\r\n]/g, '');
+    lyric = lyric.replace(/[\n\r]/g, '');
     lyric = lyric.replace(
       /<div class="roma" style="display: none;.*?<\/div>/g,
       ''
@@ -48,7 +48,7 @@ class Lyric extends LyricBase {
       composer: '<p>作曲：(.*?)</p>',
       arranger: '<p>編曲者：(.*?)</p>',
     };
-    const line = block.replace(/[\r\n]/g, '').replace(/\t+/g, ' ');
+    const line = block.replace(/[\n\r]/g, '').replace(/\t+/g, ' ');
     this.fill_song_info(line, patterns);
   }
 
@@ -69,8 +69,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'https://animesongz.com/lyric/5145/23706';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

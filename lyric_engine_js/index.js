@@ -18,34 +18,34 @@ const load_modules = async () => {
 
   try {
     files = await fs.readdir(path.join(__dirname, 'modules'));
-  } catch (err) {
-    console.error('Failed to load modules. err:', err);
+  } catch (error) {
+    console.error('Failed to load modules. err:', error);
     return;
   }
 
-  files.forEach((f) => {
-    const obj = path.parse(f);
-    if (obj.ext !== '.js') {
-      return;
+  for (const f of files) {
+    const object = path.parse(f);
+    if (object.ext !== '.js') {
+      continue;
     }
-    if (f.indexOf('.test.js') !== -1) {
-      return;
+    if (f.includes('.test.js')) {
+      continue;
     }
 
-    const obj_name = `./modules/${obj.name}`;
+    const object_name = `./modules/${object.name}`;
 
     // eslint-disable-next-line global-require, import/no-dynamic-require
-    site_array.push(require(obj_name));
-  });
+    site_array.push(require(object_name));
+  }
 };
 
-const get_obj = async (url) => {
+const get_object = async (url) => {
   await load_modules();
 
   let site;
 
   site_array.some((item) => {
-    if (url.indexOf(item.keyword) === -1) {
+    if (!url.includes(item.keyword)) {
       return false;
     }
 
@@ -58,25 +58,25 @@ const get_obj = async (url) => {
     throw new SiteNotSupportError(domain);
   }
 
-  const obj = new site.Lyric(url);
+  const object = new site.Lyric(url);
 
-  if (!await obj.parse_page()) {
+  if (!(await object.parse_page())) {
     throw 'Parse failed.';
   }
 
-  return obj;
+  return object;
 };
 
 const get_full = async (url) => {
-  const obj = await get_obj(url);
+  const object = await get_object(url);
 
-  return obj.get_full();
+  return object.get_full();
 };
 
 const get_json = async (url) => {
-  const obj = await get_obj(url);
+  const object = await get_object(url);
 
-  return obj.get_json();
+  return object.get_json();
 };
 
 exports.get_full = get_full;
@@ -92,7 +92,7 @@ async function main() {
 
   const lyric = await get_full(url);
 
-  console.log('lyric: ', lyric);
+  console.log('lyric:', lyric);
 }
 
 if (require.main === module) {

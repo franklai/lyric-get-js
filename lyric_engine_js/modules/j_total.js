@@ -13,7 +13,7 @@ class Lyric extends LyricBase {
       return false;
     }
 
-    lyric = lyric.replace(/ {4} +/g, '');
+    lyric = lyric.replace(/ {5,}/g, '');
     lyric = lyric.replace(/\r/g, '');
     lyric = lyric.replace(/\n/g, '');
     lyric = lyric.replace(/<br>/g, '\n');
@@ -27,8 +27,8 @@ class Lyric extends LyricBase {
     const prefix = '<font size="4" color="#FFFFFF">';
     const suffix = '<tr bgcolor="#CCCCCC">';
 
-    const info_str = this.find_string_by_prefix_suffix(html, prefix, suffix);
-    if (!info_str) {
+    const info_string = this.find_string_by_prefix_suffix(html, prefix, suffix);
+    if (!info_string) {
       return false;
     }
 
@@ -39,7 +39,7 @@ class Lyric extends LyricBase {
       composer: '曲：(.*?)<',
     };
 
-    this.fill_song_info(info_str, patterns);
+    this.fill_song_info(info_string, patterns);
 
     return true;
   }
@@ -48,8 +48,8 @@ class Lyric extends LyricBase {
     const prefix = '<div class="box2">';
     const suffix = '</div>';
 
-    const info_str = this.find_string_by_prefix_suffix(html, prefix, suffix);
-    if (!info_str) {
+    const info_string = this.find_string_by_prefix_suffix(html, prefix, suffix);
+    if (!info_string) {
       return false;
     }
 
@@ -60,7 +60,7 @@ class Lyric extends LyricBase {
       composer: '曲：(.*?)<',
     };
 
-    this.fill_song_info(info_str, patterns);
+    this.fill_song_info(info_string, patterns);
 
     return true;
   }
@@ -93,8 +93,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'http://music.j-total.net/data/003u/003_utada_hikaru/004.html';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

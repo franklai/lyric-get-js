@@ -2,23 +2,23 @@
 const { Lyric } = require('./musixmatch');
 const BlockedError = require('../include/blocked_error');
 
-async function testLyric(obj) {
-  const { url } = obj;
+async function testLyric(object) {
+  const { url, title, artist, lyricist, composer, arranger, length } = object;
   const inst = new Lyric(url);
   try {
     await inst.get();
-  } catch (e) {
-    if (e instanceof BlockedError) {
+  } catch (error) {
+    if (error instanceof BlockedError) {
       console.warn('Blocked by vendor');
       return;
     }
   }
 
-  expect(inst.title).toBe(obj.title);
-  expect(inst.artist).toBe(obj.artist);
-  if (obj.lyricist) expect(inst.lyricist).toBe(obj.lyricist);
-  if (obj.composer) expect(inst.composer).toBe(obj.composer);
-  if (obj.length) expect(inst.lyric.length).toBe(obj.length);
+  expect(inst.title).toBe(title);
+  expect(inst.artist).toBe(artist);
+  if (lyricist) expect(inst.lyricist).toBe(lyricist);
+  if (composer) expect(inst.composer).toBe(composer);
+  if (length > 0) expect(inst.lyric.length).toBe(length);
 }
 
 test('', async () => {
@@ -34,7 +34,7 @@ test('', async () => {
 test('', async () => {
   await testLyric({
     url: 'https://www.musixmatch.com/lyrics/L-Arc-en-Ciel/Honey',
-    title: "Honey",
+    title: 'Honey',
     artist: "L'Arc-en-Ciel",
     length: 433,
   });

@@ -16,7 +16,7 @@ class Lyric extends LyricBase {
     json_lds.push(first_json_ld);
 
     const pos = html.indexOf(first_json_ld);
-    const after_first = html.substring(pos + first_json_ld.length);
+    const after_first = html.slice(Math.max(0, pos + first_json_ld.length));
 
     json_lds.push(
       this.find_string_by_prefix_suffix(after_first, prefix, suffix, false)
@@ -91,8 +91,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'https://www.oricon.co.jp/prof/586696/lyrics/I235546/';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

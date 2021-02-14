@@ -49,8 +49,8 @@ if (require.main === module) {
   (async () => {
     const url = 'https://rocklyric.jp/lyric.php?sid=175043';
     // const url = 'https://rocklyric.jp/lyric.php?sid=172900';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

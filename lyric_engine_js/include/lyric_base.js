@@ -27,17 +27,17 @@ class LyricBase {
   }
 
   get_json() {
-    const obj = {
+    const object = {
       title: this.title || null,
       lyric: this.lyric || null,
     };
 
-    ATTR_LIST.forEach((attr) => {
-      const key = attr[0];
-      obj[key] = this[key] || null;
-    });
+    for (const attribute of ATTR_LIST) {
+      const key = attribute[0];
+      object[key] = this[key] || null;
+    }
 
-    return obj;
+    return object;
   }
 
   get_full() {
@@ -45,22 +45,20 @@ class LyricBase {
     const template = [];
 
     if (this.title) {
-      template.push(this.title);
-      template.push('');
+      template.push(this.title, '');
     }
 
-    ATTR_LIST.forEach((attr) => {
-      const key = attr[0];
-      const translate = attr[1];
+    for (const attribute of ATTR_LIST) {
+      const key = attribute[0];
+      const translate = attribute[1];
 
       if (this[key]) {
         template.push(util.format('%s：%s', translate, this[key]));
       }
-    });
+    }
 
     if (template.length > 2) {
-      template.push('');
-      template.push('');
+      template.push('', '');
     }
     template.push(this.lyric);
 
@@ -129,7 +127,7 @@ class LyricBase {
   }
 
   fill_song_info(content, patterns) {
-    Object.keys(patterns).forEach((key) => {
+    for (const key of Object.keys(patterns)) {
       const key_for_pattern = patterns[key];
 
       let value = this.get_first_group_by_pattern(content, key_for_pattern);
@@ -138,7 +136,7 @@ class LyricBase {
 
         this[key] = value;
       }
-    });
+    }
   }
 }
 

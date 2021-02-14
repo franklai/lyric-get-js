@@ -11,7 +11,7 @@ class Lyric extends LyricBase {
     if (pos === -1) {
       return null;
     }
-    const second_part = html.substring(pos + 1);
+    const second_part = html.slice(Math.max(0, pos + 1));
 
     const json_ld = this.find_string_by_prefix_suffix(
       second_part,
@@ -63,8 +63,8 @@ if (require.main === module) {
   (async () => {
     const url =
       'https://www.kkbox.com/tw/tc/song/XgJ00.nUO65u2jgdu2jgd0XL-index.html';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

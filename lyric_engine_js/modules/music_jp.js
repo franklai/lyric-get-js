@@ -21,7 +21,7 @@ class Lyric extends LyricBase {
     const url_object = URL.parse(url, true);
 
     const pos = url_object.pathname.lastIndexOf('/');
-    const pid = url_object.pathname.substr(pos + 1);
+    const pid = url_object.pathname.slice(pos + 1);
 
     const post_url = 'https://music-book.jp/music/MusicDetail/GetLyric';
     const body = {
@@ -63,16 +63,16 @@ class Lyric extends LyricBase {
     let html;
     try {
       html = await this.get_html(url);
-    } catch (err) {
+    } catch (error) {
       if (
-        err.response &&
-        err.response.body &&
-        err.response.body.indexOf('メンテナンス') >= 0
+        error.response &&
+        error.response.body &&
+        error.response.body.includes('メンテナンス')
       ) {
         this.lyric = '只今メンテナンス中です';
         return true;
       }
-      console.error(err);
+      console.error(error);
       return false;
     }
 
@@ -92,8 +92,8 @@ if (require.main === module) {
   (async () => {
     const url =
       'https://music-book.jp/music/Kashi/aaa6rh9s?artistname=%25e5%2580%2589%25e6%259c%25a8%25e9%25ba%25bb%25e8%25a1%25a3&title=%25e6%25b8%25a1%25e6%259c%2588%25e6%25a9%258b%2520%25ef%25bd%259e%25e5%2590%259b%2520%25e6%2583%25b3%25e3%2581%25b5%25ef%25bd%259e&packageName=%25e6%25b8%25a1%25e6%259c%2588%25e6%25a9%258b%2520%25ef%25bd%259e%25e5%2590%259b%2520%25e6%2583%25b3%25e3%2581%25b5%25ef%25bd%259e';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

@@ -73,8 +73,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'http://utaten.com/lyric/BUMP+OF+CHICKEN/beautiful+glider/';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

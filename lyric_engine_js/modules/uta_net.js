@@ -4,7 +4,7 @@ const keyword = 'uta-net';
 
 class Lyric extends LyricBase {
   find_song_id(url) {
-    const pattern = /[a-z]+\/([0-9]+)/;
+    const pattern = /[a-z]+\/(\d+)/;
     const result = pattern.exec(url);
 
     return result ? result[1] : null;
@@ -45,7 +45,8 @@ class Lyric extends LyricBase {
 
     const patterns = {
       title: '<h2[^>]*>([^<]+)</h2>',
-      artist: '歌手：<h[1-6].*?><a href="/artist/[0-9]+/".*?>(.+?)</a></h[1-6]>',
+      artist:
+        '歌手：<h[1-6].*?><a href="/artist/[0-9]+/".*?>(.+?)</a></h[1-6]>',
       lyricist: '作詞：<h4.*?>(.+?)</h4>',
       composer: '作曲：<h4.*?>(.+?)</h4>',
     };
@@ -69,8 +70,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'https://www.uta-net.com/song/216847/';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

@@ -16,7 +16,7 @@ class Lyric extends LyricBase {
     json_lds.push(first_json_ld);
 
     const pos = html.indexOf(first_json_ld);
-    const after_first = html.substring(pos + first_json_ld.length);
+    const after_first = html.slice(Math.max(0, pos + first_json_ld.length));
 
     json_lds.push(
       this.find_string_by_prefix_suffix(after_first, prefix, suffix, false)
@@ -28,7 +28,7 @@ class Lyric extends LyricBase {
   get_hash(url) {
     const my_url = new URL(url);
     if (my_url.hash[0] === '#') {
-      return my_url.hash.substring(1);
+      return my_url.hash.slice(1);
     }
     return '';
   }
@@ -43,7 +43,7 @@ class Lyric extends LyricBase {
   }
 
   find_lyric(url, html) {
-    const oneLine = html.replace(/[\r\n]/g, '');
+    const oneLine = html.replace(/[\n\r]/g, '');
 
     const block = this.get_lyric_content_block(url, oneLine);
     if (!block) {
@@ -88,7 +88,7 @@ class Lyric extends LyricBase {
       composer: '"composer".*?"name" : "(.+?)"',
     };
 
-    const line = block.replace(/[\r\n]/g, '');
+    const line = block.replace(/[\n\r]/g, '');
     this.fill_song_info(line, patterns);
 
     // some page does not have 曲名、歌手
@@ -124,8 +124,8 @@ if (require.main === module) {
       // eslint-disable-next-line prefer-destructuring
       url = process.argv[2];
     }
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

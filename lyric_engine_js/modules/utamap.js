@@ -27,12 +27,12 @@ class Lyric extends LyricBase {
     };
 
     const patterns = {};
-    Object.keys(keys).forEach((key) => {
+    for (const key of Object.keys(keys)) {
       const input_name = keys[key];
       patterns[key] = new RegExp(
         util.format('<INPUT type="hidden" name=%s value="([^"]*)">', input_name)
       );
-    });
+    }
 
     this.fill_song_info(html, patterns);
   }
@@ -58,8 +58,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'https://www.utamap.com/showkasi.php?surl=70380';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

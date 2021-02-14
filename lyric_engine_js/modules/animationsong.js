@@ -26,12 +26,12 @@ class Lyric extends LyricBase {
     const prefix = '<div class="kashidescription">';
     const suffix = '</div>';
 
-    let info_str = this.find_string_by_prefix_suffix(html, prefix, suffix);
-    if (!info_str) {
+    let info_string = this.find_string_by_prefix_suffix(html, prefix, suffix);
+    if (!info_string) {
       this.find_info_alt_ver(url, html);
       return false;
     }
-    info_str = info_str.replace(/\n/g, '');
+    info_string = info_string.replace(/\n/g, '');
 
     const patterns = {
       title: '<h1>(.*?)</h1>',
@@ -41,7 +41,7 @@ class Lyric extends LyricBase {
       arranger: '編曲：(.*?)<',
     };
 
-    this.fill_song_info(info_str, patterns);
+    this.fill_song_info(info_string, patterns);
 
     return true;
   }
@@ -76,8 +76,8 @@ if (require.main === module) {
   (async () => {
     // const alt_url = 'http://animationsong.com/archives/767560.html';
     const url = 'https://animationsong.com/archives/1803492.html';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

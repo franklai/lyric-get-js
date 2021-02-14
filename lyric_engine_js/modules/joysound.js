@@ -46,13 +46,13 @@ class Lyric extends LyricBase {
       composer: 'composer',
     };
 
-    Object.keys(patterns).forEach((key) => {
+    for (const key of Object.keys(patterns)) {
       const key_for_pattern = patterns[key];
 
       const value = json[key_for_pattern];
 
       this[key] = value;
-    });
+    }
   }
 
   async parse_page() {
@@ -74,8 +74,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'https://www.joysound.com/web/search/song/21599';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

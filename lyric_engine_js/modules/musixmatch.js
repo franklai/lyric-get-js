@@ -8,7 +8,7 @@ class Lyric extends LyricBase {
     try {
       const { body } = json.page.lyrics.lyrics;
       this.lyric = body;
-    } catch (err) {
+    } catch {
       console.error('json does not have lyrics body');
       return false;
     }
@@ -21,7 +21,7 @@ class Lyric extends LyricBase {
       const { track } = json.page;
       this.title = track.name;
       this.artist = track.artistName;
-    } catch (err) {
+    } catch {
       return false;
     }
 
@@ -68,8 +68,8 @@ if (require.main === module) {
   (async () => {
     const url =
       'https://www.musixmatch.com/lyrics/Shawn-Mendes/There-s-Nothing-Holdin-Me-Back';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

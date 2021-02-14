@@ -5,7 +5,7 @@ const keyword = 'petitlyrics';
 
 class Lyric extends LyricBase {
   find_song_id(html) {
-    const pattern = /lyrics_id:([0-9]+)/;
+    const pattern = /lyrics_id:(\d+)/;
     return this.get_first_group_by_pattern(html, pattern);
   }
 
@@ -25,14 +25,14 @@ class Lyric extends LyricBase {
 
   async get_csrf_token(html) {
     const pattern = /(\/lib\/pl-lib.js[^"]+)/;
-    const lib_pl_js = this.get_first_group_by_pattern(html, pattern);
-    if (!lib_pl_js) {
+    const library_pl_js = this.get_first_group_by_pattern(html, pattern);
+    if (!library_pl_js) {
       console.warn('Failed to get pl-lib.js url');
       return false;
     }
 
     const site_url = 'https://petitlyrics.com';
-    const js_url = `${site_url}${lib_pl_js}`;
+    const js_url = `${site_url}${library_pl_js}`;
 
     const res = await this.agent.get(js_url);
     const js_raw = res.text;
@@ -152,8 +152,8 @@ if (require.main === module) {
     //         const url = 'https://petitlyrics.com/lyrics/2640215';
     //         const url = 'https://petitlyrics.com/lyrics/2664168';
     const url = 'https://petitlyrics.com/lyrics/2664256';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

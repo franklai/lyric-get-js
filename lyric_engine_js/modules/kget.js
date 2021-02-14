@@ -26,7 +26,7 @@ class Lyric extends LyricBase {
 
     const prefix = '<table class="lyric-data">';
     const suffix = '</table>';
-    const table_str = this.find_string_by_prefix_suffix(
+    const table_string = this.find_string_by_prefix_suffix(
       html,
       prefix,
       suffix,
@@ -39,7 +39,7 @@ class Lyric extends LyricBase {
       composer: '>作曲</th><td>([^<]*)<br></td></tr>',
     };
 
-    this.fill_song_info(table_str, patterns);
+    this.fill_song_info(table_string, patterns);
 
     return true;
   }
@@ -62,8 +62,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'http://www.kget.jp/lyric/11066/';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

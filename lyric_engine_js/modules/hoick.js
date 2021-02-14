@@ -61,8 +61,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'http://hoick.jp/mdb/detail/9920/%E3%81%AB%E3%81%98';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }

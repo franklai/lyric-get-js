@@ -4,7 +4,7 @@ const keyword = 'kashinavi';
 
 class Lyric extends LyricBase {
   find_song_id(url) {
-    const pattern = /\?([0-9]+)/;
+    const pattern = /\?(\d+)/;
     return this.get_first_group_by_pattern(url, pattern);
   }
 
@@ -23,7 +23,7 @@ class Lyric extends LyricBase {
   async find_info(url, html) {
     const prefix = '<td valign=top align=center width=550>';
     const suffix = '<hr ';
-    const table_str = this.find_string_by_prefix_suffix(
+    const table_string = this.find_string_by_prefix_suffix(
       html,
       prefix,
       suffix,
@@ -37,7 +37,7 @@ class Lyric extends LyricBase {
       composer: '作曲\\s*：\\s*(.+)</.+>',
     };
 
-    this.fill_song_info(table_str, patterns);
+    this.fill_song_info(table_string, patterns);
   }
 
   async parse_page() {
@@ -58,8 +58,8 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     const url = 'https://kashinavi.com/song_view.html?77597';
-    const obj = new Lyric(url);
-    const lyric = await obj.get();
+    const object = new Lyric(url);
+    const lyric = await object.get();
     console.log(lyric);
   })();
 }
