@@ -34,7 +34,6 @@ const load_modules = async () => {
 
     const object_name = `./modules/${object.name}`;
 
-    // eslint-disable-next-line global-require, import/no-dynamic-require
     site_array.push(require(object_name));
   }
 };

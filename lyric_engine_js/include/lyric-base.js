@@ -1,4 +1,4 @@
-const util = require('util');
+const { format } = require('util');
 
 const he = require('he');
 const iconv = require('iconv-lite');
@@ -20,7 +20,7 @@ class LyricBase {
 
   async get() {
     if (!(await this.parse_page())) {
-      return null;
+      return;
     }
 
     return this.get_full();
@@ -28,13 +28,13 @@ class LyricBase {
 
   get_json() {
     const object = {
-      title: this.title || null,
-      lyric: this.lyric || null,
+      title: this.title,
+      lyric: this.lyric,
     };
 
     for (const attribute of ATTR_LIST) {
       const key = attribute[0];
-      object[key] = this[key] || null;
+      object[key] = this[key];
     }
 
     return object;
@@ -53,7 +53,7 @@ class LyricBase {
       const translate = attribute[1];
 
       if (this[key]) {
-        template.push(util.format('%s：%s', translate, this[key]));
+        template.push(format('%s：%s', translate, this[key]));
       }
     }
 
@@ -82,9 +82,9 @@ class LyricBase {
     }
 
     if (including === true) {
-      return input.substr(start, end - start + suffix.length);
+      return input.slice(start, end + suffix.length);
     }
-    return input.substr(start + prefix.length, end - start - prefix.length);
+    return input.slice(start + prefix.length, end);
   }
 
   get_first_group_by_pattern(input, pattern) {
@@ -93,7 +93,7 @@ class LyricBase {
     if (result && result.length >= 2) {
       return result[1];
     }
-    return null;
+    return;
   }
 
   async get_html(url, options = {}) {
