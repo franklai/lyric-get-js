@@ -29,8 +29,11 @@ const outputJson = (response, out) => {
   response.end(json_string);
 };
 
-const handlerEror = (request, response, error, lyric_url) => {
+const handleError = (request, response, error, lyric_url) => {
   console.error('err:', error);
+  if (error.response) {
+    console.error('response text:', response.text);
+  }
 
   const out = {
     lyric: `Failed to find lyric of ${lyric_url}`,
@@ -88,7 +91,7 @@ http
           const lyric = await engine.get_full(url);
           out.lyric = lyric;
         } catch (error) {
-          return handlerEror(request, response, error, url);
+          return handleError(request, response, error, url);
         }
       } else if (pathname === '/json') {
         try {
@@ -97,7 +100,7 @@ http
             out = json;
           }
         } catch (error) {
-          return handlerEror(request, response, error, url);
+          return handleError(request, response, error, url);
         }
       }
 
