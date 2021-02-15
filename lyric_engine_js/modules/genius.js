@@ -29,6 +29,7 @@ class Lyric extends LyricBase {
     }
     return body;
   }
+
   find_lyric(url, html) {
     let body = this.get_by_div_lyrics(html);
     if (!body) {
@@ -36,8 +37,9 @@ class Lyric extends LyricBase {
       body = this.get_by_lyrics_root(html);
     }
 
-    body = body.replace(new RegExp('<br/>', 'g'), '\n');
-    let lyric = this.sanitize_html(body);
+    let lyric = body;
+    lyric = lyric.replace(new RegExp('<br/>', 'g'), '\n');
+    lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
 

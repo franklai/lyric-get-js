@@ -20,7 +20,7 @@ class LyricBase {
 
   async get() {
     if (!(await this.parse_page())) {
-      return;
+      return null;
     }
 
     return this.get_full();
@@ -67,7 +67,7 @@ class LyricBase {
 
   async parse_page() {
     this.title = 'base class';
-    throw 'Implement this function!';
+    throw new Error('Implement this function!');
   }
 
   find_string_by_prefix_suffix(input, prefix, suffix, including = true) {
@@ -90,10 +90,12 @@ class LyricBase {
   get_first_group_by_pattern(input, pattern) {
     const regex = new RegExp(pattern);
     const result = regex.exec(input);
+    let value;
     if (result && result.length >= 2) {
-      return result[1];
+      // eslint-disable-next-line prefer-destructuring
+      value = result[1];
     }
-    return;
+    return value;
   }
 
   async get_html(url, options = {}) {

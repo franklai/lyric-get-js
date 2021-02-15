@@ -1,5 +1,6 @@
 /* global expect test */
 const { Lyric } = require('./genius');
+const BlockedError = require('../include/blocked-error');
 
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, length } = object;

@@ -11,7 +11,7 @@ class Lyric extends LyricBase {
       return result[1];
     }
 
-    return;
+    return null;
   }
 
   async find_lyric(url) {

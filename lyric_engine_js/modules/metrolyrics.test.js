@@ -10,6 +10,7 @@ async function testLyric(object) {
   expect(inst.artist).toBe(artist);
   if (lyricist) expect(inst.lyricist).toBe(lyricist);
   if (composer) expect(inst.composer).toBe(composer);
+  if (arranger) expect(inst.arranger).toBe(arranger);
   if (length > 0) expect(inst.lyric.length).toBe(length);
 }
 

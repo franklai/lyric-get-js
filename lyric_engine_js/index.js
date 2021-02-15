@@ -36,6 +36,7 @@ const load_modules = async () => {
 
     const object_name = `./modules/${object.name}`;
 
+    // eslint-disable-next-line import/no-dynamic-require, global-require
     site_array.push(require(object_name));
   }
 };
@@ -62,7 +63,7 @@ const get_object = async (url) => {
   const object = new site.Lyric(url);
 
   if (!(await object.parse_page())) {
-    throw 'Parse failed.';
+    throw new Error('Parse failed.');
   }
 
   return object;
