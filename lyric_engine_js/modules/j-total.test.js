@@ -18,7 +18,7 @@ async function testLyric(object) {
 
 test('', async () => {
   await testLyric({
-    url: 'http://music.j-total.net/data/013su/029_sukima_switch/004.html',
+    url: 'https://music.j-total.net/data/013su/029_sukima_switch/004.html',
     title: '奏（かなで）',
     artist: 'スキマスイッチ',
     lyricist: '常田真太郎・大橋卓弥',
@@ -29,7 +29,7 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'http://music.j-total.net/data/026ha/048_hata_motohiro/010.html',
+    url: 'https://music.j-total.net/data/026ha/048_hata_motohiro/010.html',
     title: '鱗(うろこ)',
     artist: '秦基博',
     lyricist: '秦基博',

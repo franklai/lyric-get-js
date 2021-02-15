@@ -48,7 +48,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'http://j-lyric.net/artist/a04cc4b/l020e9b.html';
+    const url = 'https://j-lyric.net/artist/a04cc4b/l020e9b.html';
     const object = new Lyric(url);
     const lyric = await object.get();
     console.log(lyric);

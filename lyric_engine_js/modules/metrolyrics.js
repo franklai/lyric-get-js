@@ -71,8 +71,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url =
-      'http://www.metrolyrics.com/wherever-you-are-lyrics-one-ok-rock.html';
+    const url = 'https://www.metrolyrics.com/clocks-lyrics-coldplay.html';
     const object = new Lyric(url);
     const lyric = await object.get();
     console.log(lyric);

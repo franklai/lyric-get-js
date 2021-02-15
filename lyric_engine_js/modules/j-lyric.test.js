@@ -16,7 +16,7 @@ async function testLyric(object) {
 
 test('', async () => {
   await testLyric({
-    url: 'http://j-lyric.net/artist/a002723/l001e83.html',
+    url: 'https://j-lyric.net/artist/a002723/l001e83.html',
     title: 'tune the rainbow',
     artist: '坂本真綾',
     lyricist: '岩里祐穂',
@@ -27,7 +27,7 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'http://j-lyric.net/artist/a000673/l000bea.html',
+    url: 'https://j-lyric.net/artist/a000673/l000bea.html',
     title: '天体観測',
     artist: 'BUMP OF CHICKEN',
     lyricist: '藤原基央',

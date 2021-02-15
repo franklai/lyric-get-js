@@ -74,7 +74,6 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    // const alt_url = 'http://animationsong.com/archives/767560.html';
     const url = 'https://animationsong.com/archives/1803492.html';
     const object = new Lyric(url);
     const lyric = await object.get();

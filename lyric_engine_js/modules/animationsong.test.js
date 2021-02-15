@@ -15,7 +15,7 @@ async function testLyric(object) {
 
 test('', async () => {
   await testLyric({
-    url: 'http://animationsong.com/archives/1803656.html',
+    url: 'https://animationsong.com/archives/1803656.html',
     title: 'gravityWall',
     artist: 'SawanoHiroyuki[nZk]:Tielle & Gemie',
     lyricist: '澤野弘之・Tielle',
@@ -26,7 +26,7 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'http://animationsong.com/archives/1804004.html',
+    url: 'https://animationsong.com/archives/1804004.html',
     title: '明日の君さえいればいい。',
     artist: 'ChouCho',
     lyricist: '松井洋平',

@@ -22,7 +22,7 @@ class Lyric extends LyricBase {
       return false;
     }
 
-    const song_url = `http://www.uta-net.com/user/phplib/svg/showkasi.php?ID=${song_id}`;
+    const song_url = `https://www.uta-net.com/user/phplib/svg/showkasi.php?ID=${song_id}`;
     const raw = await this.get_html(song_url);
     if (!raw) {
       console.warn('Failed to get content of url:', song_url);

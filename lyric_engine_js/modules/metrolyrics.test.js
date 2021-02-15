@@ -16,7 +16,7 @@ async function testLyric(object) {
 test('', async () => {
   await testLyric({
     url:
-      'http://www.metrolyrics.com/something-just-like-this-lyrics-coldplay.html',
+      'https://www.metrolyrics.com/something-just-like-this-lyrics-coldplay.html',
     title: 'Something Just Like This',
     artist: 'Coldplay',
     length: 1681,
@@ -25,7 +25,7 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'http://www.metrolyrics.com/red-lyrics-taylor-swift.html',
+    url: 'https://www.metrolyrics.com/red-lyrics-taylor-swift.html',
     title: 'Red',
     artist: 'Taylor Swift',
     length: 1540,

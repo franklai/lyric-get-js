@@ -92,7 +92,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'http://music.j-total.net/data/003u/003_utada_hikaru/004.html';
+    const url = 'https://music.j-total.net/data/003u/003_utada_hikaru/004.html';
     const object = new Lyric(url);
     const lyric = await object.get();
     console.log(lyric);
