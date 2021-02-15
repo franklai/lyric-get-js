@@ -85,19 +85,19 @@ http
 
       if (pathname === '/app') {
         try {
-          const lyric = await engine.get_full(lyric_url);
+          const lyric = await engine.get_full(url);
           out.lyric = lyric;
         } catch (error) {
-          return handlerEror(request, response, error, lyric_url);
+          return handlerEror(request, response, error, url);
         }
       } else if (pathname === '/json') {
         try {
-          const json = await engine.get_json(lyric_url);
+          const json = await engine.get_json(url);
           if (json) {
             out = json;
           }
         } catch (error) {
-          return handlerEror(request, response, error, lyric_url);
+          return handlerEror(request, response, error, url);
         }
       }
 
