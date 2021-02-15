@@ -102,12 +102,20 @@ class LyricBase {
       'User-Agent': USER_AGENT,
     };
 
-    const response = await superagent
-      .get(url)
-      .set(headers)
-      .responseType('arraybuffer');
+    try {
+      const response = await superagent
+        .get(url)
+        .set(headers)
+        .responseType('arraybuffer');
 
-    return iconv.decode(response.body, encoding);
+      return iconv.decode(response.body, encoding);
+    } catch (error) {
+      if (error.status === 403) {
+        console.error(`Failed to request ${url}. Response code 403`);
+        console.error(iconv.decode(response.body, encoding));
+      }
+      throw error;
+    }
   }
 
   async post_form(url, body, options = {}) {
