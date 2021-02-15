@@ -15,18 +15,18 @@ async function testLyric(object) {
 
 test('', async () => {
   await testLyric({
-    url: 'https://www.azlyrics.com/lyrics/coldplay/adventureofalifetime.html',
-    title: 'Adventure Of A Lifetime',
+    url: 'https://genius.com/Coldplay-adventure-of-a-lifetime-lyrics',
+    title: 'Adventure of a Lifetime',
     artist: 'Coldplay',
-    length: 1154,
+    length: 1400,
   });
 });
 
-test('', async () => {
-  await testLyric({
-    url: 'https://www.azlyrics.com/lyrics/gunsnroses/sweetchildomine.html',
-    title: "Sweet Child O' Mine",
-    artist: "Guns N' Roses",
-    length: 1056,
-  });
-});
+// test('', async () => {
+//   await testLyric({
+//     url: 'https://genius.com/Guns-n-roses-sweet-child-o-mine-lyrics',
+//     title: "Sweet Child O’ Mine",
+//     artist: "Guns N’ Roses",
+//     length: 1,
+//   });
+// });

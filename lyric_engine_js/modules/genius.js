@@ -1,14 +1,42 @@
 const LyricBase = require('../include/lyric-base');
 
-const keyword = 'azlyrics';
+const keyword = 'genius';
 
 class Lyric extends LyricBase {
-  find_lyric(url, html) {
-    const prefix = '<!-- Usage of azlyrics.com content';
+  get_by_div_lyrics(html) {
+    const prefix = '<div class="lyrics">';
     const suffix = '</div>';
 
-    let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix);
-    lyric = this.sanitize_html(lyric);
+    return this.find_string_by_prefix_suffix(html, prefix, suffix);
+  }
+
+  get_by_lyrics_root(html) {
+    const prefix = ' Lyrics__Root';
+    const suffix = '<div class="SectionLeaderboard';
+
+    let body = this.find_string_by_prefix_suffix(html, prefix, suffix);
+    if (body) {
+      // remove prefix and suffix
+      body = body.replace(new RegExp(`${prefix}.*?>`, 'g'), '');
+      body = body.replace(new RegExp(suffix, 'g'), '');
+
+      // add newline for ad block
+      body = body.replace(
+        new RegExp('<div class="SidebarAd__Container', 'g'),
+        '<br/><div class="'
+      );
+    }
+    return body;
+  }
+  find_lyric(url, html) {
+    let body = this.get_by_div_lyrics(html);
+    if (!body) {
+      console.log('Failed to get content from .lyrics, try Lyrics__Root');
+      body = this.get_by_lyrics_root(html);
+    }
+
+    body = body.replace(new RegExp('<br/>', 'g'), '\n');
+    let lyric = this.sanitize_html(body);
 
     this.lyric = lyric;
 
@@ -17,8 +45,8 @@ class Lyric extends LyricBase {
 
   find_info(url, html) {
     const patterns = {
-      title: 'SongName = "(.*?)"',
-      artist: 'ArtistName = "(.*?)"',
+      title: '<meta content=".*? – (.*?)" property="twitter:title" />',
+      artist: '<meta content="(.*?) – .*?" property="twitter:title" />',
     };
 
     this.fill_song_info(html, patterns);
@@ -41,7 +69,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'https://www.azlyrics.com/lyrics/coldplay/upup.html';
+    const url = 'https://genius.com/Guns-n-roses-sweet-child-o-mine-lyrics';
     const object = new Lyric(url);
     const lyric = await object.get();
     console.log(lyric);
