@@ -102,17 +102,12 @@ class LyricBase {
       'User-Agent': USER_AGENT,
     };
 
-    try {
-      const response = await superagent
-        .get(url)
-        .set(headers)
-        .responseType('arraybuffer');
+    const response = await superagent
+      .get(url)
+      .set(headers)
+      .responseType('arraybuffer');
 
-      return iconv.decode(response.body, encoding);
-    } catch (error) {
-      console.error(`request to url ${url} failed. error: ${error}`);
-      throw error;
-    }
+    return iconv.decode(response.body, encoding);
   }
 
   async post_form(url, body, options = {}) {
