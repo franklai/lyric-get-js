@@ -112,7 +112,7 @@ class LyricBase {
     } catch (error) {
       if (error.status === 403) {
         console.error(`Failed to request ${url}. Response code 403`);
-        console.error(iconv.decode(response.body, encoding));
+        console.error(iconv.decode(error.response.body, encoding));
       }
       throw error;
     }
