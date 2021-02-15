@@ -19,10 +19,7 @@ class LyricBase {
   }
 
   async get() {
-    if (!(await this.parse_page())) {
-      return null;
-    }
-
+    await this.parse_page();
     return this.get_full();
   }
 

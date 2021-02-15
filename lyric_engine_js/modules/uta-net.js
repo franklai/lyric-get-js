@@ -5,13 +5,7 @@ const keyword = 'uta-net';
 class Lyric extends LyricBase {
   find_song_id(url) {
     const pattern = /[a-z]+\/(\d+)/;
-    const result = pattern.exec(url);
-
-    if (result) {
-      return result[1];
-    }
-
-    return null;
+    return this.get_first_group_by_pattern(url, pattern);
   }
 
   async find_lyric(url) {
