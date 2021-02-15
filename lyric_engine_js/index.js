@@ -2,6 +2,8 @@ const fs = require('fs').promises;
 const path = require('path');
 const urlModule = require('url');
 
+const BlockedError = require('./include/blocked-error');
+
 // let site_dict = {};
 const site_array = [];
 
@@ -81,6 +83,7 @@ const get_json = async (url) => {
 exports.get_full = get_full;
 exports.get_json = get_json;
 exports.SiteNotSupportError = SiteNotSupportError;
+exports.BlockedError = BlockedError;
 
 async function main() {
   let url = 'http://www.utamap.com/showkasi.php?surl=70380';

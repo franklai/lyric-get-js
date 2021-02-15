@@ -1,4 +1,5 @@
 const LyricBase = require('../include/lyric-base');
+const BlockedError = require('../include/blocked-error');
 
 const keyword = 'genius';
 
@@ -56,9 +57,15 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const html = await this.get_html(url);
-    this.find_lyric(url, html);
-    this.find_info(url, html);
+    try {
+      const html = await this.get_html(url);
+      this.find_lyric(url, html);
+      this.find_info(url, html);
+    } catch (error) {
+      if (error.status === 403) {
+        throw new BlockedError('genius is blocked');
+      }
+    }
 
     return true;
   }

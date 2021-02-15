@@ -9,8 +9,8 @@ async function testLyric(object) {
   try {
     await inst.get();
   } catch (error) {
-    if (process.env.GITHUB_ACTIONS) {
-      console.error(error);
+    if (error instanceof BlockedError) {
+      console.warn('Blocked by vendor');
       return;
     }
   }

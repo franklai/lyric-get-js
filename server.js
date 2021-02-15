@@ -31,9 +31,6 @@ const outputJson = (response, out) => {
 
 const handleError = (request, response, error, lyric_url) => {
   console.error('err:', error);
-  if (error.response) {
-    console.error('response text:', response.text);
-  }
 
   const out = {
     lyric: `Failed to find lyric of ${lyric_url}`,
@@ -46,6 +43,10 @@ const handleError = (request, response, error, lyric_url) => {
 
     out.lyric = error.message;
     domain = error.domain;
+  }
+  if (error instanceof engine.BlockedError) {
+    level = 'warning';
+    out.lyric = `Failed to get lyric of ${lyric_url}. Blocked by vendor.`;
   }
 
   Sentry.withScope((scope) => {
