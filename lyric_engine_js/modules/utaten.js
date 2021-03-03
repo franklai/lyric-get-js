@@ -36,7 +36,7 @@ class Lyric extends LyricBase {
 
     this.fill_song_info(content, patterns);
 
-    prefix = '<dl class="lyricWork">';
+    prefix = '<dl class="newLyricWork">';
     suffix = '</dl>';
     content = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
     if (!content) {
