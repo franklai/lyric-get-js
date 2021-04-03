@@ -43,8 +43,7 @@ class Lyric extends LyricBase {
 
     const patterns = {
       title: '<h2[^>]*>([^<]+)</h2>',
-      artist:
-        '<a href="/artist/[0-9]+/".*?itemprop="byArtist".*?>(.+?)</a>',
+      artist: '<a href="/artist/[0-9]+/".*?itemprop="byArtist".*?>(.+?)</a>',
       lyricist: '作詞：<a.*?itemprop="lyricist".*?>(.+?)</a>',
       composer: '作曲：<a.*?itemprop="composer".*?>(.+?)</a>',
     };
