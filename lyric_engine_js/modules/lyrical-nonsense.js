@@ -37,7 +37,7 @@ class Lyric extends LyricBase {
     const hash = this.get_hash(url) || 'Lyrics';
 
     const prefix = `<div class="contents" id="${hash}">`;
-    const suffix = '</p><br /></div>';
+    const suffix = '</p><br/></div>';
 
     return this.find_string_by_prefix_suffix(html, prefix, suffix);
   }
@@ -59,7 +59,7 @@ class Lyric extends LyricBase {
     }
 
     lyric = lyric.replace(/<\/p>/g, '\n');
-    lyric = lyric.replace(/<br \/> ?/g, '\n');
+    lyric = lyric.replace(/<br\/> ?/g, '\n');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
