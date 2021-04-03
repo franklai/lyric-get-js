@@ -4,11 +4,12 @@ const keyword = 'utaten';
 
 class Lyric extends LyricBase {
   async find_lyric(url, html) {
-    const prefix = '<div class="lyricBody">';
+    const prefix = '<div class="lyricBody';
     const suffix = '</div>';
 
-    let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix);
     if (!lyric) {
+      console.error(`Failed to find lyric block of url: ${url}`);
       return false;
     }
 
