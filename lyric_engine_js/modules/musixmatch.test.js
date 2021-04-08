@@ -34,9 +34,9 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'https://www.musixmatch.com/lyrics/L-Arc-en-Ciel/Honey',
-    title: 'Honey',
-    artist: "L'Arc-en-Ciel",
-    length: 433,
+    url: 'https://www.musixmatch.com/lyrics/Hollow-Coves/Coastline',
+    title: 'Coastline',
+    artist: "Hollow Coves",
+    length: 983,
   });
 });
