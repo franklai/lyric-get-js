@@ -36,7 +36,7 @@ test('', async () => {
   await testLyric({
     url: 'https://www.musixmatch.com/lyrics/Hollow-Coves/Coastline',
     title: 'Coastline',
-    artist: "Hollow Coves",
+    artist: 'Hollow Coves',
     length: 983,
   });
 });
