@@ -36,8 +36,15 @@ class Lyric extends LyricBase {
   get_lyric_content_block(url, html) {
     const hash = this.get_hash(url) || 'Lyrics';
 
-    const prefix = `<div class="contents" id="${hash}">`;
+    let prefix = `<div class="contents" id="${hash}">`;
     const suffix = '</p><br/></div>';
+
+    const block = this.find_string_by_prefix_suffix(html, prefix, suffix);
+    if (block) {
+      return block;
+    }
+
+    prefix = `<div class="contents subcontents" id="${hash}">`;
 
     return this.find_string_by_prefix_suffix(html, prefix, suffix);
   }
@@ -84,20 +91,20 @@ class Lyric extends LyricBase {
     const patterns = {
       title: '"name" : "(.+?)",',
       artist: '"byArtist".*?"name" : "(.+?)",',
-      lyricist: '"lyricist".*?"name" : "(.+?)"',
-      composer: '"composer".*?"name" : "(.+?)"',
+      lyricist: '"lyricist".*?"name" : "(.*?)"',
+      composer: '"composer".*?"name" : "(.*?)"',
     };
 
     const line = block.replace(/[\n\r]/g, '');
     this.fill_song_info(line, patterns);
 
-    // some page does not have 曲名、歌手
-    if (!this.title) {
-      const pattern = { title: '<h1>(.*?)</h1>' };
+    // composer and lyricist may be empty in LD JSON
+    if (!this.lyricist) {
+      const pattern = { lyricist: '<dt>作詞：</dt><dd>(.*?)</dd>' };
       this.fill_song_info(html, pattern);
     }
-    if (!this.artist) {
-      const pattern = { artist: '<div class="artistcontainer">(.*?)</h2>' };
+    if (!this.composer) {
+      const pattern = { composer: '<dt>作曲：</dt><dd>(.*?)</dd>' };
       this.fill_song_info(html, pattern);
     }
   }
