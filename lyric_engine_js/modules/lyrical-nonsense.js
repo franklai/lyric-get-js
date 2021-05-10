@@ -34,7 +34,7 @@ class Lyric extends LyricBase {
   }
 
   get_lyric_content_block(url, html) {
-    const hash = this.get_hash(url) || 'Lyrics';
+    const hash = this.get_hash(url) || 'Original';
 
     let prefix = `<div class="contents" id="${hash}">`;
     const suffix = '</p><br/></div>';
