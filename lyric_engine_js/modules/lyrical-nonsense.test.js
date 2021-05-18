@@ -40,7 +40,8 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'https://www.lyrical-nonsense.com/global/lyrics/kenshi-yonezu/lemon/#Espanol',
+    url:
+      'https://www.lyrical-nonsense.com/global/lyrics/kenshi-yonezu/lemon/#Espanol',
     title: 'Lemon',
     artist: 'Kenshi Yonezu',
     length: 1665,
