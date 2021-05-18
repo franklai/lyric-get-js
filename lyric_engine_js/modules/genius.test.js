@@ -27,7 +27,7 @@ test('', async () => {
     url: 'https://genius.com/Coldplay-adventure-of-a-lifetime-lyrics',
     title: 'Adventure of a Lifetime',
     artist: 'Coldplay',
-    length: 1400,
+    length: 1405,
   });
 });
 
