@@ -18,8 +18,8 @@ async function testLyric(object) {
 
 test('', async () => {
   await testLyric({
-    url: 'https://www.lyrical-nonsense.com/lyrics/lisa/homura/#Romaji',
-    title: '炎',
+    url: 'https://www.lyrical-nonsense.com/global/lyrics/lisa/homura/#Romaji',
+    title: 'Homura',
     artist: 'LiSA',
     lyricist: '梶浦由記・LiSA',
     composer: '梶浦由記',
@@ -40,9 +40,9 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'https://www.lyrical-nonsense.com/lyrics/kenshi-yonezu/lemon/#Espanol',
+    url: 'https://www.lyrical-nonsense.com/global/lyrics/kenshi-yonezu/lemon/#Espanol',
     title: 'Lemon',
-    artist: '米津玄師',
+    artist: 'Kenshi Yonezu',
     length: 1665,
   });
 });
