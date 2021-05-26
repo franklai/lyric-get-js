@@ -28,7 +28,7 @@ test('', async () => {
       'https://www.musixmatch.com/lyrics/SawanoHiroyuki-nZk-Tielle-Gemie/sh0ut',
     title: 'sh0ut',
     artist: 'SawanoHiroyuki[nZk]:Tielle&Gemie',
-    length: 1719,
+    length: 1957,
   });
 });
 
