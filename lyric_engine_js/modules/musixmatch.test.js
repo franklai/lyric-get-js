@@ -24,8 +24,7 @@ async function testLyric(object) {
 
 test('', async () => {
   await testLyric({
-    url:
-      'https://www.musixmatch.com/lyrics/SawanoHiroyuki-nZk-Tielle-Gemie/sh0ut',
+    url: 'https://www.musixmatch.com/lyrics/SawanoHiroyuki-nZk-Tielle-Gemie/sh0ut',
     title: 'sh0ut',
     artist: 'SawanoHiroyuki[nZk]:Tielle&Gemie',
     length: 1957,

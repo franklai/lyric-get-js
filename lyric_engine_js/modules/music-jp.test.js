@@ -1,7 +1,7 @@
 /* global expect jest test */
 const { Lyric } = require('./music-jp');
 
-jest.setTimeout(40000); // 40 second timeout
+jest.setTimeout(50_000); // 50 second timeout
 
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, arranger, length } = object;
@@ -18,8 +18,7 @@ async function testLyric(object) {
 
 test('', async () => {
   await testLyric({
-    url:
-      'https://music-book.jp/music/Kashi/aaa1fw1p?artistname=miwa&title=%25e3%2583%2592%25e3%2582%25ab%25e3%2583%25aa%25e3%2583%2598&packageName=%25e3%2583%2592%25e3%2582%25ab%25e3%2583%25aa%25e3%2583%2598',
+    url: 'https://music-book.jp/music/Kashi/aaa1fw1p?artistname=miwa&title=%25e3%2583%2592%25e3%2582%25ab%25e3%2583%25aa%25e3%2583%2598&packageName=%25e3%2583%2592%25e3%2582%25ab%25e3%2583%25aa%25e3%2583%2598',
     title: 'ヒカリヘ',
     artist: 'miwa',
     lyricist: 'miwa',
@@ -30,8 +29,7 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url:
-      'https://music-book.jp/music/Kashi/aaa1pa8u?artistname=%25e8%2597%258d%25e4%25ba%2595%25e3%2582%25a8%25e3%2582%25a4%25e3%2583%25ab&title=INNOCENCE&packageName=INNOCENCE',
+    url: 'https://music-book.jp/music/Kashi/aaa1pa8u?artistname=%25e8%2597%258d%25e4%25ba%2595%25e3%2582%25a8%25e3%2582%25a4%25e3%2583%25ab&title=INNOCENCE&packageName=INNOCENCE',
     title: 'INNOCENCE',
     artist: '藍井エイル',
     lyricist: 'Eir/Ryosuke Shigenaga',

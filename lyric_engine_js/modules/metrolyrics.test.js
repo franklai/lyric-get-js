@@ -16,8 +16,7 @@ async function testLyric(object) {
 
 test('', async () => {
   await testLyric({
-    url:
-      'https://www.metrolyrics.com/something-just-like-this-lyrics-coldplay.html',
+    url: 'https://www.metrolyrics.com/something-just-like-this-lyrics-coldplay.html',
     title: 'Something Just Like This',
     artist: 'Coldplay',
     length: 1681,

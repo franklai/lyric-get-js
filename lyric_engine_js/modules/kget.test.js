@@ -1,7 +1,7 @@
 /* global expect jest test */
 const { Lyric } = require('./kget');
 
-jest.setTimeout(30000); // 30 second timeout
+jest.setTimeout(30_000); // 30 second timeout
 
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, arranger, length } = object;

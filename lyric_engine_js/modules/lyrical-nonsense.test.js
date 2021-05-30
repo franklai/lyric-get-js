@@ -1,7 +1,7 @@
 /* global expect jest test */
 const { Lyric } = require('./lyrical-nonsense');
 
-jest.setTimeout(20000); // 20 second timeout
+jest.setTimeout(20_000); // 20 second timeout
 
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, arranger, length } = object;
@@ -40,8 +40,7 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url:
-      'https://www.lyrical-nonsense.com/global/lyrics/kenshi-yonezu/lemon/#Espanol',
+    url: 'https://www.lyrical-nonsense.com/global/lyrics/kenshi-yonezu/lemon/#Espanol',
     title: 'Lemon',
     artist: 'Kenshi Yonezu',
     length: 1665,

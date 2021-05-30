@@ -26,7 +26,8 @@ class Lyric extends LyricBase {
   }
 
   get_artist_name(html) {
-    const pattern = /<div class="headline3"><a href=".*?ArtistTop.php\?artist=.+?">(.+?)<\/a>/;
+    const pattern =
+      /<div class="headline3"><a href=".*?ArtistTop.php\?artist=.+?">(.+?)<\/a>/;
     return this.get_first_group_by_pattern(html, pattern);
   }
 
@@ -67,11 +68,9 @@ class Lyric extends LyricBase {
       this.composer = first_json.composer.name;
     }
 
-    if (second_json.name) {
-      this.artist = second_json.name;
-    } else {
-      this.artist = this.get_artist_name(html);
-    }
+    this.artist = second_json.name
+      ? second_json.name
+      : this.get_artist_name(html);
   }
 
   async parse_page() {
