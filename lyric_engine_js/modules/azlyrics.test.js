@@ -31,12 +31,3 @@ test('', async () => {
     length: 1154,
   });
 });
-
-test('', async () => {
-  await testLyric({
-    url: 'https://www.azlyrics.com/lyrics/gunsnroses/sweetchildomine.html',
-    title: "Sweet Child O' Mine",
-    artist: "Guns N' Roses",
-    length: 1056,
-  });
-});
