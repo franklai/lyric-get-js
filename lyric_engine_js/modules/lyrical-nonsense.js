@@ -76,7 +76,7 @@ class Lyric extends LyricBase {
 
   find_info(url, html) {
     const prefix = '"@type": "MusicComposition",';
-    const suffix = '"Lyrics" : {';
+    const suffix = '"Lyrics" :';
 
     const block = this.find_string_by_prefix_suffix(
       html,
