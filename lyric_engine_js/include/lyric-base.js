@@ -1,6 +1,6 @@
 const { format } = require('util');
 
-const he = require('he');
+const { decode } = require('html-entities');
 const iconv = require('iconv-lite');
 const striptags = require('striptags');
 const superagent = require('superagent');
@@ -130,7 +130,7 @@ class LyricBase {
   }
 
   sanitize_html(value) {
-    return striptags(he.decode(value)).trim();
+    return striptags(decode(value)).trim();
   }
 
   fill_song_info(content, patterns) {
