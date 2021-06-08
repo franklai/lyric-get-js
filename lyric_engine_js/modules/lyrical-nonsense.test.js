@@ -21,8 +21,8 @@ test('', async () => {
     url: 'https://www.lyrical-nonsense.com/global/lyrics/lisa/homura/#Romaji',
     title: 'Homura',
     artist: 'LiSA',
-    lyricist: '梶浦由記・LiSA',
-    composer: '梶浦由記',
+    lyricist: 'Yuki Kajiura・LiSA',
+    composer: 'Yuki Kajiura',
     length: 1019,
   });
 });
