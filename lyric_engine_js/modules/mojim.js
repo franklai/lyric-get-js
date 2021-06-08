@@ -1,4 +1,3 @@
-const he = require('he');
 const Sentry = require('@sentry/node');
 
 const LyricBase = require('../include/lyric-base');
@@ -94,8 +93,7 @@ class Lyric extends LyricBase {
       url = url.replace(/^https:/, 'http:');
     }
 
-    const raw = await this.get_html(url);
-    const html = he.decode(raw);
+    const html = await this.get_html(url);
 
     this.find_lyric(url, html);
     this.find_info(url, html);
