@@ -14,7 +14,7 @@ async function testLyric(object) {
   if (length > 0) expect(inst.lyric.length).toBe(length);
 }
 
-test('', async () => {
+test.skip('', async () => {
   await testLyric({
     url: 'https://www.metrolyrics.com/something-just-like-this-lyrics-coldplay.html',
     title: 'Something Just Like This',
@@ -23,7 +23,7 @@ test('', async () => {
   });
 });
 
-test('', async () => {
+test.skip('', async () => {
   await testLyric({
     url: 'https://www.metrolyrics.com/red-lyrics-taylor-swift.html',
     title: 'Red',
