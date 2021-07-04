@@ -39,6 +39,8 @@ class Lyric extends LyricBase {
 
     let lyric = body;
     lyric = lyric.replace(new RegExp('<br/>', 'g'), '\n');
+    lyric = lyric.replace(new RegExp('<button.*?</button>', 'g'), '');
+    lyric = lyric.replace(new RegExp('<label.*?</label>', 'g'), '');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
