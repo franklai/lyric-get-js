@@ -1,12 +1,21 @@
 /* global expect jest test */
 const { Lyric } = require('./lyrical-nonsense');
+const BlockedError = require('../include/blocked-error');
 
 jest.setTimeout(20_000); // 20 second timeout
 
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, arranger, length } = object;
   const inst = new Lyric(url);
-  await inst.get();
+
+  try {
+    await inst.get();
+  } catch (error) {
+    if (error instanceof BlockedError) {
+      console.warn('Blocked by vendor');
+      return;
+    }
+  }
 
   expect(inst.title).toBe(title);
   expect(inst.artist).toBe(artist);
