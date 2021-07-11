@@ -41,6 +41,14 @@ class Lyric extends LyricBase {
     lyric = lyric.replace(new RegExp('<br/>', 'g'), '\n');
     lyric = lyric.replace(new RegExp('<button.*?</button>', 'g'), '');
     lyric = lyric.replace(new RegExp('<label.*?</label>', 'g'), '');
+    lyric = lyric.replace(
+      new RegExp('<div class="EmbedForm__Copy.*?</label>', 'g'),
+      ''
+    );
+    lyric = lyric.replace(
+      new RegExp('<div class="ShareButtons.*?</label>', 'g'),
+      ''
+    );
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
