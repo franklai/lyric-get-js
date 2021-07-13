@@ -14,7 +14,7 @@ async function testLyric(object) {
   if (length > 0) expect(inst.lyric.length).toBe(length);
 }
 
-test('', async () => {
+test.skip('', async () => {
   await testLyric({
     url: 'https://animationsong.com/archives/1803656.html',
     title: 'gravityWall',
@@ -25,7 +25,7 @@ test('', async () => {
   });
 });
 
-test('', async () => {
+test.skip('', async () => {
   await testLyric({
     url: 'https://animationsong.com/archives/1804004.html',
     title: '明日の君さえいればいい。',
