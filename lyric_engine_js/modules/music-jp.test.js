@@ -23,6 +23,28 @@ test('', async () => {
     artist: '藍井エイル',
     lyricist: 'Eir/Ryosuke Shigenaga',
     composer: 'Ryosuke Shigenaga',
-    length: 467,
+    length: 468,
+  });
+});
+
+test('', async () => {
+  await testLyric({
+    url: 'https://music-book.jp/music/Artist/461542/Music/aaa9lset',
+    title: '猫背',
+    artist: '坂本　真綾',
+    lyricist: '岩里祐穂',
+    composer: '菅野よう子',
+    length: 362,
+  });
+});
+
+test('', async () => {
+  await testLyric({
+    url: 'https://music-book.jp/music/Artist/1540020/Music/aaaeznbo',
+    title: '優しさの剣',
+    artist: 'Novelbright',
+    lyricist: '竹中雄大',
+    composer: '竹中雄大/沖聡次郎',
+    length: 482,
   });
 });

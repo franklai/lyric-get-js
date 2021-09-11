@@ -1,60 +1,92 @@
-const URL = require('url');
-
 const LyricBase = require('../include/lyric-base');
 
 const keyword = 'music-book.jp';
 
 class Lyric extends LyricBase {
-  get_artist_id(html) {
-    const pattern = "checkFavorite\\('([0-9]+)'\\)";
-    const id = this.get_first_group_by_pattern(html, pattern);
-    return id;
+  get_nuxt_script(html) {
+    const prefix = 'window.__NUXT__=';
+    const suffix = '</script>';
+    return this.find_string_by_prefix_suffix(html, prefix, suffix);
   }
 
-  async get_song_json(url, html) {
-    const artist_id = this.get_artist_id(html);
-    if (!artist_id) {
-      console.error('Failed to get artist id of url:', url);
-      return false;
+  find_list(content, prefix, suffix) {
+    const value = this.find_string_by_prefix_suffix(
+      content,
+      prefix,
+      suffix,
+      false
+    );
+    if (!value) {
+      return [];
+    }
+    return value.split(',');
+  }
+
+  get_parameters(script) {
+    const keys = this.find_list(script, 'function(', ')');
+    const values = this.find_list(script, '}}(', ')');
+    const parameters = Object.fromEntries(
+      keys.map((_, index) => [keys[index], JSON.parse(values[index])])
+    );
+    return parameters;
+  }
+
+  get_mapping(script) {
+    const patterns = {
+      artist: /artist:(.+?),/,
+      title: /id:".*?",title:(.+?),artist:/,
+      package: /packageName:(.+?),/,
+    };
+    const mapping = {};
+    for (const [key, pattern] of Object.entries(patterns)) {
+      mapping[key] = this.get_first_group_by_pattern(script, pattern);
+    }
+    return mapping;
+  }
+
+  async get_basic_info(url, html) {
+    const nuxt_script = this.get_nuxt_script(html);
+
+    const parameters = this.get_parameters(nuxt_script);
+    const mapping = this.get_mapping(nuxt_script);
+
+    for (const [key, value] of Object.entries(mapping)) {
+      if (value.length === 1) {
+        mapping[key] = parameters[value];
+      } else {
+        mapping[key] = JSON.parse(value);
+      }
     }
 
-    const url_object = URL.parse(url, true);
+    return mapping;
+  }
 
-    const pos = url_object.pathname.lastIndexOf('/');
-    const pid = url_object.pathname.slice(pos + 1);
+  async get_song_json(info) {
+    const url_parameters = new URLSearchParams({
+      trackTitle: info.title,
+      artistName: info.artist,
+      packageName: info.package,
+    });
 
-    const post_url = 'https://music-book.jp/music/MusicDetail/GetLyric';
-    const body = {
-      artistId: artist_id,
-      artistName: decodeURIComponent(url_object.query.artistname),
-      title: url_object.query.title,
-      muid: '',
-      pid,
-      packageName: decodeURIComponent(url_object.query.packageName),
-    };
+    const lyric_url = `https://music-book.jp/music/Lyrics/Track?${url_parameters.toString()}`;
+    const json = await this.get_html(lyric_url);
 
-    const json = await this.post_form(post_url, body);
-
-    return json;
+    return JSON.parse(json);
   }
 
   async find_lyric(url, json) {
-    let lyric = json.Lyrics;
-
-    lyric = lyric.replace(/<br \/>/g, '\n');
-    lyric = lyric.trim();
+    const lyric = json.lyrics.join('\n');
 
     this.lyric = lyric;
     return true;
   }
 
-  async find_info(url, json) {
-    const url_object = URL.parse(url, true);
+  async find_info(url, json, info) {
+    this.artist = info.artist;
 
-    this.title = decodeURIComponent(url_object.query.title);
-    this.artist = decodeURIComponent(url_object.query.artistname);
-    this.lyricist = json.Writer;
-    this.composer = json.Composer;
+    this.title = json.title;
+    this.lyricist = json.writer;
+    this.composer = json.composer;
   }
 
   async parse_page() {
@@ -76,10 +108,12 @@ class Lyric extends LyricBase {
       return false;
     }
 
-    const json = await this.get_song_json(url, html);
+    const info = await this.get_basic_info(url, html);
+
+    const json = await this.get_song_json(info);
 
     await this.find_lyric(url, json);
-    await this.find_info(url, json);
+    await this.find_info(url, json, info);
 
     return true;
   }
@@ -90,8 +124,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url =
-      'https://music-book.jp/music/Kashi/aaa6rh9s?artistname=%25e5%2580%2589%25e6%259c%25a8%25e9%25ba%25bb%25e8%25a1%25a3&title=%25e6%25b8%25a1%25e6%259c%2588%25e6%25a9%258b%2520%25ef%25bd%259e%25e5%2590%259b%2520%25e6%2583%25b3%25e3%2581%25b5%25ef%25bd%259e&packageName=%25e6%25b8%25a1%25e6%259c%2588%25e6%25a9%258b%2520%25ef%25bd%259e%25e5%2590%259b%2520%25e6%2583%25b3%25e3%2581%25b5%25ef%25bd%259e';
+    const url = 'https://music-book.jp/music/Artist/461542/Music/aaa9lset';
     const object = new Lyric(url);
     const lyric = await object.get();
     console.log(lyric);
