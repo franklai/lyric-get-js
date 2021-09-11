@@ -16,7 +16,7 @@ async function testLyric(object) {
   if (length > 0) expect(inst.lyric.length).toBe(length);
 }
 
-test.skip('', async () => {
+test('', async () => {
   await testLyric({
     url: 'http://www.kget.jp/lyric/188989/',
     title: 'ずっと feat.HAN-KUN & TEE',
@@ -27,7 +27,7 @@ test.skip('', async () => {
   });
 });
 
-test.skip('', async () => {
+test('', async () => {
   await testLyric({
     url: 'http://www.kget.jp/lyric/185146/',
     title: 'ビースト!!',
@@ -38,7 +38,7 @@ test.skip('', async () => {
   });
 });
 
-test.skip('', async () => {
+test('', async () => {
   await testLyric({
     url: 'http://www.kget.jp/lyric/11066/',
     title: 'tune the rainbow',
