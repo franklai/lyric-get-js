@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const http = require('http');
 const mime = require('mime-types');
-const url = require('url');
+const { URL } = require('url');
 const { format } = require('util');
 
 const Sentry = require('@sentry/node');
@@ -65,7 +65,10 @@ const handleError = (request, response, error, lyric_url) => {
 
 http
   .createServer(async (request, response) => {
-    const request_object = url.parse(request.url, true);
+    const request_object = new URL(
+      request.url,
+      `https://${request.headers.host}`
+    );
 
     let { pathname } = request_object;
     if (pathname === '/') {
@@ -75,17 +78,24 @@ http
     }
 
     if (pathname === '/info') {
-      return outputJson(response, request);
+      const info = {
+        headers: request.headers,
+        rawHeaders: request.rawHeaders,
+      };
+      return outputJson(response, info);
+    }
+    if (pathname === '/self') {
+
     }
 
     if (pathname === '/app' || pathname === '/json') {
-      const { query } = request_object;
-      if (!query || !query.url) {
+      const { searchParams } = request_object;
+      if (!searchParams || !searchParams.has('url')) {
         console.warn('in app, but no query');
         return do_not_found(response);
       }
 
-      const { url } = query;
+      const url = searchParams.get('url');
 
       let out = {
         lyric: `Failed to find lyric of ${url}`,
