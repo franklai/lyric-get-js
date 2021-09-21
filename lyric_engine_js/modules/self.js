@@ -6,7 +6,7 @@ const info_url = 'https://franks543-lyric-get.azurewebsites.net/info';
 
 class Lyric extends LyricBase {
   find_lyric(url, json) {
-    this.lyric = JSON.stringify(json);
+    this.lyric = JSON.stringify(json, undefined, '  ');
 
     return true;
   }
@@ -18,8 +18,9 @@ class Lyric extends LyricBase {
     return true;
   }
 
-  get_json() {
-    const raw = this.get_html();
+  async get_json() {
+    const raw = await this.get_html(info_url);
+    console.log(raw);
 
     return JSON.parse(raw);
   }
@@ -27,7 +28,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    const json = this.get_json();
+    const json = await this.get_json();
     this.find_lyric(url, json);
     this.find_info(url, json);
 
