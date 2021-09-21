@@ -31,7 +31,7 @@ test('AAA', async () => {
     title: 'Charge & Go!',
     artist: 'AAA',
     lyricist: 'Kenn Kato',
-    composer: 'TETSUYA KOMURO',
+    composer: 'Tetsuya Komuro',
     length: 1256,
   });
 });
