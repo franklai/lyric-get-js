@@ -118,6 +118,7 @@ class Lyric extends LyricBase {
       await this.find_lyric(url, html);
       await this.find_info(url, html);
     } catch (error) {
+      console.error(error);
       if (error.status === 503) {
         throw new BlockedError('lyrical-nonsense is blocked');
       }
