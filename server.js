@@ -74,6 +74,10 @@ http
       pathname = '/former/index.html';
     }
 
+    if (pathname === '/info') {
+      return outputJson(response, request);
+    }
+
     if (pathname === '/app' || pathname === '/json') {
       const { query } = request_object;
       if (!query || !query.url) {
