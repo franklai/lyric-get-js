@@ -11,7 +11,7 @@ const ATTR_LIST = [
   ['composer', '作曲'],
   ['arranger', '編曲'],
 ];
-const USER_AGENT = 'Mozilla/5.0 Gecko/20100101 Firefox/79.0 Lyric Get/2.0';
+const USER_AGENT = 'Mozilla/5.0 Gecko/20100101 Firefox/92.0 Lyric Get/2.0';
 
 class LyricBase {
   constructor(url) {
