@@ -1,5 +1,4 @@
 const LyricBase = require('../include/lyric-base');
-const BlockedError = require('../include/blocked-error');
 
 const keyword = 'linkco.re';
 
@@ -29,18 +28,24 @@ class Lyric extends LyricBase {
     return true;
   }
 
-  async parse_page() {
-    const { url } = this;
+  add_lang_ja(url) {
+    const addr = new URL(url);
 
-    try {
-      const html = await this.get_html(url);
-      this.find_lyric(url, html);
-      this.find_info(url, html);
-    } catch (error) {
-      if (error.status === 403) {
-        throw new BlockedError('tunecore shows 403');
-      }
+    if (!addr.searchParams.has('lang')) {
+      addr.searchParams.set('lang', 'ja');
+      return addr.toString();
     }
+
+    return url;
+  }
+
+  async parse_page() {
+    let { url } = this;
+
+    url = this.add_lang_ja(url);
+    const html = await this.get_html(url);
+    this.find_lyric(url, html);
+    this.find_info(url, html);
 
     return true;
   }
@@ -51,7 +56,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'https://linkco.re/5ZuherRZ/songs/1343847/lyrics?lang=ja';
+    const url = 'https://linkco.re/zcFutsCs/songs/1596102/lyrics';
     const object = new Lyric(url);
     const lyric = await object.get();
     console.log(lyric);

@@ -25,6 +25,17 @@ async function testLyric(object) {
 
 test('', async () => {
   await testLyric({
+    url: 'https://linkco.re/ydtc1MEu/songs/1589993/lyrics',
+    title: 'サイリウムの証明',
+    artist: '放課後プリンセス',
+    lyricist: '藤原優樹',
+    composer: 'ANDW',
+    length: 546,
+  });
+});
+
+test('', async () => {
+  await testLyric({
     url: 'https://linkco.re/ydtc1MEu/songs/1589993/lyrics?lang=ja',
     title: 'サイリウムの証明',
     artist: '放課後プリンセス',
