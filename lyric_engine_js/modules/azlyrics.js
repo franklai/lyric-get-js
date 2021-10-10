@@ -32,11 +32,20 @@ class Lyric extends LyricBase {
     return true;
   }
 
+  is_blocked(html) {
+    const keyword = 'recaptcha/api.js';
+    return html && html.includes(keyword);
+  }
+
   async parse_page() {
     const { url } = this;
 
     try {
       const html = await this.get_html(url);
+      if (is_blocked(html)) {
+        throw new BlockedError('AZLyrics shows recaptcha');
+      }
+
       this.find_lyric(url, html);
       this.find_info(url, html);
     } catch (error) {
