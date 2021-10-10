@@ -52,6 +52,7 @@ class Lyric extends LyricBase {
       if (error.status === 403) {
         throw new BlockedError('AZLyrics shows 403');
       }
+      throw error;
     }
 
     return true;
