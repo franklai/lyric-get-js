@@ -33,8 +33,8 @@ class Lyric extends LyricBase {
   }
 
   is_blocked(html) {
-    const keyword = 'recaptcha/api.js';
-    return html && html.includes(keyword);
+    const pattern = 'recaptcha/api.js';
+    return html && html.includes(pattern);
   }
 
   async parse_page() {
@@ -42,7 +42,7 @@ class Lyric extends LyricBase {
 
     try {
       const html = await this.get_html(url);
-      if (is_blocked(html)) {
+      if (this.is_blocked(html)) {
         throw new BlockedError('AZLyrics shows recaptcha');
       }
 
