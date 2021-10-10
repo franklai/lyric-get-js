@@ -23,6 +23,12 @@ class Lyric extends LyricBase {
     };
 
     this.fill_song_info(html, patterns);
+
+    if (!this.title) {
+      console.error('Failed to find title');
+      console.error(url);
+      console.error(html);
+    }
     return true;
   }
 
