@@ -5,9 +5,16 @@ const keyword = 'kget';
 class Lyric extends LyricBase {
   async find_lyric(url, html) {
     const prefix = '<div id="lyric-trunk">';
-    const suffix = '</div>';
+    const suffix = '</div><!-- close #lyric-trunk -->';
 
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
+    lyric = this.find_string_by_prefix_suffix(
+      lyric,
+      '</script>',
+      '<script>',
+      false
+    );
+
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
