@@ -23,7 +23,7 @@ class Lyric extends LyricBase {
 
       // add newline for ad block
       body = body.replace(
-        new RegExp('<div class="SidebarAd__Container', 'g'),
+        /<div class="SidebarAd__Container/g,
         '<br/><div class="'
       );
     }
@@ -38,17 +38,11 @@ class Lyric extends LyricBase {
     }
 
     let lyric = body;
-    lyric = lyric.replace(new RegExp('<br/>', 'g'), '\n');
-    lyric = lyric.replace(new RegExp('<button.*?</button>', 'g'), '');
-    lyric = lyric.replace(new RegExp('<label.*?</label>', 'g'), '');
-    lyric = lyric.replace(
-      new RegExp('<div class="EmbedForm__Copy.*?</div>', 'g'),
-      ''
-    );
-    lyric = lyric.replace(
-      new RegExp('<div class="ShareButtons.*?</div>', 'g'),
-      ''
-    );
+    lyric = lyric.replace(/<br\/>/g, '\n');
+    lyric = lyric.replace(/<button.*?<\/button>/g, '');
+    lyric = lyric.replace(/<label.*?<\/label>/g, '');
+    lyric = lyric.replace(/<div class="EmbedForm__Copy.*?<\/div>/g, '');
+    lyric = lyric.replace(/<div class="ShareButtons.*?<\/div>/g, '');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
