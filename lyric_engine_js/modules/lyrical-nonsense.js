@@ -53,7 +53,7 @@ class Lyric extends LyricBase {
   }
 
   find_lyric(url, html) {
-    const oneLine = html.replace(/[\n\r]/g, '');
+    const oneLine = html.replace(/[\n\r]/g, '').replace(/> +</g, '><');
 
     const block = this.get_lyric_content_block(url, oneLine);
     if (!block) {
