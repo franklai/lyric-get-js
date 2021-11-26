@@ -31,10 +31,10 @@ class Lyric extends LyricBase {
   }
 
   find_lyric(url, html) {
-    let body = this.get_by_div_lyrics(html);
+    let body = this.get_by_lyrics_root(html);
     if (!body) {
-      console.log('Failed to get content from .lyrics, try Lyrics__Root');
-      body = this.get_by_lyrics_root(html);
+      console.log('Failed to get content from .lyrics, try class="lyrics"');
+      body = this.get_by_div_lyrics(html);
     }
 
     let lyric = body;
@@ -43,6 +43,7 @@ class Lyric extends LyricBase {
     lyric = lyric.replace(/<label.*?<\/label>/g, '');
     lyric = lyric.replace(/<div class="EmbedForm__Copy.*?<\/div>/g, '');
     lyric = lyric.replace(/<div class="ShareButtons.*?<\/div>/g, '');
+    lyric = lyric.replace(/<div class="LyricsEditExplainer__.*?<\/div>/g, '');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
@@ -82,7 +83,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url = 'https://genius.com/Guns-n-roses-sweet-child-o-mine-lyrics';
+    const url = 'https://genius.com/Hollow-coves-coastline-lyrics';
     const object = new Lyric(url);
     const lyric = await object.get();
     console.log(lyric);

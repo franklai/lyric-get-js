@@ -24,10 +24,10 @@ async function testLyric(object) {
 
 test('', async () => {
   await testLyric({
-    url: 'https://genius.com/Coldplay-adventure-of-a-lifetime-lyrics',
-    title: 'Adventure of a Lifetime',
-    artist: 'Coldplay',
-    length: 1405,
+    url: 'https://genius.com/Hollow-coves-coastline-lyrics',
+    title: 'Coastline',
+    artist: 'Hollow Coves',
+    length: 1027,
   });
 });
 
