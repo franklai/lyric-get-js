@@ -1,4 +1,4 @@
-/* global expect test */
+/* global expect jest test */
 const { Lyric } = require('./genius');
 const BlockedError = require('../include/blocked-error');
 
