@@ -41,9 +41,14 @@ class Lyric extends LyricBase {
     const { url } = this;
 
     try {
-      const html = await this.get_html(url);
+      let html = await this.get_html(url);
       if (this.is_blocked(html)) {
-        throw new BlockedError('AZLyrics shows recaptcha');
+        // try using proxy
+        html = await this.get_html_by_proxy(url);
+
+        if (this.is_blocked(html)) {
+          throw new BlockedError('AZLyrics shows recaptcha');
+        }
       }
 
       this.find_lyric(url, html);

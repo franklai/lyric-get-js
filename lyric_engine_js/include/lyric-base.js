@@ -5,6 +5,8 @@ const iconv = require('iconv-lite');
 const striptags = require('striptags');
 const superagent = require('superagent');
 
+require('superagent-proxy')(superagent);
+
 const ATTR_LIST = [
   ['artist', '歌手'],
   ['lyricist', '作詞'],
@@ -12,6 +14,7 @@ const ATTR_LIST = [
   ['arranger', '編曲'],
 ];
 const USER_AGENT = 'Mozilla/5.0 Gecko/20100101 Firefox/92.0 Lyric Get/2.0';
+const PROXY = 'http://45.145.150.50:3128';
 
 class LyricBase {
   constructor(url) {
@@ -95,7 +98,11 @@ class LyricBase {
     return value;
   }
 
-  async get_html(url, options = {}) {
+  async get_html_by_proxy(url, options = {}) {
+    return this.get_html(url, options, PROXY);
+  }
+
+  async get_html(url, options = {}, proxy = '') {
     const { encoding = 'utf-8' } = options;
     const headers = {
       'User-Agent': USER_AGENT,
@@ -104,6 +111,7 @@ class LyricBase {
     try {
       const response = await superagent
         .get(url)
+        .proxy(proxy)
         .set(headers)
         .responseType('arraybuffer');
 
