@@ -22,7 +22,7 @@ class Lyric extends LyricBase {
     const block = raw.replace(/\n/g, '').replace(/\t/g, '');
     const patterns = {
       title: '<h1>(.+?)</h1>',
-      artist: '<h2><a href =".*?"><font.*?>(.+?)</font>',
+      artist: '<h2><a href=".*?"><font.*?>(.+?)</font>',
       lyricist: 'word:.*?>(.+?)</a>',
       composer: 'music:.*?>(.+?)</a>',
     };
