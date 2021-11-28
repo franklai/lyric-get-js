@@ -14,7 +14,7 @@ const ATTR_LIST = [
   ['arranger', '編曲'],
 ];
 const USER_AGENT = 'Mozilla/5.0 Gecko/20100101 Firefox/92.0 Lyric Get/2.0';
-const PROXY = 'http://45.145.150.50:3128';
+const PROXY = 'http://207.244.227.169:443';
 
 class LyricBase {
   constructor(url) {

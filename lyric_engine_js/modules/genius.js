@@ -64,15 +64,23 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
+    let html;
     try {
-      const html = await this.get_html(url);
-      this.find_lyric(url, html);
-      this.find_info(url, html);
+      html = await this.get_html_by_proxy(url);
     } catch (error) {
       if (error.status === 403) {
-        throw new BlockedError('genius is blocked');
+        try {
+          html = await this.get_html_by_proxy(url);
+        } catch (moreError) {
+          if (moreError.status === 403) {
+            throw new BlockedError('genius is blocked');
+          }
+        }
       }
     }
+
+    this.find_lyric(url, html);
+    this.find_info(url, html);
 
     return true;
   }

@@ -2,6 +2,8 @@
 const { Lyric } = require('./genius');
 const BlockedError = require('../include/blocked-error');
 
+jest.setTimeout(20_000); // 20 second timeout
+
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, length } = object;
   const inst = new Lyric(url);
