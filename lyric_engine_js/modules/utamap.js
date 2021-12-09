@@ -40,10 +40,7 @@ class Lyric extends LyricBase {
   async parse_page() {
     const { url } = this;
 
-    // due to utamap only supports TLS 1.0
-    tls.DEFAULT_MIN_VERSION = 'TLSv1';
-    // set encoding to null, to let response is Buffer, not String
-    const html = await this.get_html(url, { encoding: 'eucjp' });
+    const html = await this.get_html(url);
 
     await this.find_lyric(url, html);
     await this.find_info(url, html);
