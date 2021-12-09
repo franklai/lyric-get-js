@@ -1,4 +1,3 @@
-const tls = require('tls');
 const { format } = require('util');
 
 const LyricBase = require('../include/lyric-base');
