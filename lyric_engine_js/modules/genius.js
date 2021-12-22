@@ -66,16 +66,10 @@ class Lyric extends LyricBase {
 
     let html;
     try {
-      html = await this.get_html_by_proxy(url);
+      html = await this.get_html(url);
     } catch (error) {
       if (error.status === 403) {
-        try {
-          html = await this.get_html_by_proxy(url);
-        } catch (moreError) {
-          if (moreError.status === 403) {
-            throw new BlockedError('genius is blocked');
-          }
-        }
+        throw new BlockedError('genius is blocked');
       }
     }
 
