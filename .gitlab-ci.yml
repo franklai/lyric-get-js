@@ -10,7 +10,7 @@ stages:
 Test:
   stage: test
   tags:
-    - node
+    - docker
   before_script:
     - yarn config set cache-folder .yarn
     - yarn install
