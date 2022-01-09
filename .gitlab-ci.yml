@@ -1,0 +1,19 @@
+image: node:14-alpine
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - test
+
+Test:
+  stage: test
+  tags:
+    - node
+  before_script:
+    - yarn config set cache-folder .yarn
+    - yarn install
+  script:
+    - yarn run test
+
