@@ -1,4 +1,4 @@
-/* global expect test */
+/* global expect jest test */
 const { Lyric } = require('./utaten');
 
 jest.setTimeout(20_000); // 20 second timeout
