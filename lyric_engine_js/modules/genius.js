@@ -38,6 +38,10 @@ class Lyric extends LyricBase {
     }
 
     let lyric = body;
+    lyric = lyric.replace(
+      /<br\/><div data-primis-player/g,
+      '<br/><br/><div data-primis-player'
+    );
     lyric = lyric.replace(/<br\/>/g, '\n');
     lyric = lyric.replace(/<button.*?<\/button>/g, '');
     lyric = lyric.replace(/<label.*?<\/label>/g, '');
