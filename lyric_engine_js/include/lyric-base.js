@@ -96,7 +96,7 @@ class LyricBase {
   }
 
   async get_html(url, options = {}) {
-    const { encoding = 'utf-8' } = options;
+    const { encoding = 'utf8' } = options;
     const headers = {
       'User-Agent': USER_AGENT,
     };
