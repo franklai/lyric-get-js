@@ -1,6 +1,6 @@
 {
   "name": "lyric-get-js",
-  "version": "2022.04.24",
+  "version": "2022.4.24",
   "private": true,
   "main": "lyric_engine_js/index.js",
   "scripts": {
