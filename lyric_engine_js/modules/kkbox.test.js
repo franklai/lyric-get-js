@@ -14,6 +14,10 @@ async function testLyric(object) {
       console.warn('Blocked by vendor');
       return;
     }
+    if (error.code === 'ECONNRESET') {
+      console.warn('Connection rest');
+      return;
+    }
   }
 
   expect(inst.title).toBe(title);

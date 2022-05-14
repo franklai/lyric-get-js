@@ -57,6 +57,9 @@ class Lyric extends LyricBase {
       if (error.status === 403) {
         throw new BlockedError('KKbox shows 403');
       }
+      if (error.code === 'ECONNRESET') {
+        throw error;
+      }
     }
 
     return true;
