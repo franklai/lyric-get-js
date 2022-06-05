@@ -1,3 +1,4 @@
+/* global document fetch navigator window */
 /* eslint func-names: 0, no-var: 0, vars-on-top:0, prefer-template: 0, prefer-arrow-callback:0 */
 (function () {
   if (!document.querySelectorAll) {
@@ -134,8 +135,16 @@
     inputUrl.select();
   });
 
-  var doAjaxQuery = function (val) {
-    var url = 'app?url=' + encodeURIComponent(val);
+  var doAjaxQuery = function (value) {
+    var encodedValue = encodeURIComponent(value);
+    var url = 'app?url=' + encodedValue;
+    var host = window.location.hostname.toLowerCase();
+    if (host.endsWith('.vercel.app')) {
+      url = 'api/lyric/get/' + encodedValue;
+    }
+    if (host.endsWith('.netlify.app')) {
+      url = '.netlify/functions/lyric?url=' + encodedValue;
+    }
 
     fetch(url)
       .then(function (resp) {
