@@ -1,0 +1,6 @@
+[build]
+publish = "public"
+environment = { NODE_VERSION = "14.18.1" }
+
+[functions]
+included_files = ["lyric_engine_js/include/*.js", "lyric_engine_js/modules/*.js"]
