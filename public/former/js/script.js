@@ -55,8 +55,17 @@ $(document).ready(function () {
     $('#loading_div').html('Loading...');
     $('#loading_div').show();
 
+    var appPath = '/app';
+    var host = window.location.hostname.toLowerCase();
+    if (host.endsWith('.vercel.app')) {
+      appPath = 'api/lyric/get/' + encodeURIComponent(url);
+    }
+    if (host.endsWith('.netlify.app')) {
+      appPath = '.netlify/functions/lyric';
+    }
+
     // JSON query
-    $.getJSON('/app', { url: url }, function (data) {
+    $.getJSON(appPath, { url: url }, function (data) {
       var lyric = data['lyric'];
       if (!lyric) {
         // failed to get lyric
