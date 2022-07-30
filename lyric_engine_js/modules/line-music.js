@@ -13,9 +13,10 @@ class Lyric extends LyricBase {
 
     const json_url = `https://music.line.me/api2/track/${song_id}/lyrics.v1`;
     const raw = await this.get_html(json_url);
-    const j = JSON.parse(raw);
+    const json = JSON.parse(raw);
 
-    let lyric = j.response.result.lyric.lyric;
+    let { lyric } = json.response.result.lyric;
+    lyric = lyric.trim();
 
     this.lyric = lyric;
 
@@ -27,9 +28,9 @@ class Lyric extends LyricBase {
 
     const json_url = `https://music.line.me/api2/tracks/${song_id}.v1`;
     const raw = await this.get_html(json_url);
-    const j = JSON.parse(raw);
+    const json = JSON.parse(raw);
 
-    const track = j.response.result.tracks[0];
+    const track = json.response.result.tracks[0];
 
     this.title = track.trackTitle;
     this.artist = track.artists[0].artistName;

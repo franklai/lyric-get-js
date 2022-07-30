@@ -9,10 +9,6 @@ async function testLyric(object) {
   try {
     await inst.get();
   } catch (error) {
-    if (error instanceof BlockedError) {
-      console.warn('Blocked by vendor');
-      return;
-    }
     if (error.code === 'ECONNRESET') {
       console.warn('Connection rest');
       return;
