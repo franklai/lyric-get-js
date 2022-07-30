@@ -58,10 +58,10 @@ $(document).ready(function () {
     var appPath = '/app';
     var host = window.location.hostname.toLowerCase();
     if (host.endsWith('.vercel.app')) {
-      appPath = 'api/lyric/get/' + encodeURIComponent(url);
+      appPath = '/api/lyric/get/' + encodeURIComponent(url);
     }
     if (host.endsWith('.netlify.app')) {
-      appPath = '.netlify/functions/lyric';
+      appPath = '/.netlify/functions/lyric';
     }
 
     // JSON query
