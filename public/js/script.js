@@ -142,6 +142,9 @@
     if (host.endsWith('.vercel.app')) {
       url = 'api/lyric/get/' + encodedValue;
     }
+    if (host.endsWith('.pages.dev')) {
+      url = 'api/lyric/get/' + encodedValue;
+    }
     if (host.endsWith('.netlify.app')) {
       url = '.netlify/functions/lyric?url=' + encodedValue;
     }
