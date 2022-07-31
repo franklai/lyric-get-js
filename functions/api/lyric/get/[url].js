@@ -1,4 +1,4 @@
-// const engine = require('../../../../lyric_engine_js');
+const engine = require('../../../../lyric_engine_js');
 
 // eslint-disable-next-line import/prefer-default-export
 export async function onRequestGet({ params }) {
@@ -7,8 +7,8 @@ export async function onRequestGet({ params }) {
     lyric: `Failed to find lyric of ${url}`,
   };
   try {
-    // const lyric = await engine.get_full(url);
-    // out.lyric = lyric;
+    const lyric = await engine.get_full(url);
+    out.lyric = lyric;
   } catch (error) {
     console.log(`something wrong, error: ${error}`);
   }
