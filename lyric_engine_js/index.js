@@ -1,6 +1,6 @@
-const fs = require('fs').promises;
-const path = require('path');
-const urlModule = require('url');
+const fs = require('node:fs').promises;
+const path = require('node:path');
+const urlModule = require('node:url');
 
 const BlockedError = require('./include/blocked-error');
 
