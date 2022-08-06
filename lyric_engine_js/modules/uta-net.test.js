@@ -36,7 +36,6 @@ test('', async () => {
   });
 });
 
-
 test('', async () => {
   await testLyric({
     url: 'https://www.uta-net.com/song/322189/',
@@ -44,7 +43,7 @@ test('', async () => {
     artist: 'angela',
     lyricist: '永野椎菜',
     composer: '馬飼野康二',
-    // arranger: 'angela',
+    arranger: 'angela',
     length: 671,
   });
 });
