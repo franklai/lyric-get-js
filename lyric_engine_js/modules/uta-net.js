@@ -46,6 +46,7 @@ class Lyric extends LyricBase {
       artist: '<a href="/artist/[0-9]+/".*?itemprop="byArtist".*?>(.+?)</a>',
       lyricist: '作詞：<a.*?itemprop="lyricist".*?>(.+?)</a>',
       composer: '作曲：<a.*?itemprop="composer".*?>(.+?)</a>',
+      arranger: '編曲：<a.*?itemprop="arranger".*?>(.+?)</a>',
     };
 
     this.fill_song_info(html, patterns);

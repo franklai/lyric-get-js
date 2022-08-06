@@ -35,3 +35,16 @@ test('', async () => {
     length: 629,
   });
 });
+
+
+test('', async () => {
+  await testLyric({
+    url: 'https://www.uta-net.com/song/322189/',
+    title: 'JUST COMMUNICATION',
+    artist: 'angela',
+    lyricist: '永野椎菜',
+    composer: '馬飼野康二',
+    // arranger: 'angela',
+    length: 671,
+  });
+});
