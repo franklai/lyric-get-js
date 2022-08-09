@@ -7,7 +7,9 @@ class Lyric extends LyricBase {
   find_lyric(url, json) {
     try {
       const { body } = json.page.lyrics.lyrics;
-      this.lyric = body;
+      let lyric = body;
+      lyric = lyric.replaceAll('′', "'");
+      this.lyric = lyric;
     } catch {
       console.error('json does not have lyrics body');
       return false;
