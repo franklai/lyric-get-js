@@ -29,7 +29,7 @@ test('', async () => {
     url: 'https://genius.com/Hollow-coves-coastline-lyrics',
     title: 'Coastline',
     artist: 'Hollow Coves',
-    length: 1027,
+    length: 1028,
   });
 });
 
