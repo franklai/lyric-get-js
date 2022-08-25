@@ -3,7 +3,7 @@ const LyricBase = require('../include/lyric-base');
 const keyword = 'kashinavi';
 
 class Lyric extends LyricBase {
-  find_json_ld(html, start) {
+  find_json_ld(html) {
     const prefix = '"@type": "MusicComposition",';
     const suffix = '</script>';
 
