@@ -48,6 +48,7 @@ class Lyric extends LyricBase {
     lyric = lyric.replace(/<div class="EmbedForm__Copy.*?<\/div>/g, '');
     lyric = lyric.replace(/<div class="ShareButtons.*?<\/div>/g, '');
     lyric = lyric.replace(/<div class="LyricsEditExplainer__.*?<\/div>/g, '');
+    lyric = lyric.replace(/<div class="RecommendedSongs__.*?<\/div>/g, '');
     lyric = lyric.replace(/<h2.*?<\/h2>/g, '');
     lyric = this.sanitize_html(lyric);
 
