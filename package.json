@@ -14,7 +14,7 @@
     "node": "^16.13.0"
   },
   "dependencies": {
-    "@sentry/node": "^6.15.0",
+    "@sentry/node": "^7.23.0",
     "html-entities": "^2.3.2",
     "iconv-lite": "^0.6.2",
     "mime-types": "^2.1.28",
