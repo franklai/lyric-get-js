@@ -51,11 +51,7 @@ class Lyric extends LyricBase {
     const mapping = this.get_mapping(nuxt_script);
 
     for (const [key, value] of Object.entries(mapping)) {
-      if (value.length === 1) {
-        mapping[key] = parameters[value];
-      } else {
-        mapping[key] = JSON.parse(value);
-      }
+      mapping[key] = value.length === 1 ? parameters[value] : JSON.parse(value);
     }
 
     return mapping;
