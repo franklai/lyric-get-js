@@ -11,7 +11,6 @@ const jlyric = require('./modules/j-lyric');
 const joysound = require('./modules/joysound');
 const jtotal = require('./modules/j-total');
 const kashinavi = require('./modules/kashinavi');
-const kget = require('./modules/kget');
 const kkbox = require('./modules/kkbox');
 const line_music = require('./modules/line-music');
 const lyrical_nonsense = require('./modules/lyrical-nonsense');
@@ -39,7 +38,6 @@ const site_array = [
   joysound,
   jtotal,
   kashinavi,
-  kget,
   kkbox,
   line_music,
   lyrical_nonsense,
