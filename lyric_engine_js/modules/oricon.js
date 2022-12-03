@@ -68,9 +68,7 @@ class Lyric extends LyricBase {
       this.composer = first_json.composer.name;
     }
 
-    this.artist = second_json.name
-      ? second_json.name
-      : this.get_artist_name(html);
+    this.artist = second_json.name || this.get_artist_name(html);
   }
 
   async parse_page() {
