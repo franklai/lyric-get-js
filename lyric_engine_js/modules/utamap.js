@@ -1,5 +1,3 @@
-const { format } = require('util');
-
 const LyricBase = require('../include/lyric-base');
 
 const keyword = 'utamap';
@@ -29,7 +27,7 @@ class Lyric extends LyricBase {
     for (const key of Object.keys(keys)) {
       const input_name = keys[key];
       patterns[key] = new RegExp(
-        format('<INPUT type="hidden" name=%s value="([^"]*)">', input_name)
+        `<INPUT type="hidden" name=${input_name} value="([^"]*)">`
       );
     }
 

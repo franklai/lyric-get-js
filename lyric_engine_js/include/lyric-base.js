@@ -1,5 +1,3 @@
-const { format } = require('util');
-
 const { decode } = require('html-entities');
 const iconv = require('iconv-lite');
 const striptags = require('striptags');
@@ -50,7 +48,7 @@ class LyricBase {
       const translate = attribute[1];
 
       if (this[key]) {
-        template.push(format('%s：%s', translate, this[key]));
+        template.push(`${translate}：${this[key]}`);
       }
     }
 
