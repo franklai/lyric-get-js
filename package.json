@@ -53,6 +53,7 @@
       ],
       "prettier/prettier": "error",
       "unicorn/prefer-module": "off",
+      "unicorn/prefer-node-protocol": "off",
       "unicorn/prefer-top-level-await": "off",
       "unicorn/prevent-abbreviations": [
         "error",

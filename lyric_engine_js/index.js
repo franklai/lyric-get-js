@@ -1,4 +1,4 @@
-const urlModule = require('node:url');
+const urlModule = require('url');
 
 const BlockedError = require('./include/blocked-error');
 
