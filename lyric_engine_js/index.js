@@ -1,11 +1,61 @@
-const fs = require('node:fs').promises;
-const path = require('node:path');
 const urlModule = require('node:url');
 
 const BlockedError = require('./include/blocked-error');
 
+const animesongz = require('./modules/animesongz');
+const azlyrics = require('./modules/azlyrics');
+const evesta = require('./modules/evesta');
+const genius = require('./modules/genius');
+const hoick = require('./modules/hoick');
+const jlyric = require('./modules/j-lyric');
+const joysound = require('./modules/joysound');
+const jtotal = require('./modules/j-total');
+const kashinavi = require('./modules/kashinavi');
+const kget = require('./modules/kget');
+const kkbox = require('./modules/kkbox');
+const line_music = require('./modules/line-music');
+const lyrical_nonsense = require('./modules/lyrical-nonsense');
+const mojim = require('./modules/mojim');
+const music_jp = require('./modules/music-jp');
+const musixmatch = require('./modules/musixmatch');
+const nana_music = require('./modules/nana-music');
+const oricon = require('./modules/oricon');
+const petitlyrics = require('./modules/petitlyrics');
+const rocklyric = require('./modules/rocklyric');
+const self = require('./modules/self');
+const tunecore = require('./modules/tunecore');
+const utamap = require('./modules/utamap');
+const uta_net = require('./modules/uta-net');
+const utaten = require('./modules/utaten');
+
 // let site_dict = {};
-const site_array = [];
+const site_array = [
+  animesongz,
+  azlyrics,
+  evesta,
+  genius,
+  hoick,
+  jlyric,
+  joysound,
+  jtotal,
+  kashinavi,
+  kget,
+  kkbox,
+  line_music,
+  lyrical_nonsense,
+  mojim,
+  music_jp,
+  musixmatch,
+  nana_music,
+  oricon,
+  petitlyrics,
+  rocklyric,
+  self,
+  tunecore,
+  utamap,
+  uta_net,
+  utaten,
+];
 
 class SiteNotSupportError extends Error {
   constructor(domain) {
@@ -15,35 +65,7 @@ class SiteNotSupportError extends Error {
   }
 }
 
-const load_modules = async () => {
-  let files;
-
-  try {
-    files = await fs.readdir(path.join(__dirname, 'modules'));
-  } catch (error) {
-    console.error('Failed to load modules. err:', error);
-    return;
-  }
-
-  for (const f of files) {
-    const object = path.parse(f);
-    if (object.ext !== '.js') {
-      continue;
-    }
-    if (f.includes('.test.js')) {
-      continue;
-    }
-
-    const object_name = `./modules/${object.name}`;
-
-    // eslint-disable-next-line import/no-dynamic-require, global-require
-    site_array.push(require(object_name));
-  }
-};
-
 const get_object = async (url) => {
-  await load_modules();
-
   let site;
 
   site_array.some((item) => {
