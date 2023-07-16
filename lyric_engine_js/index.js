@@ -15,7 +15,6 @@ const kkbox = require('./modules/kkbox');
 const line_music = require('./modules/line-music');
 const lyrical_nonsense = require('./modules/lyrical-nonsense');
 const mojim = require('./modules/mojim');
-const music_jp = require('./modules/music-jp');
 const musixmatch = require('./modules/musixmatch');
 const nana_music = require('./modules/nana-music');
 const oricon = require('./modules/oricon');
@@ -42,7 +41,6 @@ const site_array = [
   line_music,
   lyrical_nonsense,
   mojim,
-  music_jp,
   musixmatch,
   nana_music,
   oricon,
