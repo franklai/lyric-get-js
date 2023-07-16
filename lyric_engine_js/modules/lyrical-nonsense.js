@@ -40,7 +40,7 @@ class Lyric extends LyricBase {
     const hash = this.get_hash(url) || 'Original';
 
     let prefix = `<div class="contents" id="${hash}">`;
-    const suffix = '</p><br/></div>';
+    const suffix = '</div><div class="ln-row-cont">';
 
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix);
     if (block) {
@@ -60,10 +60,10 @@ class Lyric extends LyricBase {
       console.error(`Failed to get content block of url ${url}`);
       return false;
     }
-    const prefix = '<div class="olyrictext">';
-    const suffix = '</div>';
+    const prefix = ' class="olyrictext">';
+    const suffix = '</div><div class="ln-row-cont">';
 
-    let lyric = this.find_string_by_prefix_suffix(block, prefix, suffix);
+    let lyric = this.find_string_by_prefix_suffix(block, prefix, suffix, false);
     if (!lyric) {
       return false;
     }
