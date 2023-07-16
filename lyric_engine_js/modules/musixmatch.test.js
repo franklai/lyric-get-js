@@ -33,9 +33,9 @@ test('', async () => {
 
 test('', async () => {
   await testLyric({
-    url: 'https://www.musixmatch.com/lyrics/Hollow-Coves/Coastline',
-    title: 'Coastline',
-    artist: 'Hollow Coves',
-    length: 983,
+    url: 'https://www.musixmatch.com/lyrics/Maroon-5/Sugar',
+    title: 'Sugar',
+    artist: 'Maroon 5',
+    length: 2511,
   });
 });
