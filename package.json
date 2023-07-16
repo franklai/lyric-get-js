@@ -52,6 +52,7 @@
         "WithStatement"
       ],
       "prettier/prettier": "error",
+      "unicorn/expiring-todo-comments": "off",
       "unicorn/prefer-module": "off",
       "unicorn/prefer-node-protocol": "off",
       "unicorn/prefer-top-level-await": "off",
