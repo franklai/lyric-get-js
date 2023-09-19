@@ -2,8 +2,6 @@
 const { Lyric } = require('./lyrical-nonsense');
 const BlockedError = require('../include/blocked-error');
 
-jest.setTimeout(30_000); // 30 second timeout
-
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, arranger, length } = object;
   const inst = new Lyric(url);

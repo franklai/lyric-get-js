@@ -4,9 +4,7 @@ const BlockedError = require('./include/blocked-error');
 
 const animesongz = require('./modules/animesongz');
 const azlyrics = require('./modules/azlyrics');
-const evesta = require('./modules/evesta');
 const genius = require('./modules/genius');
-const hoick = require('./modules/hoick');
 const jlyric = require('./modules/j-lyric');
 const joysound = require('./modules/joysound');
 const jtotal = require('./modules/j-total');
@@ -30,9 +28,7 @@ const utaten = require('./modules/utaten');
 const site_array = [
   animesongz,
   azlyrics,
-  evesta,
   genius,
-  hoick,
   jlyric,
   joysound,
   jtotal,
