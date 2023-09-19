@@ -40,7 +40,7 @@ class Lyric extends LyricBase {
     const hash = this.get_hash(url) || 'Original';
 
     let prefix = `<div class="contents" id="${hash}">`;
-    const suffix = '</div><div class="ln-row-cont">';
+    const suffix = '<br/></div><div class="ln-row-cont">';
 
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix);
     if (block) {
@@ -141,7 +141,7 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     let url =
-      'https://www.lyrical-nonsense.com/lyrics/minami-373/kawaki-wo-ameku/';
+      'https://www.lyrical-nonsense.com/global/lyrics/king-gnu/specialz/#Original';
     if (process.argv.length > 2) {
       // eslint-disable-next-line prefer-destructuring
       url = process.argv[2];
