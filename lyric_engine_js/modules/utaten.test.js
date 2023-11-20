@@ -1,7 +1,5 @@
-/* global expect jest test */
+/* global expect test */
 const { Lyric } = require('./utaten');
-
-jest.setTimeout(20_000); // 20 second timeout
 
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, arranger, length } = object;
@@ -18,7 +16,7 @@ async function testLyric(object) {
 
 test('BUMP OF CHICKEN', async () => {
   await testLyric({
-    url: 'https://utaten.com/lyric/jb81012024/',
+    url: 'http://utaten.com/lyric/jb81012024/',
     title: 'beautiful glider',
     artist: 'BUMP OF CHICKEN',
     lyricist: '藤原基央',
@@ -29,7 +27,7 @@ test('BUMP OF CHICKEN', async () => {
 
 test('AAA', async () => {
   await testLyric({
-    url: 'https://utaten.com/lyric/jb71110163/',
+    url: 'http://utaten.com/lyric/jb71110163/',
     title: 'Charge & Go!',
     artist: 'AAA',
     lyricist: 'Kenn Kato',

@@ -1,8 +1,6 @@
-/* global expect jest test */
+/* global expect test */
 const { Lyric } = require('./kkbox');
 const BlockedError = require('../include/blocked-error');
-
-jest.setTimeout(20_000); // 20 second timeout
 
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, arranger, length } = object;

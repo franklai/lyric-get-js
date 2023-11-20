@@ -1,8 +1,6 @@
-/* global expect jest test */
+/* global expect test */
 const { Lyric } = require('./genius');
 const BlockedError = require('../include/blocked-error');
-
-jest.setTimeout(45_000); // 45 second timeout
 
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, length } = object;
