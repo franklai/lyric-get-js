@@ -8,7 +8,7 @@ class Lyric extends LyricBase {
     const suffix = '<!-- 歌詞 end -->';
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
 
-    lyric = lyric.replace(/<br>/g, '\n');
+    lyric = lyric.replaceAll('<br>', '\n');
     lyric = lyric.trim();
 
     this.lyric = lyric;

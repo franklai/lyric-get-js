@@ -53,7 +53,7 @@ class Lyric extends LyricBase {
   }
 
   find_lyric(url, html) {
-    const oneLine = html.replace(/[\n\r]/g, '').replace(/> +</g, '><');
+    const oneLine = html.replaceAll(/[\n\r]/g, '').replaceAll(/> +</g, '><');
 
     const block = this.get_lyric_content_block(url, oneLine);
     if (!block) {
@@ -68,8 +68,8 @@ class Lyric extends LyricBase {
       return false;
     }
 
-    lyric = lyric.replace(/<\/p>/g, '\n');
-    lyric = lyric.replace(/<br\/> ?/g, '\n');
+    lyric = lyric.replaceAll('</p>', '\n');
+    lyric = lyric.replaceAll(/<br\/> ?/g, '\n');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
@@ -98,7 +98,7 @@ class Lyric extends LyricBase {
       composer: '"composer".*?"name" : "(.*?)"',
     };
 
-    const line = block.replace(/[\n\r]/g, '');
+    const line = block.replaceAll(/[\n\r]/g, '');
     this.fill_song_info(line, patterns);
 
     // composer and lyricist may be empty in LD JSON

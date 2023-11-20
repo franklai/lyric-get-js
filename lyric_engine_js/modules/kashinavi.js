@@ -12,9 +12,9 @@ class Lyric extends LyricBase {
     const prefix = 'oncopy="return false;" unselectable="on;">';
     const suffix = '</div>';
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
-    lyric = lyric.replace(/<br>　<br>/g, '<br><br>'); // eslint-disable-line no-irregular-whitespace
-    lyric = lyric.replace(/<\/p><p>/g, '\n\n');
-    lyric = lyric.replace(/<br>/g, '\n');
+    lyric = lyric.replaceAll('<br>\u3000<br>', '<br><br>'); // eslint-disable-line no-irregular-whitespace
+    lyric = lyric.replaceAll('</p><p>', '\n\n');
+    lyric = lyric.replaceAll('<br>', '\n');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;

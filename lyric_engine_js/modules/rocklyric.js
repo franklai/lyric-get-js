@@ -8,7 +8,10 @@ class Lyric extends LyricBase {
     const suffix = '</p>';
 
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, true);
-    lyric = lyric.replace(/\n/g, '').replace(/\r/g, '').replace(/<br>/g, '\n');
+    lyric = lyric
+      .replaceAll('\n', '')
+      .replaceAll('\r', '')
+      .replaceAll('<br>', '\n');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
@@ -19,7 +22,7 @@ class Lyric extends LyricBase {
     const prefix = '<div id="artist_info">';
     const suffix = '</h3>';
     const raw = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
-    const block = raw.replace(/\n/g, '').replace(/\t/g, '');
+    const block = raw.replaceAll('\n', '').replaceAll('\t', '');
     const patterns = {
       title: '<h1>(.+?)</h1>',
       artist: '<h2><a href *=".*?"><font.*?>(.+?)</font>',

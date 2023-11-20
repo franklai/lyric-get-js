@@ -18,12 +18,12 @@ class Lyric extends LyricBase {
     let body = this.find_string_by_prefix_suffix(html, prefix, suffix);
     if (body) {
       // remove prefix and suffix
-      body = body.replace(new RegExp(`${prefix}.*?>`, 'g'), '');
-      body = body.replace(new RegExp(suffix, 'g'), '');
+      body = body.replaceAll(new RegExp(`${prefix}.*?>`, 'g'), '');
+      body = body.replaceAll(new RegExp(suffix, 'g'), '');
 
       // add newline for ad block
-      body = body.replace(
-        /<div class="SidebarAd__Container/g,
+      body = body.replaceAll(
+        '<div class="SidebarAd__Container',
         '<br/><div class="'
       );
     }
@@ -42,14 +42,17 @@ class Lyric extends LyricBase {
       /<div class="PrimisPlayer/,
       '<br/><div class="PrimisPlayer'
     );
-    lyric = lyric.replace(/<br\/>/g, '\n');
-    lyric = lyric.replace(/<button.*?<\/button>/g, '');
-    lyric = lyric.replace(/<label.*?<\/label>/g, '');
-    lyric = lyric.replace(/<div class="EmbedForm__Copy.*?<\/div>/g, '');
-    lyric = lyric.replace(/<div class="ShareButtons.*?<\/div>/g, '');
-    lyric = lyric.replace(/<div class="LyricsEditExplainer__.*?<\/div>/g, '');
-    lyric = lyric.replace(/<div class="RecommendedSongs__.*?<\/div>/g, '');
-    lyric = lyric.replace(/<h2.*?<\/h2>/g, '');
+    lyric = lyric.replaceAll('<br/>', '\n');
+    lyric = lyric.replaceAll(/<button.*?<\/button>/g, '');
+    lyric = lyric.replaceAll(/<label.*?<\/label>/g, '');
+    lyric = lyric.replaceAll(/<div class="EmbedForm__Copy.*?<\/div>/g, '');
+    lyric = lyric.replaceAll(/<div class="ShareButtons.*?<\/div>/g, '');
+    lyric = lyric.replaceAll(
+      /<div class="LyricsEditExplainer__.*?<\/div>/g,
+      ''
+    );
+    lyric = lyric.replaceAll(/<div class="RecommendedSongs__.*?<\/div>/g, '');
+    lyric = lyric.replaceAll(/<h2.*?<\/h2>/g, '');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;

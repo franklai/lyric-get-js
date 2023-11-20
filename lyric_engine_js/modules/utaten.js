@@ -14,7 +14,7 @@ class Lyric extends LyricBase {
     }
 
     const pattern = /<span class="rt">(.*?)<\/span>/g;
-    lyric = lyric.replace(pattern, '($1)');
+    lyric = lyric.replaceAll(pattern, '($1)');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
@@ -50,7 +50,7 @@ class Lyric extends LyricBase {
       composer: '作曲</dt>(.*?)</dd>',
     };
 
-    content = content.replace(/\n/g, '');
+    content = content.replaceAll('\n', '');
     this.fill_song_info(content, patterns);
 
     return true;

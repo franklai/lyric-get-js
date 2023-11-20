@@ -37,7 +37,7 @@ class Lyric extends LyricBase {
     );
     lyric = this.filter_ad(lyric);
     lyric = this.filter_thank(lyric);
-    lyric = lyric.replace(/<br \/>/g, '\n');
+    lyric = lyric.replaceAll('<br />', '\n');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
@@ -52,7 +52,7 @@ class Lyric extends LyricBase {
       prefix,
       suffix,
       true
-    ).replace(/\n/g, '');
+    ).replaceAll('\n', '');
 
     Sentry.withScope((scope) => {
       scope.setLevel('info');

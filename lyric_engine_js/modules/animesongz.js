@@ -12,16 +12,16 @@ class Lyric extends LyricBase {
       return false;
     }
 
-    lyric = lyric.replace(/[\n\r]/g, '');
-    lyric = lyric.replace(
+    lyric = lyric.replaceAll(/[\n\r]/g, '');
+    lyric = lyric.replaceAll(
       /<div class="roma" style="display: none;.*?<\/div>/g,
       ''
     );
-    lyric = lyric.replace(/<h2.*?h2>/g, '');
-    lyric = lyric.replace(/\t+/g, '');
-    lyric = lyric.replace(/<div class="kana"><\/div>/g, '');
-    lyric = lyric.replace(/<br>/g, '\n\n');
-    lyric = lyric.replace(/<\/div><div/g, '</div>\n<div');
+    lyric = lyric.replaceAll(/<h2.*?h2>/g, '');
+    lyric = lyric.replaceAll(/\t+/g, '');
+    lyric = lyric.replaceAll('<div class="kana"></div>', '');
+    lyric = lyric.replaceAll('<br>', '\n\n');
+    lyric = lyric.replaceAll('</div><div', '</div>\n<div');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
@@ -48,7 +48,7 @@ class Lyric extends LyricBase {
       composer: '<p>作曲：(.*?)</p>',
       arranger: '<p>編曲者：(.*?)</p>',
     };
-    const line = block.replace(/[\n\r]/g, '').replace(/\t+/g, ' ');
+    const line = block.replaceAll(/[\n\r]/g, '').replaceAll(/\t+/g, ' ');
     this.fill_song_info(line, patterns);
   }
 

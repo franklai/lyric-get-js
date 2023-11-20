@@ -13,7 +13,7 @@ class Lyric extends LyricBase {
       return false;
     }
 
-    lyric = lyric.replace(/<br>/g, '\n');
+    lyric = lyric.replaceAll('<br>', '\n');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
