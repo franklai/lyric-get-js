@@ -10,9 +10,6 @@
     "lint": "eslint lyric_engine_js"
   },
   "license": "Apache",
-  "engines": {
-    "node": "^18.16.0"
-  },
   "dependencies": {
     "@sentry/node": "^7.23.0",
     "html-entities": "^2.3.2",
