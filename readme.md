@@ -4,7 +4,6 @@
 
 - https://franks543-lyric-get.vercel.app/
 - https://franks543-lyric-get.netlify.app/
-- https://franks543-lyric-get.azurewebsites.net/
 
 ## Offline version
 
