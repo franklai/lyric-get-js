@@ -31,11 +31,11 @@ test('', async () => {
   });
 });
 
-// test('', async () => {
-//   await testLyric({
-//     url: 'https://genius.com/Guns-n-roses-sweet-child-o-mine-lyrics',
-//     title: "Sweet Child O’ Mine",
-//     artist: "Guns N’ Roses",
-//     length: 1,
-//   });
-// });
+test('', async () => {
+  await testLyric({
+    url: 'https://genius.com/Maaya-sakamoto-tune-the-rainbow-lyrics',
+    title: "​tune the rainbow",
+    artist: "坂本真綾 (Maaya Sakamoto)",
+    length: 520,
+  });
+});

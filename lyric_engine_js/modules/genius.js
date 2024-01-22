@@ -12,7 +12,7 @@ class Lyric extends LyricBase {
   }
 
   get_by_lyrics_root(html) {
-    const prefix = ' Lyrics__Root';
+    const prefix = '<div data-lyrics-container="true"';
     const suffix = '<div class="SectionLeaderboard';
 
     let body = this.find_string_by_prefix_suffix(html, prefix, suffix);
