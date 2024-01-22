@@ -15,7 +15,6 @@ const lyrical_nonsense = require('./modules/lyrical-nonsense');
 const mojim = require('./modules/mojim');
 const musixmatch = require('./modules/musixmatch');
 const nana_music = require('./modules/nana-music');
-const oricon = require('./modules/oricon');
 const petitlyrics = require('./modules/petitlyrics');
 const rocklyric = require('./modules/rocklyric');
 const self = require('./modules/self');
@@ -39,7 +38,6 @@ const site_array = [
   mojim,
   musixmatch,
   nana_music,
-  oricon,
   petitlyrics,
   rocklyric,
   self,
