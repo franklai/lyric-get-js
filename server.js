@@ -4,12 +4,6 @@ const mime = require('mime-types');
 const { URL } = require('url');
 const { format } = require('util');
 
-const Sentry = require('@sentry/node');
-
-Sentry.init({
-  dsn: 'https://a7fa45b215ae4cf68bb9320a075234d7@sentry.io/1263950',
-});
-
 const engine = require('./lyric_engine_js');
 
 function do_not_found(response) {
@@ -48,17 +42,6 @@ const handleError = (request, response, error, lyric_url) => {
     level = 'warning';
     out.lyric = `Failed to get lyric of ${lyric_url}. Blocked by vendor.`;
   }
-
-  Sentry.withScope((scope) => {
-    scope.setLevel(level);
-    scope.addEventProcessor(async (event) =>
-      Sentry.Handlers.parseRequest(event, request)
-    );
-    if (domain) {
-      scope.setFingerprint(['site-not-support-error', domain]);
-    }
-    Sentry.captureException(error);
-  });
 
   outputJson(response, out);
 };

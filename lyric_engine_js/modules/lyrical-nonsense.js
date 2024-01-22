@@ -1,5 +1,3 @@
-const Sentry = require('@sentry/node');
-
 const LyricBase = require('../include/lyric-base');
 const BlockedError = require('../include/blocked-error');
 
@@ -120,12 +118,6 @@ class Lyric extends LyricBase {
       await this.find_lyric(url, html);
       await this.find_info(url, html);
     } catch (error) {
-      Sentry.withScope((scope) => {
-        scope.setLevel('info');
-        scope.setExtra(error);
-        Sentry.captureMessage('lyrical nonsense error');
-      });
-
       if (error.status === 503) {
         throw new BlockedError('lyrical-nonsense is blocked');
       }

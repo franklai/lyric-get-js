@@ -6,12 +6,11 @@
   "scripts": {
     "start": "node server",
     "watch": "nodemon server",
-    "test": "jest",
+    "test": "jest lyric_engine_js",
     "lint": "eslint lyric_engine_js"
   },
   "license": "Apache",
   "dependencies": {
-    "@sentry/node": "^7.23.0",
     "html-entities": "^2.3.2",
     "iconv-lite": "^0.6.2",
     "mime-types": "^2.1.28",
@@ -19,6 +18,8 @@
     "superagent": "^8.0.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.10.0",
     "eslint": "^8.29.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.0.0",

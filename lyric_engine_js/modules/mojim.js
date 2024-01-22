@@ -1,5 +1,4 @@
 const { decode } = require('html-entities');
-const Sentry = require('@sentry/node');
 
 const LyricBase = require('../include/lyric-base');
 
@@ -53,12 +52,6 @@ class Lyric extends LyricBase {
       suffix,
       true
     ).replaceAll('\n', '');
-
-    Sentry.withScope((scope) => {
-      scope.setLevel('info');
-      scope.setExtra(block);
-      Sentry.captureMessage('Mojim.com info block');
-    });
 
     const keys = {
       lyricist: '作詞',

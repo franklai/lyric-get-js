@@ -1,5 +1,3 @@
-const Sentry = require('@sentry/node');
-
 const engine = require('../../../lyric_engine_js');
 const LyricBase = require('../../../lyric_engine_js/include/lyric-base');
 
