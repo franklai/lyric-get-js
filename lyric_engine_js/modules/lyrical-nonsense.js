@@ -38,7 +38,10 @@ class Lyric extends LyricBase {
     const hash = this.get_hash(url) || 'Original';
 
     let prefix = `<div class="contents" id="${hash}">`;
-    const suffix = '<br/></div><div class="ln-row-cont">';
+    const suffix =
+      hash === 'Original'
+        ? '<div class="tl_msg_cont">'
+        : '<br/></div><div class="ln-row-cont">';
 
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix);
     if (block) {
@@ -59,7 +62,7 @@ class Lyric extends LyricBase {
       return false;
     }
     const prefix = ' class="olyrictext">';
-    const suffix = '</div><div class="ln-row-cont">';
+    const suffix = '<div class="ln-row-cont">';
 
     let lyric = this.find_string_by_prefix_suffix(block, prefix, suffix, false);
     if (!lyric) {
@@ -101,12 +104,41 @@ class Lyric extends LyricBase {
 
     // composer and lyricist may be empty in LD JSON
     if (!this.lyricist) {
-      const pattern = { lyricist: '<dt>作詞：</dt><dd>(.*?)</dd>' };
-      this.fill_song_info(html, pattern);
+      const info = this.find_string_by_prefix_suffix(
+        html,
+        '<th>作詞：</th>',
+        '</td>',
+        false
+      );
+      this.lyricist = this.sanitize_html(info);
+    }
+    if (!this.lyricist) {
+      const info = this.find_string_by_prefix_suffix(
+        html,
+        '<th>Lyricist:</th>',
+        '</td>',
+        false
+      );
+      this.lyricist = this.sanitize_html(info);
+    }
+
+    if (!this.composer) {
+      const info = this.find_string_by_prefix_suffix(
+        html,
+        '<th>作曲：</th>',
+        '</td>',
+        false
+      );
+      this.composer = this.sanitize_html(info);
     }
     if (!this.composer) {
-      const pattern = { composer: '<dt>作曲：</dt><dd>(.*?)</dd>' };
-      this.fill_song_info(html, pattern);
+      const info = this.find_string_by_prefix_suffix(
+        html,
+        '<th>Composer:</th>',
+        '</td>',
+        false
+      );
+      this.composer = this.sanitize_html(info);
     }
   }
 
@@ -133,7 +165,7 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     let url =
-      'https://www.lyrical-nonsense.com/global/lyrics/king-gnu/specialz/#Original';
+      'https://www.lyrical-nonsense.com/global/lyrics/lisa/homura/#Romaji';
     if (process.argv.length > 2) {
       // eslint-disable-next-line prefer-destructuring
       url = process.argv[2];
