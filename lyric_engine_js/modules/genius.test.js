@@ -34,8 +34,8 @@ test('', async () => {
 test('', async () => {
   await testLyric({
     url: 'https://genius.com/Maaya-sakamoto-tune-the-rainbow-lyrics',
-    title: "​tune the rainbow",
-    artist: "坂本真綾 (Maaya Sakamoto)",
+    title: '​tune the rainbow',
+    artist: '坂本真綾 (Maaya Sakamoto)',
     length: 520,
   });
 });
