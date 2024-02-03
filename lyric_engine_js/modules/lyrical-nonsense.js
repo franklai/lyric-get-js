@@ -26,29 +26,34 @@ class Lyric extends LyricBase {
     return json_lds.map((value) => JSON.parse(value));
   }
 
-  get_hash(url) {
+  get_content_id(url) {
     const my_url = new URL(url);
     if (my_url.hash[0] === '#') {
       return my_url.hash.slice(1);
     }
-    return '';
+    if (my_url.pathname.startsWith('/global/')) {
+      return 'Romaji';
+    }
+    return 'Original';
   }
 
   get_lyric_content_block(url, html) {
-    const hash = this.get_hash(url) || 'Original';
+    const content_id = this.get_content_id(url);
 
-    let prefix = `<div class="contents" id="${hash}">`;
-    const suffix =
-      hash === 'Original'
-        ? '<div class="tl_msg_cont">'
-        : '<br/></div><div class="ln-row-cont">';
+    let prefix = `<div class="contents subcontents" id="${content_id}">`;
+    let suffix = '<br/></div><div class="ln-row-cont">';
+    if (content_id === 'Romaji') {
+      prefix = `<div class="contents" id="${content_id}">`;
+      suffix = '<style>';
+    } else if (content_id === 'Original') {
+      prefix = `<div class="contents" id="${content_id}">`;
+      suffix = '</p></div><div class="ln-row-cont">';
+    }
 
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix);
     if (block) {
       return block;
     }
-
-    prefix = `<div class="contents subcontents" id="${hash}">`;
 
     return this.find_string_by_prefix_suffix(html, prefix, suffix);
   }
@@ -61,14 +66,9 @@ class Lyric extends LyricBase {
       console.error(`Failed to get content block of url ${url}`);
       return false;
     }
-    const prefix = ' class="olyrictext">';
-    const suffix = '<div class="ln-row-cont">';
+    let lyric = block;
 
-    let lyric = this.find_string_by_prefix_suffix(block, prefix, suffix, false);
-    if (!lyric) {
-      return false;
-    }
-
+    lyric = lyric.replaceAll(/<dl class="titledetails">.+?<\/dl>/g, '');
     lyric = lyric.replaceAll('</p>', '\n');
     lyric = lyric.replaceAll(/<br\/> ?/g, '\n');
     lyric = this.sanitize_html(lyric);
@@ -153,6 +153,7 @@ class Lyric extends LyricBase {
       if (error.status === 503) {
         throw new BlockedError('lyrical-nonsense is blocked');
       }
+      console.error(error);
     }
 
     return true;
@@ -164,8 +165,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    let url =
-      'https://www.lyrical-nonsense.com/global/lyrics/lisa/homura/#Romaji';
+    let url = 'https://www.lyrical-nonsense.com/global/lyrics/yorushika/haru/';
     if (process.argv.length > 2) {
       // eslint-disable-next-line prefer-destructuring
       url = process.argv[2];

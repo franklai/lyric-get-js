@@ -54,5 +54,17 @@ test('', async () => {
   });
 });
 
+test('', async () => {
+  await testLyric({
+    url: 'https://www.lyrical-nonsense.com/global/lyrics/yorushika/haru/',
+    title: 'Sunny',
+    artist: 'Yorushika',
+    lyricist: 'n-buna',
+    composer: 'n-buna',
+    length: 1033,
+  });
+});
+
+
 // https://www.lyrical-nonsense.com/lyrics/asca/resister/#LyricsPlus
 // https://www.lyrical-nonsense.com/lyrics/kenshi-yonezu/lemon/#Espanol
