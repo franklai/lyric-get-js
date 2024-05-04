@@ -1,5 +1,4 @@
 'use strict';
-// const eslintConfigAirbnbBase = require('eslint-config-airbnb-base');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
 const eslintPluginUnicorn = require('eslint-plugin-unicorn');
 
