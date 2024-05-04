@@ -28,17 +28,20 @@ class Lyric extends LyricBase {
 
   get_content_id(url) {
     const my_url = new URL(url);
-    if (my_url.hash[0] === '#') {
-      return my_url.hash.slice(1);
-    }
-    if (my_url.pathname.startsWith('/global/')) {
-      return 'Romaji';
-    }
-    return 'Original';
+
+    const is_global = my_url.pathname.startsWith('/global/');
+    const content_id =
+      my_url.hash[0] === '#'
+        ? my_url.hash.slice(1)
+        : is_global
+          ? 'Romaji'
+          : 'Original';
+
+    return [content_id, is_global];
   }
 
   get_lyric_content_block(url, html) {
-    const content_id = this.get_content_id(url);
+    const [content_id, is_global] = this.get_content_id(url);
 
     let prefix = `<div class="contents subcontents" id="${content_id}">`;
     let suffix = '<br/></div><div class="ln-row-cont">';
@@ -47,7 +50,11 @@ class Lyric extends LyricBase {
       suffix = '<style>';
     } else if (content_id === 'Original') {
       prefix = `<div class="contents" id="${content_id}">`;
-      suffix = '</p></div><div class="ln-row-cont">';
+      if (is_global) {
+        suffix = '<br/></div><div class="ln-row-cont">';
+      } else {
+        suffix = '</span></div><div class="ln-row-cont">';
+      }
     }
 
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix);
@@ -165,7 +172,8 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    let url = 'https://www.lyrical-nonsense.com/global/lyrics/yorushika/haru/';
+    let url =
+      'https://www.lyrical-nonsense.com/lyrics/minami-373/kawaki-wo-ameku/';
     if (process.argv.length > 2) {
       // eslint-disable-next-line prefer-destructuring
       url = process.argv[2];
