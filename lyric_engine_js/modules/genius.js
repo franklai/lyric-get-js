@@ -52,6 +52,7 @@ class Lyric extends LyricBase {
       ''
     );
     lyric = lyric.replaceAll(/<div class="RecommendedSongs__.*?<\/div>/g, '');
+    lyric = lyric.replaceAll(/<div class="StubhubLink__.*?<\/div>/g, '');
     lyric = lyric.replaceAll(/<h2.*?<\/h2>/g, '');
     lyric = this.sanitize_html(lyric);
 
