@@ -5,7 +5,7 @@
   "main": "lyric_engine_js/index.js",
   "scripts": {
     "start": "node server",
-    "watch": "nodemon server",
+    "watch": "node --watch server",
     "test": "jest lyric_engine_js",
     "lint": "eslint lyric_engine_js"
   },
