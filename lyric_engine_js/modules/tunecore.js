@@ -20,8 +20,8 @@ class Lyric extends LyricBase {
     const patterns = {
       title: '<div class=header_text>.*?<h2>(.*?)</h2>',
       artist: '<div class=header_text>.*?<h3>(.*?)</h3>',
-      lyricist: '<div class=lyric_credit>.*?<p>([^<]*?)</ul>',
-      composer: '<div class=lyric_credit>.*?<p>([^<]*?)<li>',
+      composer: '<div class=lyric_credit>.*?<p>([^<]*?)</ul>',
+      lyricist: '<div class=lyric_credit>.*?<p>([^<]*?)<li>',
     };
 
     this.fill_song_info(html, patterns);
