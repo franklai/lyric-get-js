@@ -50,11 +50,9 @@ class Lyric extends LyricBase {
       suffix = '<style>';
     } else if (content_id === 'Original') {
       prefix = `<div class="contents" id="${content_id}">`;
-      if (is_global) {
-        suffix = '<br/></div><div class="ln-row-cont">';
-      } else {
-        suffix = '</span></div><div class="ln-row-cont">';
-      }
+      suffix = is_global
+        ? '<br/></div><div class="ln-row-cont">'
+        : '</span></div><div class="ln-row-cont">';
     }
 
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix);
@@ -175,7 +173,6 @@ if (require.main === module) {
     let url =
       'https://www.lyrical-nonsense.com/lyrics/minami-373/kawaki-wo-ameku/';
     if (process.argv.length > 2) {
-      // eslint-disable-next-line prefer-destructuring
       url = process.argv[2];
     }
     const object = new Lyric(url);

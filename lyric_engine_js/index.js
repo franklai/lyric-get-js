@@ -102,7 +102,7 @@ async function main() {
   let url = 'http://www.utamap.com/showkasi.php?surl=70380';
 
   if (process.argv.length > 2) {
-    url = process.argv[2]; // eslint-disable-line prefer-destructuring
+    url = process.argv[2];
   }
 
   const lyric = await get_full(url);

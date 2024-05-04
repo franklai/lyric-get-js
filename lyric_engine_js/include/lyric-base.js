@@ -87,7 +87,6 @@ class LyricBase {
     const result = regex.exec(input);
     let value;
     if (result && result.length >= 2) {
-      // eslint-disable-next-line prefer-destructuring
       value = result[1];
     }
     return value;
