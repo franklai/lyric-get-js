@@ -1,15 +1,18 @@
 'use strict';
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
 const eslintPluginUnicorn = require('eslint-plugin-unicorn');
+const jsdoc = require('eslint-plugin-jsdoc');
 
 module.exports = [
   // eslintConfigAirbnbBase,
   eslintPluginUnicorn.configs['flat/recommended'],
   eslintPluginPrettierRecommended,
+  jsdoc.configs['flat/recommended'],
   {
     rules: {
       'class-methods-use-this': 'off',
       camelcase: 'off',
+      'jsdoc/require-jsdoc': 'off',
       'no-console': 'off',
       'no-restricted-syntax': [
         'error',

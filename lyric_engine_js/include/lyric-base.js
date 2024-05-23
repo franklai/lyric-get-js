@@ -21,6 +21,10 @@ class LyricBase {
     return this.get_full();
   }
 
+  /**
+   *
+   * @returns {object} title and lyric
+   */
   get_json() {
     const object = {
       title: this.title,
@@ -35,6 +39,10 @@ class LyricBase {
     return object;
   }
 
+  /**
+   *
+   * @returns {string} song info and lyric
+   */
   get_full() {
     // template of full information
     const template = [];
@@ -65,6 +73,14 @@ class LyricBase {
     throw new Error('Implement this function!');
   }
 
+  /**
+   *
+   * @param {string} input String to find
+   * @param {string} prefix Prefix
+   * @param {string} suffix Suffix
+   * @param {boolean} including Returned string includes prefix/suffix or not
+   * @returns {string} Found string
+   */
   find_string_by_prefix_suffix(input, prefix, suffix, including = true) {
     const start = input.indexOf(prefix);
     if (start === -1) {
