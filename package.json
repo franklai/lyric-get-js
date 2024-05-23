@@ -11,6 +11,7 @@
   },
   "license": "Apache",
   "dependencies": {
+    "eslint-plugin-jsdoc": "^48.2.5",
     "html-entities": "^2.3.2",
     "iconv-lite": "^0.6.2",
     "mime-types": "^2.1.28",
