@@ -35,8 +35,8 @@ class Lyric extends LyricBase {
     const patterns = {
       title: '<h2>「(.+)」歌詞',
       artist: '歌手：<a.*?>(.+?)<',
-      lyricist: '作詞\\s*：\\s*(.+)<br>',
-      composer: '作曲\\s*：\\s*(.+)</.+>',
+      lyricist: String.raw`作詞\s*：\s*(.+)<br>`,
+      composer: String.raw`作曲\s*：\s*(.+)</.+>`,
     };
 
     this.fill_song_info(info_block, patterns);
