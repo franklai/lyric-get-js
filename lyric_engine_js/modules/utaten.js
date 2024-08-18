@@ -32,7 +32,6 @@ class Lyric extends LyricBase {
     );
     let patterns = {
       title: '<meta property="og:title" content="(.*?) 歌詞',
-      artist: '<meta property="og:description" content="(.*?)が歌う',
     };
 
     this.fill_song_info(content, patterns);
@@ -46,6 +45,7 @@ class Lyric extends LyricBase {
     }
 
     patterns = {
+      artist: '<h3>(.*?)</h3>',
       lyricist: '作詞</dt>(.*?)</dd>',
       composer: '作曲</dt>(.*?)</dd>',
     };
