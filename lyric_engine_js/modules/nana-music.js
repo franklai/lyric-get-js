@@ -20,8 +20,8 @@ class Lyric extends LyricBase {
     const raw = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
 
     const patterns = {
-      title: String.raw`<\\w+ class="lyric-song-title".*?>(.+?)</`,
-      artist: String.raw`<\\w+ class="lyric-song-artist".*?>(.+?)</`,
+      title: String.raw`<\w+ class="lyric-song-title".*?>(.+?)</`,
+      artist: String.raw`<\w+ class="lyric-song-artist".*?>(.+?)</`,
       lyricist: '<div class="lyricist-name".*?>(.+?)</div>',
       composer: '<div class="composer-name".*?>(.+?)</div>',
     };
