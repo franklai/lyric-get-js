@@ -12,7 +12,6 @@ const kashinavi = require('./modules/kashinavi');
 const kkbox = require('./modules/kkbox');
 const line_music = require('./modules/line-music');
 const lyrical_nonsense = require('./modules/lyrical-nonsense');
-const mojim = require('./modules/mojim');
 const musixmatch = require('./modules/musixmatch');
 const nana_music = require('./modules/nana-music');
 const petitlyrics = require('./modules/petitlyrics');
@@ -35,7 +34,6 @@ const site_array = [
   kkbox,
   line_music,
   lyrical_nonsense,
-  mojim,
   musixmatch,
   nana_music,
   petitlyrics,
