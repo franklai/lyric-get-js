@@ -34,7 +34,6 @@ const site_array = [
   line_music,
   lyrical_nonsense,
   musixmatch,
-  nana_music,
   petitlyrics,
   rocklyric,
   self,
