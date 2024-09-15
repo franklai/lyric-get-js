@@ -23,7 +23,7 @@ async function testLyric(object) {
   if (length > 0) expect(inst.lyric.length).toBe(length);
 }
 
-test('', async () => {
+test('lyrical-nonsense, LiSA - Homura', async () => {
   await testLyric({
     url: 'https://www.lyrical-nonsense.com/global/lyrics/lisa/homura/#Romaji',
     title: 'Homura',
@@ -34,7 +34,7 @@ test('', async () => {
   });
 });
 
-test('', async () => {
+test('lyrical-nonsense, 美波 - カワキヲアメク', async () => {
   await testLyric({
     url: 'https://www.lyrical-nonsense.com/lyrics/minami-373/kawaki-wo-ameku/',
     title: 'カワキヲアメク',
@@ -45,7 +45,7 @@ test('', async () => {
   });
 });
 
-test('', async () => {
+test('lyrical-nonsense, Kenshi Yonezu - Lemon', async () => {
   await testLyric({
     url: 'https://www.lyrical-nonsense.com/global/lyrics/kenshi-yonezu/lemon/#Espanol',
     title: 'Lemon',
@@ -54,7 +54,7 @@ test('', async () => {
   });
 });
 
-test('', async () => {
+test('lyrical-nonsense, Yorushika - Sunny', async () => {
   await testLyric({
     url: 'https://www.lyrical-nonsense.com/global/lyrics/yorushika/haru/',
     title: 'Sunny',
