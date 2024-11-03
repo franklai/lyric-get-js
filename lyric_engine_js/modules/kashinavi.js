@@ -22,7 +22,7 @@ class Lyric extends LyricBase {
   }
 
   async find_info(url, html) {
-    const prefix = '<h2>「';
+    const prefix = '<td valign=top align=center';
     const suffix = '</div></div>';
 
     const info_block = this.find_string_by_prefix_suffix(
@@ -33,7 +33,7 @@ class Lyric extends LyricBase {
     );
 
     const patterns = {
-      title: '<h2>「(.+)」歌詞',
+      title: '<h2>(.+)</h2>',
       artist: '歌手：<a.*?>(.+?)<',
       lyricist: String.raw`作詞\s*：\s*(.+)<br>`,
       composer: String.raw`作曲\s*：\s*(.+)</.+>`,
