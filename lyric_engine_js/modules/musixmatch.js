@@ -6,8 +6,8 @@ const keyword = 'musixmatch';
 class Lyric extends LyricBase {
   find_lyric(url, json) {
     try {
-      const { body } = json.page.lyrics.lyrics;
-      let lyric = body;
+      const { lyrics } = json.props.pageProps.data.trackInfo.data;
+      let lyric = lyrics.body;
       lyric = lyric.replaceAll('′', "'");
       this.lyric = lyric;
     } catch {
@@ -20,7 +20,7 @@ class Lyric extends LyricBase {
 
   find_info(url, json) {
     try {
-      const { track } = json.page;
+      const { track } = json.props.pageProps.data.trackInfo.data;
       this.title = track.name;
       this.artist = track.artistName;
     } catch {
@@ -31,12 +31,12 @@ class Lyric extends LyricBase {
   }
 
   is_blocked(html) {
-    return html.indexOf('We detected that your IP is blocked');
+    return html.includes('We detected that your IP is blocked');
   }
 
   find_json(html) {
-    const prefix = 'var __mxmState = ';
-    const suffix = ';</script>';
+    const prefix = '<script id="__NEXT_DATA__" type="application/json">';
+    const suffix = '</script>';
 
     const raw = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
     if (!raw) {
