@@ -1,0 +1,6 @@
+[install]
+saveTextLockfile = true
+
+[install.lockfile]
+print = "yarn"
+
