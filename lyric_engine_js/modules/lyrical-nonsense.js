@@ -44,7 +44,7 @@ class Lyric extends LyricBase {
     const [content_id, is_global] = this.get_content_id(url);
 
     let prefix = `<div class="contents subcontents" id="${content_id}">`;
-    let suffix = '<br/></div><div class="ln-row-cont">';
+    let suffix = '<div class="ln-row-cont">';
     if (content_id === 'Romaji') {
       prefix = `<div class="contents" id="${content_id}">`;
       suffix = '<style>';
@@ -75,8 +75,8 @@ class Lyric extends LyricBase {
 
     lyric = lyric.replaceAll(/<dl class="titledetails">.+?<\/dl>/g, '');
     lyric = lyric.replaceAll(/<div id="amplified_.+?<\/div>/g, '');
-    lyric = lyric.replaceAll('</p>', '\n');
-    lyric = lyric.replaceAll(/<br\/> ?/g, '\n');
+    lyric = lyric.replaceAll(/<span class="line-number">\d+\.<\/span>/g, '');
+    lyric = lyric.replaceAll('<span class="line-text">', '\n');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
