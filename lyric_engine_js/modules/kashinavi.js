@@ -33,7 +33,7 @@ class Lyric extends LyricBase {
     );
 
     const patterns = {
-      title: '<h2>「(.+)」歌詞?</h2>',
+      title: '<h2>.*?「(.+)」歌詞?</',
       artist: '歌手：<a.*?>(.+?)<',
       lyricist: String.raw`作詞\s*：\s*(.+)<br>`,
       composer: String.raw`作曲\s*：\s*(.+)\n`,
