@@ -22,20 +22,20 @@ async function testLyric(object) {
   if (length > 0) expect(inst.lyric.length).toBe(length);
 }
 
-test('', async () => {
+test('genius, Hollow Coves - Coastline', async () => {
   await testLyric({
     url: 'https://genius.com/Hollow-coves-coastline-lyrics',
     title: 'Coastline',
     artist: 'Hollow Coves',
-    length: 1028,
+    length: 1079,
   });
 });
 
-test('', async () => {
+test('genius, Sakamoto Maaya- tune the rainbow', async () => {
   await testLyric({
     url: 'https://genius.com/Maaya-sakamoto-tune-the-rainbow-lyrics',
     title: '​tune the rainbow',
     artist: '坂本真綾 (Maaya Sakamoto)',
-    length: 520,
+    length: 521,
   });
 });
