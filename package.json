@@ -7,7 +7,7 @@
     "start": "node server",
     "watch": "node --watch server",
     "test": "jest lyric_engine_js",
-    "lint": "eslint lyric_engine_js"
+    "lint": "oxlint lyric_engine_js"
   },
   "license": "Apache",
   "dependencies": {
@@ -20,12 +20,8 @@
   "devDependencies": {
     "@playwright/test": "^1.51.1",
     "@types/node": "^20.17.25",
-    "eslint": "^9.23.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-jsdoc": "^50.6.8",
-    "eslint-plugin-prettier": "^5.2.3",
-    "eslint-plugin-unicorn": "^56.0.1",
     "jest": "^29.7.0",
+    "oxlint": "^0.16.2",
     "prettier": "^3.5.3"
   },
   "prettier": {
