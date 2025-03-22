@@ -31,11 +31,11 @@ test('', async () => {
   });
 });
 
-test('', async () => {
+test('Maaya Sakamoto - Tune the Rainbow', async () => {
   await testLyric({
-    url: 'https://www.musixmatch.com/lyrics/Maroon-5/Sugar',
-    title: 'Sugar',
-    artist: 'Maroon 5',
-    length: 2511,
+    url: 'https://www.musixmatch.com/lyrics/Maaya-Sakamoto/Tune-the-Rainbow',
+    title: 'Tune the Rainbow',
+    artist: 'Maaya Sakamoto',
+    length: 500,
   });
 });
