@@ -16,7 +16,7 @@ async function testLyric(object) {
 
 test('BUMP OF CHICKEN', async () => {
   await testLyric({
-    url: 'http://utaten.com/lyric/jb81012024/',
+    url: 'https://utaten.com/lyric/jb81012024/',
     title: 'beautiful glider',
     artist: 'BUMP OF CHICKEN',
     lyricist: '藤原基央',
@@ -27,7 +27,7 @@ test('BUMP OF CHICKEN', async () => {
 
 test('AAA', async () => {
   await testLyric({
-    url: 'http://utaten.com/lyric/jb71110163/',
+    url: 'https://utaten.com/lyric/jb71110163/',
     title: 'Charge & Go!',
     artist: 'AAA',
     lyricist: 'Kenn Kato',
