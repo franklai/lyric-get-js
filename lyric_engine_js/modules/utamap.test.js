@@ -15,7 +15,7 @@ async function testLyric(object) {
   if (length > 0) assert.strictEqual(inst.lyric.length, length);
 }
 
-test('', async () => {
+test('', { skip: 'utamap is not responding since 2025-04-21' }, async () => {
   await testLyric({
     url: 'https://www.utamap.com/showkasi.php?surl=59709',
     title: 'One more time,One more chance',
@@ -25,7 +25,7 @@ test('', async () => {
   });
 });
 
-test('', async () => {
+test('', { skip: 'utamap is not responding since 2025-04-21' }, async () => {
   await testLyric({
     url: 'https://www.utamap.com/showkasi.php?surl=k-131226-001',
     title: 'ちっぽけな愛のうた',
