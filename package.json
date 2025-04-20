@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "watch": "node --watch server",
-    "test": "jest lyric_engine_js",
+    "test": "node --test --test-timeout=10000 ./lyric_engine_js",
     "lint": "oxlint lyric_engine_js"
   },
   "license": "Apache",

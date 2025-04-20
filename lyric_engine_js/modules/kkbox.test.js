@@ -1,4 +1,5 @@
-/* global expect test */
+const assert = require('node:assert');
+const test = require('node:test');
 const { Lyric } = require('./kkbox');
 const BlockedError = require('../include/blocked-error');
 
@@ -18,12 +19,12 @@ async function testLyric(object) {
     }
   }
 
-  expect(inst.title).toBe(title);
-  expect(inst.artist).toBe(artist);
-  if (lyricist) expect(inst.lyricist).toBe(lyricist);
-  if (composer) expect(inst.composer).toBe(composer);
-  if (arranger) expect(inst.arranger).toBe(arranger);
-  if (length > 0) expect(inst.lyric.length).toBe(length);
+  assert.strictEqual(inst.title, title);
+  assert.strictEqual(inst.artist, artist);
+  if (lyricist) assert.strictEqual(inst.lyricist, lyricist);
+  if (composer) assert.strictEqual(inst.composer, composer);
+  if (arranger) assert.strictEqual(inst.arranger, arranger);
+  if (length > 0) assert.strictEqual(inst.lyric.length, length);
 }
 
 test('', async () => {
