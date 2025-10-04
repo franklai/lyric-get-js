@@ -4,7 +4,7 @@ const keyword = 'animesongz';
 
 class Lyric extends LyricBase {
   find_lyric(url, html) {
-    const prefix = '<div id="lyricViewArea">';
+    const prefix = '<div id="lyricViewArea"';
     const suffix = '<div style=';
 
     let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix);
