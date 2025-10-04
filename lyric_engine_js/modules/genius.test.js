@@ -35,7 +35,7 @@ test('genius, Hollow Coves - Coastline', async () => {
 test('genius, Sakamoto Maaya- tune the rainbow', async () => {
   await testLyric({
     url: 'https://genius.com/Maaya-sakamoto-tune-the-rainbow-lyrics',
-    title: '​tune the rainbow',
+    title: 'tune the rainbow',
     artist: '坂本真綾 (Maaya Sakamoto)',
     length: 520,
   });
