@@ -20,7 +20,9 @@ class Lyric extends LyricBase {
       apiVer: '1.0',
     };
 
-    const json = await this.post_form(json_url, body, { headers });
+    const json = await this.post_form(json_url, new URLSearchParams(body), {
+      headers,
+    });
 
     return json;
   }

@@ -1,7 +1,6 @@
 const { decode } = require('html-entities');
 const iconv = require('iconv-lite');
 const striptags = require('striptags');
-const superagent = require('superagent');
 
 const ATTR_LIST = [
   ['artist', '歌手'],
@@ -115,12 +114,9 @@ class LyricBase {
     };
 
     try {
-      const response = await superagent
-        .get(url)
-        .set(headers)
-        .responseType('arraybuffer');
-
-      return iconv.decode(response.body, encoding);
+      const resp = await fetch(url, { headers });
+      const buffer = Buffer.from(await resp.arrayBuffer());
+      return iconv.decode(buffer, encoding);
     } catch (error) {
       if (error.status === 403) {
         console.error(`Failed to request ${url}. Response code 403`);
@@ -135,13 +131,13 @@ class LyricBase {
   async post_form(url, body, options = {}) {
     const { headers = { 'User-Agent': USER_AGENT } } = options;
 
-    const response = await superagent
-      .post(url)
-      .set(headers)
-      .type('form')
-      .send(body);
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers,
+      body,
+    });
 
-    return response.body;
+    return await resp.json();
   }
 
   sanitize_html(value) {
