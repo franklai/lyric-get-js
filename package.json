@@ -14,8 +14,7 @@
     "html-entities": "2.6.0",
     "iconv-lite": "0.7.0",
     "mime-types": "3.0.1",
-    "striptags": "^3.2.0",
-    "superagent": "^9.0.2"
+    "striptags": "^3.2.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.51.1",
