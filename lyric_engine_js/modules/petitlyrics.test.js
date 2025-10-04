@@ -13,14 +13,6 @@ async function testLyric(object) {
   if (composer) assert.strictEqual(inst.composer, composer);
   if (arranger) assert.strictEqual(inst.arranger, arranger);
   if (length > 0) assert.strictEqual(inst.lyric.length, length);
-
-
-  // assert.strictEqual(inst.title, title);
-  // assert.strictEqual(inst.artist, artist);
-  // if (lyricist) assert.strictEqual(inst.lyricist, lyricist);
-  // if (composer) assert.strictEqual(inst.composer, composer);
-  // if (arranger) assert.strictEqual(inst.arranger, arranger);
-  // if (length > 0) assert.strictEqual(inst.lyric.length, length);
 }
 
 test('gravityWall', async () => {
