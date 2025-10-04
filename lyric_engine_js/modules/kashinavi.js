@@ -21,7 +21,22 @@ class Lyric extends LyricBase {
     return true;
   }
 
+  find_title(html) {
+    const prefix = '"MusicRecording"';
+    const suffix = '"byArtist"';
+
+    const block = this.find_string_by_prefix_suffix(html, prefix, suffix);
+
+    const patterns = {
+      title: '"name": "(.+)"',
+    };
+
+    this.fill_song_info(block, patterns);
+  }
+
   async find_info(url, html) {
+    this.find_title(html);
+
     const prefix = '<td valign=top align=center';
     const suffix = '</div></div>';
 
@@ -33,7 +48,6 @@ class Lyric extends LyricBase {
     );
 
     const patterns = {
-      title: '<h2>.*?「(.+)」歌詞?</',
       artist: '歌手：<a.*?>(.+?)<',
       lyricist: String.raw`作詞\s*：\s*(.+)<br>`,
       composer: String.raw`作曲\s*：\s*(.+)\n`,
