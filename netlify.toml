@@ -1,6 +1,5 @@
 [build]
 publish = "public"
-environment = { NODE_VERSION = "20.16.0" }
 
 [functions]
 included_files = ["lyric_engine_js/include/*.js", "lyric_engine_js/modules/*.js"]
