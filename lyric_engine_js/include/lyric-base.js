@@ -116,11 +116,13 @@ class LyricBase {
     try {
       const resp = await fetch(url, { headers });
       if (!resp.ok) {
-        throw new Error(resp);
+        const err = new Error('fetch response is not ok');
+        err.status = resp.status;
+        err.statusText = resp.statusText;
+        err.url = resp.url;
+        err.headers = resp.headers;
+        throw err;
       }
-
-      console.warn('url:', url);
-      console.warn('resp:', resp);
 
       const buffer = Buffer.from(await resp.arrayBuffer());
       return iconv.decode(buffer, encoding);
