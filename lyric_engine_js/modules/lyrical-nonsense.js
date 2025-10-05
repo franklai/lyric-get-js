@@ -82,6 +82,7 @@ class Lyric extends LyricBase {
     }
     let lyric = block;
 
+    lyric = lyric.replaceAll(/<script>.+?<\/script>/g, '');
     lyric = lyric.replaceAll(/<dl class="titledetails">.+?<\/dl>/g, '');
     lyric = lyric.replaceAll(/<div id="amplified_.+?<\/div>/g, '');
     lyric = lyric.replaceAll(/<span class="line-number">\d+\.<\/span>/g, '');
