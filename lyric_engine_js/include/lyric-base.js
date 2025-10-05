@@ -115,6 +115,9 @@ class LyricBase {
 
     try {
       const resp = await fetch(url, { headers });
+      if (!resp.ok) {
+        throw new Error(resp);
+      }
 
       console.warn('url:', url);
       console.warn('resp:', resp);
