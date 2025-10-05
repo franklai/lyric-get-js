@@ -14,6 +14,9 @@ exports.handler = async (event, context) => {
     const lyric = await engine.get_full(url);
     out.lyric = lyric;
   } catch (error) {
+    if (error instanceof engine.BlockedError) {
+      out.lyric = `Failed to get lyric of ${url}. Blocked by vendor.`;
+    }
     console.log(`something wrong, error: ${error}`);
   }
 
