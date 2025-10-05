@@ -115,6 +115,10 @@ class LyricBase {
 
     try {
       const resp = await fetch(url, { headers });
+
+      console.warn('url:', url);
+      console.warn('resp:', resp);
+
       const buffer = Buffer.from(await resp.arrayBuffer());
       return iconv.decode(buffer, encoding);
     } catch (error) {
