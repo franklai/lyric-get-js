@@ -52,7 +52,7 @@ class Lyric extends LyricBase {
       prefix = `<div class="contents" id="${content_id}">`;
       suffix = is_global
         ? '<br/></div><div class="ln-row-cont">'
-        : '</span></div><div class="ln-row-cont">';
+        : '</div><div class="ln-row-cont">';
     }
 
     console.warn(`== get block ==`);
