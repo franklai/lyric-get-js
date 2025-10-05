@@ -18,7 +18,6 @@ const petitlyrics = require('./modules/petitlyrics');
 const rocklyric = require('./modules/rocklyric');
 const self = require('./modules/self');
 const tunecore = require('./modules/tunecore');
-const utamap = require('./modules/utamap');
 const uta_net = require('./modules/uta-net');
 const utaten = require('./modules/utaten');
 
@@ -40,7 +39,6 @@ const site_array = [
   rocklyric,
   self,
   tunecore,
-  utamap,
   uta_net,
   utaten,
 ];
@@ -97,7 +95,7 @@ exports.SiteNotSupportError = SiteNotSupportError;
 exports.BlockedError = BlockedError;
 
 async function main() {
-  let url = 'http://www.utamap.com/showkasi.php?surl=70380';
+  let url = 'https://www.uta-net.com/song/17248/';
 
   if (process.argv.length > 2) {
     url = process.argv[2];
