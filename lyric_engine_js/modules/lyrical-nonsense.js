@@ -55,19 +55,10 @@ class Lyric extends LyricBase {
         : '</div><div class="ln-row-cont">';
     }
 
-    console.warn(`== get block ==`);
-    console.warn(`== url: ${url}, content id: ${content_id}, is global: ${is_global} ==`);
-    
     const block = this.find_string_by_prefix_suffix(html, prefix, suffix);
     if (block) {
-      console.warn(`== found block ==`);
-      console.warn(block);
-
       return block;
     }
-
-    console.warn(`== NOT found block ==`);
-    console.warn(html);
 
     return this.find_string_by_prefix_suffix(html, prefix, suffix);
   }
