@@ -135,7 +135,12 @@ class Lyric extends LyricBase {
     const { url } = this;
 
     const { html, plsession } = await this.get_html_and_plsession(url);
-    // console.log('plsession:', plsession);
+    console.log('plsession:', plsession);
+    console.log('html:', html);
+
+    if (!plsession) {
+      console.warn('Failed to get plsession');
+    }
 
     const csrf_token = await this.get_csrf_token(html, plsession);
     // console.log('csrf_token:', csrf_token);
