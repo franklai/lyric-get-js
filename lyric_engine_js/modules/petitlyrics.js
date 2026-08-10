@@ -10,6 +10,12 @@ class Lyric extends LyricBase {
 
   async get_html_and_plsession(url) {
     const resp = await fetch(url);
+    if (resp.status === 403) {
+      const html = await resp.text();
+      console.warn('html:', html);
+
+      throw new BlockedError('petitlyrics shows 403');
+    }
     const cookie = resp.headers.get('set-cookie');
     const plsession = this.get_first_group_by_pattern(
       cookie,
