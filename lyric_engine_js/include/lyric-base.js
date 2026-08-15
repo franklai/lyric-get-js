@@ -108,7 +108,7 @@ class LyricBase {
   }
 
   async get_html(url, options = {}) {
-    const { encoding = 'utf8' } = options;
+    const { encoding = 'utf8', rejectEmptyResponse = false } = options;
     const headers = {
       'User-Agent': USER_AGENT,
     };
@@ -125,6 +125,15 @@ class LyricBase {
       }
 
       const buffer = Buffer.from(await resp.arrayBuffer());
+      if (rejectEmptyResponse && buffer.length === 0) {
+        const err = new Error('fetch response is empty');
+        err.status = resp.status;
+        err.statusText = resp.statusText;
+        err.url = resp.url;
+        err.headers = resp.headers;
+        throw err;
+      }
+
       return iconv.decode(buffer, encoding);
     } catch (error) {
       if (error.status === 403) {
