@@ -2,7 +2,6 @@ const urlModule = require('url');
 
 const BlockedError = require('./include/blocked-error');
 
-const animesongz = require('./modules/animesongz');
 const awa = require('./modules/awa');
 const azlyrics = require('./modules/azlyrics');
 const genius = require('./modules/genius');
@@ -23,7 +22,6 @@ const utaten = require('./modules/utaten');
 
 // let site_dict = {};
 const site_array = [
-  animesongz,
   awa,
   azlyrics,
   genius,
