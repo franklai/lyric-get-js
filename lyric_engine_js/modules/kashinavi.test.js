@@ -36,3 +36,14 @@ test('', async () => {
     length: 1260,
   });
 });
+
+test('', async () => {
+  await testLyric({
+    url: 'https://kashinavi.com/lyrics/119334/',
+    title: 'sky & blue',
+    artist: 'GIRLFRIEND',
+    lyricist: 'SAKIKA・大知正紘',
+    composer: 'NAOKI-T・大知正紘',
+    length: 813,
+  });
+});
