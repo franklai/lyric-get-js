@@ -14,12 +14,7 @@ class Lyric extends LyricBase {
     }
     const second_part = html.slice(Math.max(0, pos + 1));
 
-    const json_ld = this.find_string_by_prefix_suffix(
-      second_part,
-      prefix,
-      suffix,
-      false
-    );
+    const json_ld = this.find_string_by_prefix_suffix(second_part, prefix, suffix, false);
     return JSON.parse(json_ld);
   }
 
@@ -71,8 +66,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url =
-      'https://www.kkbox.com/tw/tc/song/XgJ00.nUO65u2jgdu2jgd0XL-index.html';
+    const url = 'https://www.kkbox.com/tw/tc/song/XgJ00.nUO65u2jgdu2jgd0XL-index.html';
     const object = new Lyric(url);
     const lyric = await object.get();
     console.log(lyric);

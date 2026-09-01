@@ -53,8 +53,7 @@
     btnSubmit.disabled = true;
   };
   var setError = function () {
-    var errMsg =
-      '<span style="color: red;">Failed to get lyric. Please contact franklai.</span>';
+    var errMsg = '<span style="color: red;">Failed to get lyric. Please contact franklai.</span>';
     setErrorMsg(errMsg);
     btnSubmit.disabled = false;
   };
@@ -102,10 +101,7 @@
       return;
     }
 
-    if (
-      document.queryCommandSupported &&
-      document.queryCommandSupported('copy')
-    ) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
       document.execCommand('copy');
       return;
     }

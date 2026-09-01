@@ -24,12 +24,7 @@ class Lyric extends LyricBase {
   async find_info(url, html) {
     let prefix = '<meta property="og:site_name"';
     let suffix = '<meta property="og:image"';
-    let content = this.find_string_by_prefix_suffix(
-      html,
-      prefix,
-      suffix,
-      false
-    );
+    let content = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
     let patterns = {
       title: '<meta property="og:title" content="(.*?) 歌詞',
     };

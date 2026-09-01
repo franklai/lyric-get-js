@@ -34,19 +34,13 @@ class Lyric extends LyricBase {
     }
 
     let lyric = body;
-    lyric = lyric.replace(
-      /<div class="PrimisPlayer/,
-      '<br/><div class="PrimisPlayer'
-    );
+    lyric = lyric.replace(/<div class="PrimisPlayer/, '<br/><div class="PrimisPlayer');
     lyric = lyric.replaceAll('<br/>', '\n');
     lyric = lyric.replaceAll(/<button.*?<\/button>/g, '');
     lyric = lyric.replaceAll(/<label.*?<\/label>/g, '');
     lyric = lyric.replaceAll(/<div class="EmbedForm__Copy.*?<\/div>/g, '');
     lyric = lyric.replaceAll(/<div class="LyricsEditExplainer.*?<\/div>/g, '');
-    lyric = lyric.replaceAll(
-      /<div class="LyricsHeader__TextEllipsis.*?<\/div>/g,
-      ''
-    );
+    lyric = lyric.replaceAll(/<div class="LyricsHeader__TextEllipsis.*?<\/div>/g, '');
     lyric = lyric.replaceAll(/<div class="RecommendedSongs.*?<\/div>/g, '');
     lyric = lyric.replaceAll(/<div class="ShareButtons.*?<\/div>/g, '');
     lyric = lyric.replaceAll(/<div class="StubhubLink.*?<\/div>/g, '');
