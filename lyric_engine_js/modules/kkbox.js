@@ -45,16 +45,14 @@ class Lyric extends LyricBase {
     const { url } = this;
 
     try {
-      const html = await this.get_html(url);
+      const html = await this.get_html(url, { rejectEmptyResponse: true });
       await this.find_lyric(url, html);
       await this.find_info(url, html);
     } catch (error) {
-      if (error.status === 403) {
-        throw new BlockedError('KKbox shows 403');
+      if (error.status === 202 || error.status === 403) {
+        throw new BlockedError(`KKbox shows ${error.status}`);
       }
-      if (error.code === 'ECONNRESET') {
-        throw error;
-      }
+      throw error;
     }
 
     return true;

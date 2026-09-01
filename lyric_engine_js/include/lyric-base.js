@@ -132,7 +132,7 @@ class LyricBase {
   }
 
   async get_html(url, options = {}) {
-    const { encoding = 'utf8', impersonate } = options;
+    const { encoding = 'utf8', impersonate, rejectEmptyResponse = false } = options;
     let fetch_html = fetch;
     let request_options = {
       headers: {
@@ -165,6 +165,20 @@ class LyricBase {
       }
 
       const buffer = Buffer.from(await resp.arrayBuffer());
+      const waf_action = resp.headers.get('x-amzn-waf-action');
+      if (rejectEmptyResponse && (buffer.length === 0 || waf_action === 'challenge')) {
+        const err = new Error(
+          waf_action === 'challenge'
+            ? 'fetch response is an AWS WAF challenge'
+            : 'fetch response is empty'
+        );
+        err.status = resp.status;
+        err.statusText = resp.statusText;
+        err.url = resp.url;
+        err.headers = resp.headers;
+        throw err;
+      }
+
       return iconv.decode(buffer, encoding);
     } catch (error) {
       if (error.status === 403) {
