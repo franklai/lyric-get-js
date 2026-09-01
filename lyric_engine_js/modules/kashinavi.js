@@ -8,52 +8,35 @@ class Lyric extends LyricBase {
     return this.get_first_group_by_pattern(url, pattern);
   }
 
-  async find_lyric(url, html) {
-    const prefix = 'oncopy="return false;" unselectable="on;">';
-    const suffix = '</div>';
-    let lyric = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
-    lyric = lyric.replaceAll('<br>\u3000<br>', '<br><br>');
-    lyric = lyric.replaceAll('</p><p>', '\n\n');
-    lyric = lyric.replaceAll('<br>', '\n');
+  find_lyric(html) {
+    let lyric = this.get_first_group_by_pattern(
+      html,
+      '<div[^>]+class=["\\\'][^"\\\']*kashi-japanese-block[^"\\\']*["\\\'][^>]*>([\\s\\S]*?)</div>'
+    );
+    if (!lyric) {
+      throw new Error('Failed to find lyric');
+    }
+
+    lyric = lyric.replace(/<br\s*\/?>/gi, '\n');
     lyric = this.sanitize_html(lyric);
 
     this.lyric = lyric;
     return true;
   }
 
-  find_title(html) {
-    const prefix = '"MusicRecording"';
-    const suffix = '"byArtist"';
-
-    const block = this.find_string_by_prefix_suffix(html, prefix, suffix);
-
+  find_info(html) {
     const patterns = {
-      title: '"name": "(.+)"',
+      title:
+        '"@type"\\s*:\\s*"MusicRecording"[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
+      artist:
+        '"byArtist"\\s*:\\s*\\{[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
+      lyricist:
+        '"lyricist"\\s*:\\s*\\{[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
+      composer:
+        '"composer"\\s*:\\s*\\{[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
     };
 
-    this.fill_song_info(block, patterns);
-  }
-
-  async find_info(url, html) {
-    this.find_title(html);
-
-    const prefix = '<td valign=top align=center';
-    const suffix = '</div></div>';
-
-    const info_block = this.find_string_by_prefix_suffix(
-      html,
-      prefix,
-      suffix,
-      true
-    );
-
-    const patterns = {
-      artist: '歌手：<a.*?>(.+?)<',
-      lyricist: String.raw`作詞\s*：\s*(.+)<br>`,
-      composer: String.raw`作曲\s*：\s*(.+)\n`,
-    };
-
-    this.fill_song_info(info_block, patterns);
+    this.fill_song_info(html, patterns);
   }
 
   async parse_page() {
@@ -61,8 +44,8 @@ class Lyric extends LyricBase {
 
     const html = await this.get_html(url, { encoding: 'sjis' });
 
-    this.find_lyric(url, html);
-    this.find_info(url, html);
+    this.find_lyric(html);
+    this.find_info(html);
 
     return true;
   }
