@@ -108,13 +108,21 @@ class LyricBase {
   }
 
   async get_html(url, options = {}) {
-    const { encoding = 'utf8' } = options;
-    const headers = {
-      'User-Agent': USER_AGENT,
+    const { encoding = 'utf8', impersonate } = options;
+    let fetch_html = fetch;
+    let request_options = {
+      headers: {
+        'User-Agent': USER_AGENT,
+      },
     };
 
+    if (impersonate) {
+      ({ fetch: fetch_html } = await import('impers'));
+      request_options = { impersonate };
+    }
+
     try {
-      const resp = await fetch(url, { headers });
+      const resp = await fetch_html(url, request_options);
       if (!resp.ok) {
         const err = new Error('fetch response is not ok');
         err.status = resp.status;
