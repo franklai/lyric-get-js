@@ -2,4 +2,10 @@
 publish = "public"
 
 [functions]
-included_files = ["lyric_engine_js/include/*.js", "lyric_engine_js/modules/*.js"]
+external_node_modules = ["impers", "koffi", "@koromix/koffi-linux-x64"]
+included_files = [
+  "lyric_engine_js/include/*.js",
+  "lyric_engine_js/modules/*.js",
+  "node_modules/@koromix/koffi-linux-x64/linux_x64/koffi.node",
+  "vendor/libcurl-impersonate/**",
+]

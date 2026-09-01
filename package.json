@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server",
     "watch": "node --watch server",
+    "postinstall": "node scripts/install-libcurl-impersonate.js",
     "test": "node --test --test-timeout=10000 \"./lyric_engine_js/**/*.test.js\"",
     "lint": "oxlint lyric_engine_js"
   },
