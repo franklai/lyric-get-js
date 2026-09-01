@@ -1,6 +1,6 @@
 const assert = require('node:assert');
 const test = require('node:test');
-const { Lyric } = require('./lyrical-nonsense');
+const { Lyric } = require('./utatime');
 const BlockedError = require('../include/blocked-error');
 
 async function testLyric(object) {
@@ -24,9 +24,9 @@ async function testLyric(object) {
   if (length > 0) assert.strictEqual(inst.lyric.length, length);
 }
 
-test('lyrical-nonsense, LiSA - Homura', async () => {
+test('utatime, LiSA - Homura', async () => {
   await testLyric({
-    url: 'https://www.lyrical-nonsense.com/global/lyrics/lisa/homura/#Romaji',
+    url: 'https://www.utatime.com/global/lyrics/lisa/homura/#Romaji',
     title: 'Homura',
     artist: 'LiSA',
     lyricist: 'Yuki Kajiura・LiSA',
@@ -35,9 +35,9 @@ test('lyrical-nonsense, LiSA - Homura', async () => {
   });
 });
 
-test('lyrical-nonsense, 美波 - カワキヲアメク', async () => {
+test('utatime, 美波 - カワキヲアメク', async () => {
   await testLyric({
-    url: 'https://www.lyrical-nonsense.com/lyrics/minami-373/kawaki-wo-ameku/',
+    url: 'https://www.utatime.com/lyrics/minami-373/kawaki-wo-ameku/',
     title: 'カワキヲアメク',
     artist: '美波',
     lyricist: '美波',
@@ -46,18 +46,18 @@ test('lyrical-nonsense, 美波 - カワキヲアメク', async () => {
   });
 });
 
-test('lyrical-nonsense, Kenshi Yonezu - Lemon', async () => {
+test('utatime, Kenshi Yonezu - Lemon', async () => {
   await testLyric({
-    url: 'https://www.lyrical-nonsense.com/global/lyrics/kenshi-yonezu/lemon/#Espanol',
+    url: 'https://www.utatime.com/global/lyrics/kenshi-yonezu/lemon/#Espanol',
     title: 'Lemon',
     artist: 'Kenshi Yonezu',
     length: 1665,
   });
 });
 
-test('lyrical-nonsense, Yorushika - Sunny', async () => {
+test('utatime, Yorushika - Sunny', async () => {
   await testLyric({
-    url: 'https://www.lyrical-nonsense.com/global/lyrics/yorushika/haru/',
+    url: 'https://www.utatime.com/global/lyrics/yorushika/haru/',
     title: 'Sunny',
     artist: 'Yorushika',
     lyricist: 'n-buna',
@@ -66,5 +66,5 @@ test('lyrical-nonsense, Yorushika - Sunny', async () => {
   });
 });
 
-// https://www.lyrical-nonsense.com/lyrics/asca/resister/#LyricsPlus
-// https://www.lyrical-nonsense.com/lyrics/kenshi-yonezu/lemon/#Espanol
+// https://www.utatime.com/lyrics/asca/resister/#LyricsPlus
+// https://www.utatime.com/global/lyrics/kenshi-yonezu/lemon/#Espanol
