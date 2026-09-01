@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/lyric/get/*.js": {
+      "includeFiles": [
+        "node_modules/koffi/**",
+        "node_modules/@koromix/koffi-linux-x64/**",
+        "vendor/libcurl-impersonate/**"
+      ]
+    }
+  }
+}
