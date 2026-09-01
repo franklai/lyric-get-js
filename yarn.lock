@@ -78,45 +78,100 @@
   resolved "https://registry.npmjs.org/@koromix/koffi-win32-x64/-/koffi-win32-x64-3.1.6.tgz"
   integrity sha512-lPKjAaHz0aoiZXT/wDVqH+joR5y3lCZj1s9Bk5qx/DGRq+0MK8Ib8VoqiBOrJ69NG5AsJSvn0tQDcSqfRgLmBQ==
 
-"@oxlint/darwin-arm64@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/@oxlint/darwin-arm64/-/darwin-arm64-1.19.0.tgz"
-  integrity sha512-dSozp6FXowhFEjmT0FC/iBWj9KziWfixxaYT367kOXZUyA0hvOzsLsBB780Swr40zvqklUR0d3fbZbziGHRJoQ==
+"@oxlint/binding-android-arm-eabi@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-android-arm-eabi/-/binding-android-arm-eabi-1.80.0.tgz"
+  integrity sha512-RM3Plj+biQpxa5d1GOOX6ciDlcUROmm4OZ/pLTpitkQt2mJv4jhtY4cbgaetOm5UKWZe05/TGQ6o1Vl8EOHkrA==
 
-"@oxlint/darwin-x64@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/@oxlint/darwin-x64/-/darwin-x64-1.19.0.tgz"
-  integrity sha512-3OY1km70zTlH6b8K8AHSuaEaa4sntmAcBugMZBaJmHkioia7zxlAQV9xtQ2wsBSDQbBmcf1j5Y0NcHP7fmIZvA==
+"@oxlint/binding-android-arm64@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-android-arm64/-/binding-android-arm64-1.80.0.tgz"
+  integrity sha512-YlO5JEf0Yr2bUUlu8O8daVcUxtcGGbcSmyV7E7nSbJbfAdxTE0PFPwgnIlw7wXJaTYjb+qs5hI5q3jxUkI7cAw==
 
-"@oxlint/linux-arm64-gnu@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/@oxlint/linux-arm64-gnu/-/linux-arm64-gnu-1.19.0.tgz"
-  integrity sha512-TS9wmx9B/v1f/bNXu3lIEcdNIyS0m0H0+95YIWSTGG3q2cK3FVlyUiiAieZRUzXTN89n6JXtua6dK/TVCqbmkQ==
+"@oxlint/binding-darwin-arm64@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-darwin-arm64/-/binding-darwin-arm64-1.80.0.tgz"
+  integrity sha512-BULDOyO3AhsmdWfQeIUCykDt3dd7XZBGLhp1eIh56skRv01O+cNjNPwXMIbeW1x4+pxcln5if72wcRgViVo7PA==
 
-"@oxlint/linux-arm64-musl@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/@oxlint/linux-arm64-musl/-/linux-arm64-musl-1.19.0.tgz"
-  integrity sha512-o5RAxQfVEu7LsBUwSjEDNdM8sla8WlLMRULsTP3vgxyy1eLJxo2u+4McKtM9/P2KiZQw3NylDoaxU4Z4j/XeRQ==
+"@oxlint/binding-darwin-x64@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-darwin-x64/-/binding-darwin-x64-1.80.0.tgz"
+  integrity sha512-YJ4JzLw7N5TDSQFlA0hAQGHvnDZgyypm1yunObVWcWiF9KM7eGCJKYKLgTC2Fi/57OdnBhbj4OkzPGdFQJ6HyA==
 
-"@oxlint/linux-x64-gnu@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/@oxlint/linux-x64-gnu/-/linux-x64-gnu-1.19.0.tgz"
-  integrity sha512-QDgAP4TxXsupFEsEGYnaAaKXQQD1lJSi5Htl/b0Vl2xPz8BVBRH+bNDwVGEHVTxT7jdnO2gTEOmfEzOkRJprUQ==
+"@oxlint/binding-freebsd-x64@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-freebsd-x64/-/binding-freebsd-x64-1.80.0.tgz"
+  integrity sha512-AYUIk5QnL0s8oWAYsREZwkRYy1SupJTXALo93J1TgzHywxQtdM99FecRMQ87MXEdPQ0j1TmEpeeq3fGNkpvMqg==
 
-"@oxlint/linux-x64-musl@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/@oxlint/linux-x64-musl/-/linux-x64-musl-1.19.0.tgz"
-  integrity sha512-iOQooyYzy7RR2yHNM8oHd2Zw6CdU7/G2Uf5ryFi/cF5NV5zlSH//QSkWwrk/kLF69wKqwE8S8snV7WnRA/tXjA==
+"@oxlint/binding-linux-arm-gnueabihf@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-linux-arm-gnueabihf/-/binding-linux-arm-gnueabihf-1.80.0.tgz"
+  integrity sha512-9hBZVANupQ89W9dXyE0n8doCyaW5pDyGn3y6XlIMPZ+rIKuyqkr3SNUXmVJIhuvUq0NBU3RBiSXXE69l4XI6KA==
 
-"@oxlint/win32-arm64@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/@oxlint/win32-arm64/-/win32-arm64-1.19.0.tgz"
-  integrity sha512-bvgA2fGpdBF/DpB5hZYQzx5fFFiiHxIiPF5zp24czvsIRkezVi9ZH04lCIVkMBxgvKhnU2jLXAn6E1Mbo4QrFw==
+"@oxlint/binding-linux-arm-musleabihf@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-linux-arm-musleabihf/-/binding-linux-arm-musleabihf-1.80.0.tgz"
+  integrity sha512-SvS2uKqzY+pbfuvAHzH4338R6Zwo805GAwrIMVvK1KxoOWCIjZUdfzTCvilD7z6JK91v011+zYMryabhDo2AsQ==
 
-"@oxlint/win32-x64@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/@oxlint/win32-x64/-/win32-x64-1.19.0.tgz"
-  integrity sha512-PloVn/e1kfMsiH0urM4XIhiY0TdqDjwJlzeX8pIKDmxUsKHsjcU8fmddsZSt7K16C2nR3SQVoso2AIR00mRieA==
+"@oxlint/binding-linux-arm64-gnu@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-linux-arm64-gnu/-/binding-linux-arm64-gnu-1.80.0.tgz"
+  integrity sha512-tCLadyqRVL3pQTRPNg7cjXKvcvS4fbyXeQHhKk5BTJ1oftQln5/yIIWbu/Xom/DX41zv2P9QGt6+D/TtQVtY3A==
+
+"@oxlint/binding-linux-arm64-musl@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-linux-arm64-musl/-/binding-linux-arm64-musl-1.80.0.tgz"
+  integrity sha512-XfpCNRlOPcLlJl4Bn/FUhjqlR6BVavEykERBf/MV7YA9VZDa5g5znVqYhyviMafcxS9Pe/i/kPvHNO0U6svEHQ==
+
+"@oxlint/binding-linux-ppc64-gnu@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-linux-ppc64-gnu/-/binding-linux-ppc64-gnu-1.80.0.tgz"
+  integrity sha512-3I4yMwcFG9NeO8ioY6JBBuKsIm5GL/x7MATt1S4tVWaxPu5HcJ+XnLUbcVBTxG8q2Wu56HSj+NmXQiVYb1lp6A==
+
+"@oxlint/binding-linux-riscv64-gnu@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-linux-riscv64-gnu/-/binding-linux-riscv64-gnu-1.80.0.tgz"
+  integrity sha512-E1wAKymkpe1/E8helzBKdm81OBOF+ezxRyXRMEuik3ZpWDER5CPOKZwF66RsdwW98uwZv8UTFremUQtC1CzdJA==
+
+"@oxlint/binding-linux-riscv64-musl@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-linux-riscv64-musl/-/binding-linux-riscv64-musl-1.80.0.tgz"
+  integrity sha512-+gLRGD4sIo3+VA++iham5UxD9tKSoJ/VOrROCEXIcknrYtQg6iIQgvjN0cpiRF7N6UYC7pJbvHJlDnMge5LRpQ==
+
+"@oxlint/binding-linux-s390x-gnu@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-linux-s390x-gnu/-/binding-linux-s390x-gnu-1.80.0.tgz"
+  integrity sha512-aR0PrzHj9leW3NmzBAAP4EzdoBNoJcs9sjnIQPIwyRnBGYrRbXUIpEB5Q39AqK3PLY5JK5uEhDQDiUa1QSAstw==
+
+"@oxlint/binding-linux-x64-gnu@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-linux-x64-gnu/-/binding-linux-x64-gnu-1.80.0.tgz"
+  integrity sha512-vSVh5cSo3Xxs6ghBCcFJlpbkbENzDog1qXtoXLa/HC3aCrR4XO76GZbXmQoCPHnu99nQpdCeC3H9tdNICfDh7A==
+
+"@oxlint/binding-linux-x64-musl@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-linux-x64-musl/-/binding-linux-x64-musl-1.80.0.tgz"
+  integrity sha512-FfzBXpNQ8u7/ZI/p8bl73MeZ508Ax3hxWp3SiJpEFiC+BB9XcXy5FAZHTLKDPSzrUpxQZSZJAVdDmuJp/+HDBQ==
+
+"@oxlint/binding-openharmony-arm64@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-openharmony-arm64/-/binding-openharmony-arm64-1.80.0.tgz"
+  integrity sha512-zMzbkumtmprCgRwoYNzcB3iC39fXdJIMLMU33KdCjEGLlJGOEt1+LwQ4LF8ndLzAEKVz4BR0y3V6Xrkk3Nm3yA==
+
+"@oxlint/binding-win32-arm64-msvc@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-win32-arm64-msvc/-/binding-win32-arm64-msvc-1.80.0.tgz"
+  integrity sha512-ib6iRcrXsk4t1fm3iKcwksyWh1ZkZXC/2mEzakl0ai2+6HZunf1WWMZ/xP9EJAvw9g9K4UVTC3NF/+G2qLrbTQ==
+
+"@oxlint/binding-win32-ia32-msvc@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-win32-ia32-msvc/-/binding-win32-ia32-msvc-1.80.0.tgz"
+  integrity sha512-xhRWBMpLxZvgKAH6+DJZmpP+W8Y8UdQOSU1JfxSWNXsaBaRGW77j+1hCuNHlzj7OH4SPN8fYd1q0o2qrDtoVyw==
+
+"@oxlint/binding-win32-x64-msvc@1.80.0":
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/@oxlint/binding-win32-x64-msvc/-/binding-win32-x64-msvc-1.80.0.tgz"
+  integrity sha512-yAnO7lwBYQnz2pcfBPIGQQZWIX5zd5R/1aAKIF3oE+TVj7IhoHcROjOkz3sRDngzqhfPKfFaXqug5j5rE5dn6Q==
 
 "@playwright/test@^1.51.1":
   version "1.51.1"
@@ -161,21 +216,21 @@ koffi@^3.0.2:
   resolved "https://registry.npmjs.org/koffi/-/koffi-3.1.6.tgz"
   integrity sha512-ln60chEb3o7Du1ayjwl6BFiNN1wZK+3cTM2wWGiHLEzCY/FdTIN1ER5VWDwHq7J/j4tSnnrHaH5ABS1EO6+6ag==
   optionalDependencies:
-    "@koromix/koffi-linux-x64" "3.1.6"
-    "@koromix/koffi-win32-x64" "3.1.6"
+    "@koromix/koffi-darwin-arm64" "3.1.6"
     "@koromix/koffi-darwin-x64" "3.1.6"
-    "@koromix/koffi-linux-ia32" "3.1.6"
-    "@koromix/koffi-win32-ia32" "3.1.6"
+    "@koromix/koffi-freebsd-arm64" "3.1.6"
+    "@koromix/koffi-freebsd-ia32" "3.1.6"
     "@koromix/koffi-freebsd-x64" "3.1.6"
     "@koromix/koffi-linux-arm64" "3.1.6"
-    "@koromix/koffi-openbsd-x64" "3.1.6"
-    "@koromix/koffi-win32-arm64" "3.1.6"
-    "@koromix/koffi-darwin-arm64" "3.1.6"
-    "@koromix/koffi-freebsd-ia32" "3.1.6"
-    "@koromix/koffi-openbsd-ia32" "3.1.6"
-    "@koromix/koffi-freebsd-arm64" "3.1.6"
+    "@koromix/koffi-linux-ia32" "3.1.6"
     "@koromix/koffi-linux-loong64" "3.1.6"
     "@koromix/koffi-linux-riscv64" "3.1.6"
+    "@koromix/koffi-linux-x64" "3.1.6"
+    "@koromix/koffi-openbsd-ia32" "3.1.6"
+    "@koromix/koffi-openbsd-x64" "3.1.6"
+    "@koromix/koffi-win32-arm64" "3.1.6"
+    "@koromix/koffi-win32-ia32" "3.1.6"
+    "@koromix/koffi-win32-x64" "3.1.6"
 
 mime-db@^1.54.0:
   version "1.54.0"
@@ -189,19 +244,30 @@ mime-types@3.0.1:
   dependencies:
     mime-db "^1.54.0"
 
-oxlint@1.19.0:
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/oxlint/-/oxlint-1.19.0.tgz"
-  integrity sha512-MGeclRJFKaROXcPKMHOuJpOhbC4qkbLeZqSlelQioV/5YeBk/qVYZafUUpVO/yQ28Pld3srsTQusFtPNkVuvNA==
+oxlint@1.80.0:
+  version "1.80.0"
+  resolved "https://registry.npmjs.org/oxlint/-/oxlint-1.80.0.tgz"
+  integrity sha512-5nTiSps4qdbCWLbxzuO00alHkEO2exR9YMN/ig6QXWrLsYSG0KaObOAM+l6oU2LcKPWoSAGYbkZIGEu1ViiWKA==
   optionalDependencies:
-    "@oxlint/darwin-arm64" "1.19.0"
-    "@oxlint/darwin-x64" "1.19.0"
-    "@oxlint/linux-arm64-gnu" "1.19.0"
-    "@oxlint/linux-arm64-musl" "1.19.0"
-    "@oxlint/linux-x64-gnu" "1.19.0"
-    "@oxlint/linux-x64-musl" "1.19.0"
-    "@oxlint/win32-arm64" "1.19.0"
-    "@oxlint/win32-x64" "1.19.0"
+    "@oxlint/binding-darwin-x64" "1.80.0"
+    "@oxlint/binding-freebsd-x64" "1.80.0"
+    "@oxlint/binding-darwin-arm64" "1.80.0"
+    "@oxlint/binding-android-arm64" "1.80.0"
+    "@oxlint/binding-linux-x64-gnu" "1.80.0"
+    "@oxlint/binding-linux-x64-musl" "1.80.0"
+    "@oxlint/binding-win32-x64-msvc" "1.80.0"
+    "@oxlint/binding-linux-arm64-gnu" "1.80.0"
+    "@oxlint/binding-linux-ppc64-gnu" "1.80.0"
+    "@oxlint/binding-linux-s390x-gnu" "1.80.0"
+    "@oxlint/binding-win32-ia32-msvc" "1.80.0"
+    "@oxlint/binding-android-arm-eabi" "1.80.0"
+    "@oxlint/binding-linux-arm64-musl" "1.80.0"
+    "@oxlint/binding-win32-arm64-msvc" "1.80.0"
+    "@oxlint/binding-linux-riscv64-gnu" "1.80.0"
+    "@oxlint/binding-openharmony-arm64" "1.80.0"
+    "@oxlint/binding-linux-riscv64-musl" "1.80.0"
+    "@oxlint/binding-linux-arm-gnueabihf" "1.80.0"
+    "@oxlint/binding-linux-arm-musleabihf" "1.80.0"
 
 playwright@1.51.1:
   version "1.51.1"
