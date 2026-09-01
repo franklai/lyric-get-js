@@ -1,7 +1,7 @@
 const LyricBase = require('../include/lyric-base');
 const BlockedError = require('../include/blocked-error');
 
-const keyword = 'lyrical-nonsense';
+const keyword = 'utatime';
 
 class Lyric extends LyricBase {
   get_json_lds(html) {
@@ -117,7 +117,7 @@ class Lyric extends LyricBase {
       await this.find_info(html);
     } catch (error) {
       if (error.status === 503) {
-        throw new BlockedError('lyrical-nonsense is blocked');
+        throw new BlockedError('utatime is blocked');
       }
       console.error(error);
     }
@@ -132,7 +132,7 @@ exports.Lyric = Lyric;
 if (require.main === module) {
   (async () => {
     let url =
-      'https://www.lyrical-nonsense.com/lyrics/minami-373/kawaki-wo-ameku/';
+      'https://www.utatime.com/lyrics/minami-373/kawaki-wo-ameku/';
     if (process.argv.length > 2) {
       url = process.argv[2];
     }

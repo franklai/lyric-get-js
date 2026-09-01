@@ -11,7 +11,7 @@ const jtotal = require('./modules/j-total');
 const kashinavi = require('./modules/kashinavi');
 const kkbox = require('./modules/kkbox');
 const line_music = require('./modules/line-music');
-const lyrical_nonsense = require('./modules/lyrical-nonsense');
+const utatime = require('./modules/utatime');
 const musixmatch = require('./modules/musixmatch');
 const petitlyrics = require('./modules/petitlyrics');
 const rocklyric = require('./modules/rocklyric');
@@ -31,7 +31,7 @@ const site_array = [
   kashinavi,
   kkbox,
   line_music,
-  lyrical_nonsense,
+  utatime,
   musixmatch,
   petitlyrics,
   rocklyric,
