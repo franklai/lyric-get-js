@@ -3,7 +3,15 @@
   "trailingComma": "es5",
   "singleQuote": true,
   "arrowParens": "always",
-  "printWidth": 80,
+  "printWidth": 100,
   "sortPackageJson": false,
-  "ignorePatterns": ["public/former/**"]
+  "ignorePatterns": ["public/former/**"],
+  "overrides": [
+    {
+      "files": ["**/*.html"],
+      "options": {
+        "htmlWhitespaceSensitivity": "ignore"
+      }
+    }
+  ]
 }
