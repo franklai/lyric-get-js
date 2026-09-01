@@ -13,6 +13,7 @@
   "dependencies": {
     "html-entities": "2.6.0",
     "iconv-lite": "0.7.0",
+    "impers": "^0.1.1",
     "mime-types": "3.0.1",
     "striptags": "^3.2.0"
   },
