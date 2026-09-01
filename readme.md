@@ -8,4 +8,3 @@
 ## Offline version
 
 - https://github.com/franklai/lyric-get-electron/releases
-

@@ -8,20 +8,13 @@ class Lyric extends LyricBase {
     const prefix = '<script type="application/ld+json">';
     const suffix = '</script>';
     const json_lds = [];
-    const first_json_ld = this.find_string_by_prefix_suffix(
-      html,
-      prefix,
-      suffix,
-      false
-    );
+    const first_json_ld = this.find_string_by_prefix_suffix(html, prefix, suffix, false);
     json_lds.push(first_json_ld);
 
     const pos = html.indexOf(first_json_ld);
     const after_first = html.slice(Math.max(0, pos + first_json_ld.length));
 
-    json_lds.push(
-      this.find_string_by_prefix_suffix(after_first, prefix, suffix, false)
-    );
+    json_lds.push(this.find_string_by_prefix_suffix(after_first, prefix, suffix, false));
 
     return json_lds.map((value) => JSON.parse(value));
   }
@@ -31,11 +24,7 @@ class Lyric extends LyricBase {
 
     const is_global = my_url.pathname.startsWith('/global/');
     const content_id =
-      my_url.hash[0] === '#'
-        ? my_url.hash.slice(1)
-        : is_global
-          ? 'Romaji'
-          : 'Original';
+      my_url.hash[0] === '#' ? my_url.hash.slice(1) : is_global ? 'Romaji' : 'Original';
 
     return [content_id, is_global];
   }
@@ -56,8 +45,8 @@ class Lyric extends LyricBase {
       console.error(`Failed to get content block of url ${url}`);
       return false;
     }
-    const lines = [...block.matchAll(/<span class="line-text">([\s\S]*?)<\/span>/g)].map(
-      (match) => this.sanitize_html(match[1])
+    const lines = [...block.matchAll(/<span class="line-text">([\s\S]*?)<\/span>/g)].map((match) =>
+      this.sanitize_html(match[1])
     );
     while (lines[0] === '') lines.shift();
     while (lines.at(-1) === '') lines.pop();
@@ -80,9 +69,7 @@ class Lyric extends LyricBase {
     for (const match of scripts) {
       const data = JSON.parse(match[1]);
       const graph = data['@graph'] || [data];
-      const page = graph.find(
-        (item) => item.mainEntity?.['@type'] === 'MusicComposition'
-      );
+      const page = graph.find((item) => item.mainEntity?.['@type'] === 'MusicComposition');
       if (!page) continue;
 
       const composition = page.mainEntity;
@@ -97,9 +84,7 @@ class Lyric extends LyricBase {
 
   find_credit(html, labels) {
     for (const label of labels) {
-      const pattern = new RegExp(
-        `<th>${label}</th>\\s*<td>([\\s\\S]*?)</td>`
-      );
+      const pattern = new RegExp(`<th>${label}</th>\\s*<td>([\\s\\S]*?)</td>`);
       const value = this.get_first_group_by_pattern(html, pattern);
       if (value) {
         return this.sanitize_html(value.replace(/<br\s*\/?>/gi, '・'));
@@ -131,8 +116,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    let url =
-      'https://www.utatime.com/lyrics/minami-373/kawaki-wo-ameku/';
+    let url = 'https://www.utatime.com/lyrics/minami-373/kawaki-wo-ameku/';
     if (process.argv.length > 2) {
       url = process.argv[2];
     }

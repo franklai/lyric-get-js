@@ -48,10 +48,7 @@ const handleError = (request, response, error, lyric_url) => {
 
 http
   .createServer(async (request, response) => {
-    const request_object = new URL(
-      request.url,
-      `https://${request.headers.host}`
-    );
+    const request_object = new URL(request.url, `https://${request.headers.host}`);
 
     let { pathname } = request_object;
     if (pathname === '/') {
@@ -68,7 +65,6 @@ http
       return outputJson(response, info);
     }
     if (pathname === '/self') {
-
     }
 
     if (pathname === '/app' || pathname === '/json') {

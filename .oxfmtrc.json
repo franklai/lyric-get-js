@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "arrowParens": "always",
+  "printWidth": 100,
+  "sortPackageJson": false,
+  "ignorePatterns": ["public/former/**"],
+  "overrides": [
+    {
+      "files": ["**/*.html"],
+      "options": {
+        "htmlWhitespaceSensitivity": "ignore"
+      }
+    }
+  ]
+}

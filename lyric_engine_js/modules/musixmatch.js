@@ -68,8 +68,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    const url =
-      'https://www.musixmatch.com/lyrics/Maaya-Sakamoto/Tune-the-Rainbow';
+    const url = 'https://www.musixmatch.com/lyrics/Maaya-Sakamoto/Tune-the-Rainbow';
     const object = new Lyric(url);
     const lyric = await object.get();
     console.log(lyric);

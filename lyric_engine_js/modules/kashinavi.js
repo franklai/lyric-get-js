@@ -26,14 +26,10 @@ class Lyric extends LyricBase {
 
   find_info(html) {
     const patterns = {
-      title:
-        '"@type"\\s*:\\s*"MusicRecording"[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
-      artist:
-        '"byArtist"\\s*:\\s*\\{[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
-      lyricist:
-        '"lyricist"\\s*:\\s*\\{[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
-      composer:
-        '"composer"\\s*:\\s*\\{[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
+      title: '"@type"\\s*:\\s*"MusicRecording"[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
+      artist: '"byArtist"\\s*:\\s*\\{[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
+      lyricist: '"lyricist"\\s*:\\s*\\{[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
+      composer: '"composer"\\s*:\\s*\\{[\\s\\S]*?"name"\\s*:\\s*"([^"]+)"',
     };
 
     this.fill_song_info(html, patterns);

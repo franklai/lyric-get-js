@@ -2,12 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const project_root = path.join(__dirname, '..');
-const cache_root = path.join(
-  project_root,
-  'node_modules',
-  '.cache',
-  'libcurl-impersonate'
-);
+const cache_root = path.join(project_root, 'node_modules', '.cache', 'libcurl-impersonate');
 
 const extensions = {
   darwin: '.dylib',
@@ -35,10 +30,7 @@ async function main() {
     'libcurl-impersonate',
     `${process.platform}-${process.arch}`
   );
-  const output_path = path.join(
-    output_directory,
-    `libcurl-impersonate${extension}`
-  );
+  const output_path = path.join(output_directory, `libcurl-impersonate${extension}`);
 
   fs.mkdirSync(output_directory, { recursive: true });
   fs.copyFileSync(library.path, output_path);
