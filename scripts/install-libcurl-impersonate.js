@@ -26,7 +26,9 @@ async function main() {
   const { resolveLibrary } = await import('impers');
   const library = await resolveLibrary();
   if (!library.isImpersonate) {
-    throw new Error(`Downloaded library does not support impersonation: ${library.path}`);
+    throw new Error(
+      `Downloaded library does not support impersonation: ${library.path}`
+    );
   }
 
   const output_directory = path.join(

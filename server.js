@@ -68,7 +68,6 @@ http
       return outputJson(response, info);
     }
     if (pathname === '/self') {
-
     }
 
     if (pathname === '/app' || pathname === '/json') {

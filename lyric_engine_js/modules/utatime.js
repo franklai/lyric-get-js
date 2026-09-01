@@ -56,9 +56,9 @@ class Lyric extends LyricBase {
       console.error(`Failed to get content block of url ${url}`);
       return false;
     }
-    const lines = [...block.matchAll(/<span class="line-text">([\s\S]*?)<\/span>/g)].map(
-      (match) => this.sanitize_html(match[1])
-    );
+    const lines = [
+      ...block.matchAll(/<span class="line-text">([\s\S]*?)<\/span>/g),
+    ].map((match) => this.sanitize_html(match[1]));
     while (lines[0] === '') lines.shift();
     while (lines.at(-1) === '') lines.pop();
 
@@ -97,9 +97,7 @@ class Lyric extends LyricBase {
 
   find_credit(html, labels) {
     for (const label of labels) {
-      const pattern = new RegExp(
-        `<th>${label}</th>\\s*<td>([\\s\\S]*?)</td>`
-      );
+      const pattern = new RegExp(`<th>${label}</th>\\s*<td>([\\s\\S]*?)</td>`);
       const value = this.get_first_group_by_pattern(html, pattern);
       if (value) {
         return this.sanitize_html(value.replace(/<br\s*\/?>/gi, '・'));
@@ -131,8 +129,7 @@ exports.Lyric = Lyric;
 
 if (require.main === module) {
   (async () => {
-    let url =
-      'https://www.utatime.com/lyrics/minami-373/kawaki-wo-ameku/';
+    let url = 'https://www.utatime.com/lyrics/minami-373/kawaki-wo-ameku/';
     if (process.argv.length > 2) {
       url = process.argv[2];
     }
