@@ -41,26 +41,11 @@ class Lyric extends LyricBase {
   }
 
   get_lyric_content_block(url, html) {
-    const [content_id, is_global] = this.get_content_id(url);
-
-    let prefix = `<div class="contents subcontents" id="${content_id}">`;
-    let suffix = '<div class="ln-row-cont">';
-    if (content_id === 'Romaji') {
-      prefix = `<div class="contents" id="${content_id}">`;
-      suffix = '<style>';
-    } else if (content_id === 'Original') {
-      prefix = `<div class="contents" id="${content_id}">`;
-      suffix = is_global
-        ? '<br/></div><div class="ln-row-cont">'
-        : '</div><div class="ln-row-cont">';
-    }
-
-    const block = this.find_string_by_prefix_suffix(html, prefix, suffix);
-    if (block) {
-      return block;
-    }
-
-    return this.find_string_by_prefix_suffix(html, prefix, suffix);
+    const [content_id] = this.get_content_id(url);
+    const pattern = new RegExp(
+      `<div class="contents(?: subcontents)?" id="${content_id}">([\\s\\S]*?)(?=<div class="contents(?: subcontents)?" id=|<div class="creditlyricblock|$)`
+    );
+    return this.get_first_group_by_pattern(html, pattern);
   }
 
   find_lyric(url, html) {
@@ -71,91 +56,65 @@ class Lyric extends LyricBase {
       console.error(`Failed to get content block of url ${url}`);
       return false;
     }
-    let lyric = block;
+    const lines = [...block.matchAll(/<span class="line-text">([\s\S]*?)<\/span>/g)].map(
+      (match) => this.sanitize_html(match[1])
+    );
+    while (lines[0] === '') lines.shift();
+    while (lines.at(-1) === '') lines.pop();
 
-    lyric = lyric.replaceAll(/<script>.+?<\/script>/g, '');
-    lyric = lyric.replaceAll(/<dl class="titledetails">.+?<\/dl>/g, '');
-    lyric = lyric.replaceAll(/<div id="amplified_.+?<\/div>/g, '');
-    lyric = lyric.replaceAll(/<span class="line-number">\d+\.<\/span>/g, '');
-    lyric = lyric.replaceAll('<span class="line-text">', '\n');
-    lyric = this.sanitize_html(lyric);
+    const lyric = lines.join('\n');
+    if (!lyric) {
+      console.error(`Failed to find lyric lines of url ${url}`);
+      return false;
+    }
 
     this.lyric = lyric;
 
     return true;
   }
 
-  find_info(url, html) {
-    const prefix = '"@type": "MusicComposition",';
-    const suffix = '"Lyrics" :';
-
-    const block = this.find_string_by_prefix_suffix(
-      html,
-      prefix,
-      suffix,
-      false
+  find_info(html) {
+    const scripts = html.matchAll(
+      /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi
     );
-    if (!block) {
-      return;
+    for (const match of scripts) {
+      const data = JSON.parse(match[1]);
+      const graph = data['@graph'] || [data];
+      const page = graph.find(
+        (item) => item.mainEntity?.['@type'] === 'MusicComposition'
+      );
+      if (!page) continue;
+
+      const composition = page.mainEntity;
+      this.title = composition.name;
+      this.artist = composition.recordedAs?.byArtist?.name;
+      break;
     }
 
-    const patterns = {
-      title: '"name" : "(.+?)",',
-      artist: '"byArtist".*?"name" : "(.+?)",',
-      lyricist: '"lyricist".*?"name" : "(.*?)"',
-      composer: '"composer".*?"name" : "(.*?)"',
-    };
+    this.lyricist = this.find_credit(html, ['作詞：', 'Lyricist:']);
+    this.composer = this.find_credit(html, ['作曲：', 'Composer:']);
+  }
 
-    const line = block.replaceAll(/[\n\r]/g, '');
-    this.fill_song_info(line, patterns);
-
-    // composer and lyricist may be empty in LD JSON
-    if (!this.lyricist) {
-      const info = this.find_string_by_prefix_suffix(
-        html,
-        '<th>作詞：</th>',
-        '</td>',
-        false
+  find_credit(html, labels) {
+    for (const label of labels) {
+      const pattern = new RegExp(
+        `<th>${label}</th>\\s*<td>([\\s\\S]*?)</td>`
       );
-      this.lyricist = this.sanitize_html(info);
+      const value = this.get_first_group_by_pattern(html, pattern);
+      if (value) {
+        return this.sanitize_html(value.replace(/<br\s*\/?>/gi, '・'));
+      }
     }
-    if (!this.lyricist) {
-      const info = this.find_string_by_prefix_suffix(
-        html,
-        '<th>Lyricist:</th>',
-        '</td>',
-        false
-      );
-      this.lyricist = this.sanitize_html(info);
-    }
-
-    if (!this.composer) {
-      const info = this.find_string_by_prefix_suffix(
-        html,
-        '<th>作曲：</th>',
-        '</td>',
-        false
-      );
-      this.composer = this.sanitize_html(info);
-    }
-    if (!this.composer) {
-      const info = this.find_string_by_prefix_suffix(
-        html,
-        '<th>Composer:</th>',
-        '</td>',
-        false
-      );
-      this.composer = this.sanitize_html(info);
-    }
+    return undefined;
   }
 
   async parse_page() {
     const { url } = this;
 
     try {
-      const html = await this.get_html(url);
+      const html = await this.get_html(url, { impersonate: 'chrome' });
       await this.find_lyric(url, html);
-      await this.find_info(url, html);
+      await this.find_info(html);
     } catch (error) {
       if (error.status === 503) {
         throw new BlockedError('lyrical-nonsense is blocked');
