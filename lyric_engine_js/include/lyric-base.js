@@ -1,6 +1,8 @@
 const { decode } = require('html-entities');
+const fs = require('fs');
 const iconv = require('iconv-lite');
 const striptags = require('striptags');
+const path = require('path');
 
 const ATTR_LIST = [
   ['artist', '歌手'],
@@ -9,6 +11,28 @@ const ATTR_LIST = [
   ['arranger', '編曲'],
 ];
 const USER_AGENT = 'Mozilla/5.0 Gecko/20100101 Firefox/94.0 Lyric Get/2.0';
+
+function get_impers_library_path() {
+  const extensions = {
+    darwin: '.dylib',
+    linux: '.so',
+    win32: '.dll',
+  };
+  const extension = extensions[process.platform];
+  if (!extension) {
+    throw new Error(`impers is not supported on ${process.platform}`);
+  }
+
+  return path.join(
+    __dirname,
+    '..',
+    '..',
+    'vendor',
+    'libcurl-impersonate',
+    `${process.platform}-${process.arch}`,
+    `libcurl-impersonate${extension}`
+  );
+}
 
 class LyricBase {
   constructor(url) {
@@ -108,13 +132,29 @@ class LyricBase {
   }
 
   async get_html(url, options = {}) {
-    const { encoding = 'utf8' } = options;
-    const headers = {
-      'User-Agent': USER_AGENT,
+    const { encoding = 'utf8', impersonate } = options;
+    let fetch_html = fetch;
+    let request_options = {
+      headers: {
+        'User-Agent': USER_AGENT,
+      },
     };
 
+    if (impersonate) {
+      const library_path = get_impers_library_path();
+      if (!fs.existsSync(library_path)) {
+        throw new Error(
+          `Missing libcurl-impersonate build artifact: ${library_path}. ` +
+            'Run the package install script before starting the application.'
+        );
+      }
+      process.env.LIBCURL_IMPERSONATE_PATH = library_path;
+      ({ fetch: fetch_html } = await import('impers'));
+      request_options = { impersonate };
+    }
+
     try {
-      const resp = await fetch(url, { headers });
+      const resp = await fetch_html(url, request_options);
       if (!resp.ok) {
         const err = new Error('fetch response is not ok');
         err.status = resp.status;

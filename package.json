@@ -6,13 +6,15 @@
   "scripts": {
     "start": "node server",
     "watch": "node --watch server",
-    "test": "node --test --test-timeout=10000 ./lyric_engine_js",
+    "postinstall": "node scripts/install-libcurl-impersonate.js",
+    "test": "node --test --test-timeout=10000 \"./lyric_engine_js/**/*.test.js\"",
     "lint": "oxlint lyric_engine_js"
   },
   "license": "Apache",
   "dependencies": {
     "html-entities": "2.6.0",
     "iconv-lite": "0.7.0",
+    "impers": "^0.1.1",
     "mime-types": "3.0.1",
     "striptags": "^3.2.0"
   },
