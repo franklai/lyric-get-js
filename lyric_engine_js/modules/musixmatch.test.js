@@ -23,12 +23,12 @@ async function testLyric(object) {
   if (length > 0) assert.strictEqual(inst.lyric.length, length);
 }
 
-test('', async () => {
+test('Taylor Swift - Anti-Hero', async () => {
   await testLyric({
-    url: 'https://www.musixmatch.com/lyrics/SawanoHiroyuki-nZk-Tielle-Gemie/sh0ut',
-    title: 'sh0ut',
-    artist: 'SawanoHiroyuki[nZk]:Tielle&Gemie',
-    length: 1957,
+    url: 'https://www.musixmatch.com/lyrics/Taylor-Swift/Anti-Hero',
+    title: 'Anti-Hero',
+    artist: 'Taylor Swift',
+    length: 1794,
   });
 });
 
