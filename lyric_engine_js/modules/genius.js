@@ -38,6 +38,10 @@ class Lyric extends LyricBase {
     lyric = lyric.replaceAll('<br/>', '\n');
     lyric = lyric.replaceAll(/<button.*?<\/button>/g, '');
     lyric = lyric.replaceAll(/<label.*?<\/label>/g, '');
+    lyric = lyric.replaceAll(
+      /<a\b[^>]*\bclass="TranslationLink__Anchor[^"]*"[^>]*>[\s\S]*?<\/a>/g,
+      ''
+    );
     lyric = lyric.replaceAll(/<div class="EmbedForm__Copy.*?<\/div>/g, '');
     lyric = lyric.replaceAll(/<div class="LyricsEditExplainer.*?<\/div>/g, '');
     lyric = lyric.replaceAll(/<div class="LyricsHeader__TextEllipsis.*?<\/div>/g, '');

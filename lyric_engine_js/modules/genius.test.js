@@ -3,6 +3,20 @@ const test = require('node:test');
 const { Lyric } = require('./genius');
 const BlockedError = require('../include/blocked-error');
 
+test('genius excludes translation menu links and preserves lyric links', () => {
+  const inst = new Lyric('https://genius.com/example-lyrics');
+  const html =
+    '<div data-lyrics-container="true">' +
+    '<ul><li><a class="TranslationLink__Anchor-sc-example link" href="/translation">' +
+    '日本語 (Japanese)</a></li></ul>' +
+    '<a class="ReferentFragment" href="/annotation">First line</a><br/>Second line' +
+    '</div><div class="SectionLeaderboard">';
+
+  inst.find_lyric(inst.url, html);
+
+  assert.strictEqual(inst.lyric, 'First line\nSecond line');
+});
+
 async function testLyric(object) {
   const { url, title, artist, lyricist, composer, length } = object;
   const inst = new Lyric(url);
