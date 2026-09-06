@@ -101,10 +101,10 @@ class Lyric extends LyricBase {
       await this.find_lyric(url, html);
       await this.find_info(html);
     } catch (error) {
-      if (error.status === 503) {
+      if (error.status === 403 || error.status === 503) {
         throw new BlockedError('utatime is blocked');
       }
-      console.error(error);
+      throw error;
     }
 
     return true;
