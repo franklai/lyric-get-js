@@ -29,7 +29,7 @@ test('', async () => {
     url: 'https://s.awa.fm/track/cdaa4619fdb2fd9a1f91',
     title: '南風',
     artist: '下川 みくに',
-    length: 430,
+    length: 424,
   });
 });
 
@@ -38,6 +38,6 @@ test('', async () => {
     url: 'https://s.awa.fm/track/b20def9499bf0b335652',
     title: 'tune the rainbow',
     artist: '坂本 真綾',
-    length: 518,
+    length: 515,
   });
 });
