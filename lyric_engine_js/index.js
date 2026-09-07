@@ -97,6 +97,10 @@ async function main() {
 
   if (process.argv.length > 2) {
     url = process.argv[2];
+
+    if (!/^https?:\/\//i.test(url)) {
+      throw new Error('Invalid URL: only http and https URLs are supported.');
+    }
   }
 
   const lyric = await get_full(url);
